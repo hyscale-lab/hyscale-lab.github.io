@@ -1,0 +1,264 @@
+pi:
+  name: Dmitrii Ustiugov
+  role: PI / Supervisor
+  affiliation: Nanyang Technological University Singapore
+  url: /
+  photo: dmitrii-ustiugov.jpg
+
+active:
+  postdocs:
+    - name: Kevin Nguetchouang
+      url: https://nivekiba.github.io/
+      role: Postdoctoral researcher
+      affiliation: ENS de Lyon, France
+      period: 2025–ongoing
+    - name: Chengzhi Lu
+      url: https://blinkbear.github.io/
+      role: Postdoctoral researcher
+      affiliation: University of Chinese Academy of Sciences
+      period: 2025–ongoing
+    - name: Wenyan Chen
+      url: https://chenwenyan.github.io/
+      role: Postdoctoral researcher
+      affiliation: University of Macau
+      period: 2025–ongoing
+  phd_students:
+    - name: Leonid Kondrashov
+      url: http://leokondrashov.github.io/
+      role: PhD student
+      affiliation: MIPT
+      period: 2023–ongoing
+    - name: Ruiqi Lai
+      url: https://lrq619.github.io/
+      role: PhD student
+      affiliation: SJTU, China
+      period: 2023–ongoing
+    - name: JooYoung Park
+      url: https://jooyoung.me/
+      role: PhD student
+      affiliation: Korea University, South Korea
+      period: 2023–ongoing
+    - name: Yulin Zou
+      url: http://yulinzou.github.io/
+      role: PhD student
+      affiliation: NTU
+      period: 2024–ongoing
+    - name: Hongrui Liu
+      role: PhD student
+      affiliation: Beihang University
+      period: 2024–ongoing
+    - name: Colin Hong
+      url: https://www.linkedin.com/in/colinhong/?originalSubdomain=sg
+      role: PhD student
+      affiliation: NTU
+      period: 2025–ongoing
+      notes: FYP 2023–2024
+    - name: Yan Chen
+      role: Exchange PhD student
+      affiliation: Beihang University
+      period: 2025–2026
+  ms_students: []
+  research_assistants_interns:
+    - name: Lakshitha Kakumani
+      role: Intern
+      affiliation: IIT Madras
+      period: "2025"
+      notes: Current in the source record
+
+alumni:
+  postdocs:
+    - name: Vlad Pandelea
+      url: https://www.linkedin.com/in/vlad-pandelea-21799015b/?locale=en_US
+      role: Former postdoctoral researcher
+      affiliation: NTU; University of Pisa
+      period: "2024"
+      destination: American Express, Singapore
+  phd_students:
+    - name: Hancheng Wang
+      url: https://wanghanchengchn.github.io/
+      role: Former exchange PhD student
+      affiliation: Nanjing University
+      period: 2023–2024
+    - name: Junyi Chen
+      url: https://jinyucn.github.io/
+      role: Former exchange PhD student
+      affiliation: Hong Kong Polytechnic University
+      period: 2024–2025
+    - name: Lazar Cvetković
+      role: Former PhD student
+      affiliation: ETH Zurich
+      period: 2021–2022
+      notes: Co-supervised with Ana Klimovic; scheduling-policy exploration for serverless clouds
+    - name: Foteini Strati
+      role: Former PhD student
+      affiliation: ETH Zurich
+      period: "2022"
+      notes: Co-supervised with Ana Klimovic; cloud and serverless support for large-scale machine learning
+    - name: Tom Kuchler
+      role: Former PhD student
+      affiliation: ETH Zurich
+      period: 2021–2022
+      notes: Co-supervised with Ana Klimovic; scheduling-policy exploration for serverless clouds
+    - name: Siddharth Gupta
+      role: PhD student (supervised project; not recorded as lab alumnus)
+      period: "2017"
+      notes: Analysis of persistent-memory systems on modern CPUs
+  ms_students:
+    - name: Hongyu He
+      role: Former master's student
+      affiliation: ETH Zurich
+      period: 2021–2022
+      notes: Co-supervised with Ana Klimovic; performance-analysis methodology for large-scale serverless clusters
+    - name: Mihajlo Djokic
+      role: Former master's student
+      affiliation: ETH Zurich
+      period: 2021–2022
+      notes: Co-supervised with Ana Klimovic; large-scale serverless-cloud simulation for rapid design exploration
+    - name: Yijun Ma
+      role: Former master's student
+      affiliation: ETH Zurich
+      period: "2021"
+      notes: Co-supervised with Ana Klimovic; edge computing with a serverless programming model
+    - name: Lei Yan
+      role: Former master's student
+      affiliation: EPFL and RWTH Aachen University
+      period: "2018"
+      notes: Design-space exploration of cooperative scheduling for latency-critical cloud services
+  research_assistants_interns:
+    - name: Yixin Zhang
+      url: https://jasonzhang517.github.io/
+      role: Former research assistant
+      affiliation: NTU
+      period: "2025"
+      destination: Alibaba Cloud, Beijing
+    - name: Siyu Cao
+      url: https://www.linkedin.com/in/siyu-cao-69aa531a8/?locale=en_US
+      role: Former research assistant
+      affiliation: NTU
+      period: "2025"
+    - name: Aiza Maksutova
+      role: Former intern
+      affiliation: HSE
+      period: 2023–2024
+    - name: Dohyun Park
+      role: Former intern
+      affiliation: Korea University
+      period: "2023"
+    - name: Georgiy Lebedev
+      role: Former intern
+      affiliation: MIPT
+      period: "2023"
+    - name: Haoyuan Ma
+      role: Former intern
+      affiliation: Zhejiang University
+      period: "2023"
+    - name: Anshal Shukla
+      role: Former intern
+      affiliation: BITS Pilani
+      period: "2023"
+    - name: Shyam Jesalpura
+      role: Former research intern
+      affiliation: BITS Pilani
+      period: "2021"
+      notes: High-speed communication fabric for serverless clouds
+    - name: Mert Bora Alper
+      role: Former undergraduate intern
+      period: "2021"
+      notes: Benchmarking methodology for serverless clouds
+    - name: Michal Baczun
+      role: Former undergraduate intern
+      period: "2021"
+      notes: Representative suite of serverless workloads
+    - name: Plamen Petrov
+      role: Former undergraduate student and intern
+      period: "2020"
+      notes: End-to-end serverless benchmarking framework; RDMA network security and covert communication
+    - name: Nikhil Gupta
+      role: Former undergraduate intern
+      affiliation: IIT Delhi
+      period: "2016"
+      notes: Robust infrastructure for the QFlex (Flexus) simulation framework
+    - name: Vidit Jain
+      role: Former undergraduate researcher (URECA)
+      period: 2024–2025
+    - name: Aryan Sharma
+      role: Former final-year project student
+      period: 2024–2025
+    - name: Chaanan Anand Singh
+      role: Former final-year project student
+      period: 2024–2025
+    - name: Dhairya Rungta
+      role: Former final-year project student
+      period: 2024–2025
+    - name: Greg Lim
+      role: Former final-year project student
+      period: 2024–2025
+    - name: Ian Yeoh
+      role: Former final-year project student
+      period: 2024–2025
+    - name: Jia Xuan Koh
+      role: Former final-year project student
+      period: 2024–2025
+    - name: Joel Tan
+      role: Former final-year project student
+      period: 2024–2025
+    - name: Kavita Sriram
+      role: Former final-year project student
+      period: 2024–2025
+    - name: Kavithran Ravisankar
+      role: Former final-year project student
+      period: 2024–2025
+    - name: Lenson Lim
+      role: Former final-year project student
+      period: 2024–2025
+    - name: Siyang Shao
+      role: Former final-year project student
+      period: 2024–2025
+      notes: URECA 2023–2024
+    - name: Benjamin Chun
+      role: Former final-year project student
+      period: 2023–2024
+    - name: Jason Chua
+      role: Former final-year project student
+      period: 2023–2024
+    - name: Min Kabar Kyaw
+      role: Former final-year project student
+      period: 2023–2024
+    - name: Lee Xuan Hua
+      role: Former final-year project student
+      period: 2023–2024
+    - name: Sokunthea Eang
+      role: Former final-year project student
+      period: 2023–2024
+    - name: Yan Kai Lim
+      role: Former final-year project student
+      period: 2023–2024
+    - name: Xingjian Li
+      role: Former final-year project student
+      period: 2023–2024
+    - name: Yi Pun Wong
+      role: Former final-year project student
+      period: 2023–2024
+    - name: Yi Shen Kwai
+      role: Former final-year project student
+      period: 2023–2024
+    - name: Yuchen Niu
+      role: Former undergraduate student
+      period: 2020–2021
+      notes: Implications of multi-tenancy on serverless hosts
+    - name: Theodor Amariucai
+      role: Former undergraduate student
+      period: 2020–2021
+      notes: Tail-latency analysis framework for serverless clouds
+    - name: Ivy Wang
+      role: Former undergraduate student
+      period: "2019"
+      notes: Software support for contiguous page-table allocation
+    - name: Sean Mullan
+      role: Former undergraduate student
+      period: "2019"
+      notes: Design exploration for TLB prefetching
+    - name: Virgile Neu
+      role: Former undergraduate student
+      period: "2016"
+      notes: CPU front-end efficiency analysis using performance counters

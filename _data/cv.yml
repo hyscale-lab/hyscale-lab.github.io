@@ -1,189 +1,108 @@
 cv:
-  name: Albert Einstein
-  label: Scientist
-  email: einstein@example.com
-  location: Princeton, NJ
+  name: Dmitrii Ustiugov
+  label: Assistant Professor, Computer Systems and Architecture
+  email: dmitrii.ustiugov@ntu.edu.sg
+  location: Singapore
   image: ""
-  summary: A German-born theoretical physicist, widely ranked among the greatest and most influential scientists of all time
+  summary: Researcher in fast, scalable, and resource-efficient cloud systems, serverless architectures, and systems support for large-scale LLM inference serving. Leads the vHive open-source ecosystem and the HyScale Systems and Cloud Architecture Lab at NTU Singapore.
 
   social_networks:
     - network: X
-      username: AlbertEinstein
+      username: DmitriiUstiugov
     - network: GitHub
-      username: example
-    - network: LinkedIn
-      username: example
-
-  address:
-    street: 2712 Broadway St
-    city: San Francisco
-    region: California
-    postalCode: CA 94115
-    countryCode: US
+      username: ustiugov
 
   sections:
     Education:
-      - institution: University of Zurich
-        location: Zurich, Switzerland
-        url: https://www.uzh.ch/
-        area: Physics
+      - institution: University of Edinburgh
+        location: Edinburgh, United Kingdom
+        url: https://www.ed.ac.uk/
+        area: Computer Science
         studyType: PhD
-        start_date: 1900
-        end_date: 1905
-        score: ""
-        courses: "Theory of Relativity"
+        start_date: ""
+        end_date: ""
         highlights:
-          - Description 1.
-          - Description 2.
-
-      - institution: Eidgenössische Technische Hochschule
-        location: Zurich, Switzerland
-        area: Physics
-        studyType: Federal teaching diploma
-        start_date: 1896
-        end_date: 1900
-        highlights:
-          - Description 1.
-          - Description 2.
+          - Co-advised by Boris Grot and Edouard Bugnion.
 
     Experience:
-      - company: Institute for Advanced Study, Princeton University
-        position: Professor of Theoretical Physics
-        location: Princeton University, NJ
-        start_date: 1933
-        end_date: 1955
-        summary: Teaching at Palmer Physical Laboratory (now 302 Frist Campus Center). While not a professor at Princeton, I associated with the physics professors and continued to give lectures on campus.
-        highlights:
-          - Relativity
-          - Description 2.
-
-      - company: California Institute of Technology
-        position: Visiting Professor
-        location: Pasadena, California, US
-        start_date: 1933
-        end_date: 1933
-        highlights:
-          - Description 1.
-          - Description 2.
-
-      - company: Kaiser Wilhelm Institute for Physics
-        position: Director
-        location: Berlin, Germany
-        start_date: 1917
-        end_date: 1933
-
-      - company: Karl-Ferdinand University
-        position: Professor of Theoretical Physics
-        location: Prague, Czechoslovakia
-        start_date: 1911
-        end_date: 1917
-
-      - company: University of Zurich
-        position: Associate Professor of Theoretical Physics
+      - company: Nanyang Technological University Singapore
+        position: Assistant Professor
+        location: Singapore
+        start_date: ""
+        end_date: present
+        summary: Leads the HyScale Systems and Cloud Architecture Lab and research on cloud/serverless systems and large-scale LLM inference serving.
+      - company: ETH Zurich
+        position: Postdoctoral Researcher
         location: Zurich, Switzerland
-        start_date: 1909
-        end_date: 1911
-
-    Volunteer:
-      - company: People's Climate March
-        position: Lead Organizer
-        location: Zurich, Switzerland
-        start_date: 2014-04-01
-        end_date: 2015-07-01
-        summary: Lead organizer for the New York City branch of the People's Climate March, the largest climate march in history.
-        highlights:
-          - "Awarded 'Climate Hero' award by Greenpeace for my efforts organizing the march."
-          - "Men of the year 2014 by Time magazine"
-
-    Awards:
-      - title: Nobel Prize in Physics
-        authors:
-          - "Royal Swedish Academy of Sciences"
-        date: 1921-11-01
-        awarder: Royal Swedish Academy of Sciences
-        url: https://www.nobelprize.org/prizes/physics/1921/einstein/biographical/
-        summary: The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'
-
-      - title: Max Planck Medal
-        authors:
-          - "German Physical Society"
-        date: 2029
-        awarder: German Physical Society
-        summary: Awarded for outstanding scientific achievement
-
-    Publications:
-      - title: Zur Elektrodynamik bewegter Körper
-        authors:
-          - Albert Einstein
-        publisher: Annalen der Physik
-        releaseDate: 1905-06-30
-        url: https://en.wikisource.org/wiki/Translation:On_the_Electrodynamics_of_Moving_Bodies
-        summary: It concerned an interpretation of the Michelson–Morley experiment and the properties of light and time. Special relativity incorporates the principle that the speed of light is the same for all inertial observers regardless of the state of motion of the source.
-
-      - title: Über einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt
-        authors:
-          - Albert Einstein
-        publisher: Annalen der Physik
-        releaseDate: 1905-03-18
-        url: https://de.wikisource.org/wiki/Über_einen_die_Erzeugung_und_Verwandlung_des_Lichtes_betreffenden_heuristischen_Gesichtspunkt
-        summary: In the second paper, he applied the quantum theory to light to explain the photoelectric effect. In particular, he used the idea of light quanta (photons) to explain experimental results, but stressed the importance of the experimental results. The importance of his work on the photoelectric effect earned him the Nobel Prize in Physics in 1921.
-
-      - title: Die Grundlage der allgemeinen Relativitätstheorie
-        authors:
-          - Albert Einstein
-        publisher: Annalen der Physik
-        releaseDate: 1916-03-20
-        url: https://de.wikisource.org/wiki/Die_Grundlage_der_allgemeinen_Relativitätstheorie
-        summary: The publication of the theory of general relativity made him internationally famous. He was professor of physics at the universities of Zurich (1909–1911) and Prague (1911–1912), before he returned to ETH Zurich (1912–1914).
-
-    Skills:
-      - name: Physics
-        level: Master
-        icon: fa-solid fa-hashtag
-        keywords: "Quantum Mechanics, Quantum Computing, Quantum Information, Quantum Cryptography, Quantum Communication, Quantum Teleportation"
-
-    Languages:
-      - name: German
-        summary: "Native speaker"
-
-      - name: English
-        summary: "Fluent"
+        start_date: ""
+        end_date: ""
+        summary: Conducted postdoctoral research with Ana Klimovic.
 
     Interests:
-      - name: Physics
-        icon: fa-solid fa-tag
-        keywords: "Quantum Mechanics, Quantum Computing, Quantum Information, Quantum Cryptography, Quantum Communication, Quantum Teleportation"
+      - name: Systems and Architecture
+        icon: fa-solid fa-microchip
+        keywords:
+          - Cloud computing
+          - Serverless computing
+          - Computer systems
+          - Computer architecture
+          - LLM inference
+          - AI-systems co-design
+          - vHive
 
-    Certificates:
-      - name: Machine Learning
-        date: 2018-01-01
-        issuer: Stanford University
-        icon: fa-solid fa-location-dot
+    Awards:
+      - title: 35 Innovators Under 35, Visionary, Asia-Pacific
+        date: 2024
+        awarder: MIT Technology Review
+        url: http://tr35.mittrasia.com/awards
+        summary: Recognition for open-source systems contributions including vHive and ServerlessLLM.
+      - title: IEEE Micro Top Picks Honorable Mention
+        date: 2023
+        awarder: IEEE Micro
+        summary: Recognition for Lukewarm Serverless Functions.
+      - title: Distinguished Artifact Award
+        date: 2021
+        awarder: ASPLOS
+        summary: Recognition associated with the serverless function snapshots work and vHive artifact.
+      - title: One-Minute Thesis Pitch Winner
+        date: 2020
+        awarder: JOBS workshop at MICRO
+        url: https://jobs.eecs.umich.edu/
+        summary: Winner of the workshop's one-minute thesis competition.
+      - title: Arm Center of Excellence Fellowship
+        date: 2019
+        awarder: Arm
+        summary: Three-year fellowship supporting virtual-memory hardware/software co-design.
+      - title: EPFL PhD Fellowship
+        date: 2014
+        awarder: EPFL
+        summary: PhD fellowship recognition.
 
-      - name: Quantum Computing
-        date: 2018-01-01
-        issuer: Stanford University
-        icon: fa-solid fa-tag
+    Professional Activities:
+      - bullet: "**Technical Program Committees:** ISCA 2025–2026; EuroSys 2026; ASPLOS 2024 light; USENIX ATC 2024–2025 light; OSDI 2024; SoCC 2023–2024; FedEdge 2023; MICRO 2022."
+      - bullet: "**SESAME Workshop:** Co-chair of the [first and second SESAME workshops](https://sesame2024.github.io/) at EuroSys, 2023–2024."
+      - bullet: "**Serverless and vHive Tutorial Series:** Head organizer at [ASPLOS 2022 and SOSP 2023](https://ease-lab.github.io/vhive-asplos22/)."
+      - bullet: "**External Reviewing:** USENIX ATC 2019; ISCA 2019; IEEE Computer Architecture Letters 2019 and 2020; JLPEA 2022; Electronics 2022; IEEE Transactions on Cloud Computing 2024."
+      - bullet: "**EuroSys Shadow Program Committee:** Member in 2021."
+      - bullet: "**SOSP Session Co-Chair:** Session co-chair in 2021."
+      - bullet: "**Artifact Evaluation:** Co-chair at HPCA 2024; committee member for Journal of Systems Research 2022 and ASPLOS 2020."
 
-      - name: Quantum Information
-        date: 2018-01-01
-        issuer: Stanford University
-        icon: fa-solid fa-envelope
+    Teaching:
+      - bullet: "**Lecturer and Tutor, 2023–ongoing:** Operating Systems and Digital Logic at Nanyang Technological University Singapore."
+      - bullet: "**Invited Lecturer, 2021–2022:** Cloud Computing Architecture at ETH Zurich; Extreme Computing and Operating Systems at the University of Edinburgh."
+      - bullet: "**Teaching Assistant, 2015–2022:** Systems Programming and Computer Architecture at ETH Zurich; Introduction to Computer Systems and Extreme Computing at Edinburgh; Computer Architecture, Statistics, and Introduction to Multiprocessor Architecture at EPFL."
 
-    Projects:
-      - name: Quantum Computing
-        summary: Quantum computing is the use of quantum-mechanical phenomena such as superposition and entanglement to perform computation. Computers that perform quantum computations are known as quantum computers.
-        highlights:
-          - Quantum Teleportation
-          - Quantum Cryptography
-        start_date: 2018-01-01
-        end_date: 2018-01-01
+    Funding and Collaborations:
+      - bullet: "**AWS, Microsoft Azure, and AMD collaborations (September 2024):** Collaboration projects on large-scale serverless cloud and LLM inference-serving systems, as reported by the source site."
+      - bullet: "**Singapore Ministry of Education Tier-2 Grant:** S$661k for Serverless Programming Model and Cloud Resource Virtualization Co-Design for High Performance and Efficiency."
+      - bullet: "**Arm Fellowship:** Three-year University of Edinburgh fellowship supporting Virtual Memory Software-Hardware Co-Design for Cloud Computing."
+      - bullet: "**Google Faculty Award (2019):** One-year award for Neural Address Translation, based on a proposal with Boris Grot and Artemiy Margaritov."
+      - bullet: "**Oracle Labs Gift (2018):** One-year gift for the Disaggregated Processors project at EPFL, based on a proposal prepared with Alex Daglis and Babak Falsafi."
 
-    References:
-      - name: Professor John Doe
-        icon: fa-solid fa-laptop
-        reference: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit.
-
-      - name: Professor Jane Smith
-        icon: fa-solid fa-thumbtack
-        reference: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit.
+    Publications:
+      - title: Complete publication record
+        authors:
+          - Dmitrii Ustiugov and collaborators
+        publisher: HyScale Lab publications page
+        releaseDate: ""
+        summary: The publications page is the canonical record of 17 source-catalogued works.
