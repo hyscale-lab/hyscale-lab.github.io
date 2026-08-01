@@ -1,0 +1,59 @@
+"arXiv":
+  color: "#b31b1b"
+  url: https://arxiv.org/
+
+"EMNLP":
+  color: "#1f6f8b"
+  url: https://aclanthology.org/venues/emnlp/
+
+"EuroMLSys":
+  color: "#6f42c1"
+  url: https://2025.euromlsys.eu/
+
+"SESAME":
+  color: "#c25d17"
+  url: https://sesame25.github.io/
+
+"OSDI":
+  color: "#005a9c"
+  url: https://www.usenix.org/conference/osdi24
+
+"WORDS":
+  color: "#8b5a2b"
+  url: https://www.wordsworkshop.org/
+
+"ISCA":
+  color: "#006d5b"
+  url: https://iscaconf.org/
+
+"IISWC":
+  color: "#8c3a6b"
+  url: https://iiswc.org/
+
+"ASPLOS":
+  color: "#4f5d95"
+  url: https://www.asplos-conference.org/
+
+"MICRO":
+  color: "#7a3e00"
+  url: https://www.microarch.org/
+
+"WOOT":
+  color: "#9b1c31"
+  url: https://www.usenix.org/conference/woot20
+
+"MLSys@NeurIPS":
+  color: "#5b2c83"
+  url: https://mlsys.org/
+
+"MEMSYS":
+  color: "#2e7d32"
+  url: https://www.memsys.io/
+
+"SIGOPS OSR":
+  color: "#455a64"
+  url: https://dl.acm.org/journal/sigops
+
+"TOCS":
+  color: "#7b1fa2"
+  url: https://dl.acm.org/journal/tocs
