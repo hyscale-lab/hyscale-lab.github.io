@@ -52,7 +52,8 @@ a:focus {
 #logout:focus,
 #logout.focus,
 #logout:active,
-#logout.active {
+#logout.active,
+.open > .dropdown-toggle#logout {
   color: #1c1c1c;
   background-color: #303030;
   background: #303030;
@@ -225,7 +226,8 @@ ul#tabs a {
 
 .btn:hover,
 .btn:active:hover,
-.btn.active:hover {
+.btn.active:hover,
+.open > .dropdown-toggle.btn:hover {
   color: #ef5c00;
   border: 2px solid #e0e0e0;
   background-color: #e0e0e0;
@@ -240,7 +242,9 @@ ul#tabs a {
 .btn:active:focus,
 .btn.active:focus,
 .btn:active.focus,
-.btn.active.focus {
+.btn.active.focus,
+.open > .dropdown-toggle.btn:focus,
+.open > .dropdown-toggle.btn.focus {
   color: #ef5c00;
   border: 2px solid #e0e0e0;
   background-color: #e0e0e0 !important;
@@ -529,18 +533,6 @@ hr {
   -webkit-box-shadow: none;
   box-shadow: none;
   z-index: 10;
-}
-
-#clusters > a {
-  color: #ef5c00;
-  text-decoration: underline;
-  cursor: auto;
-}
-
-#clusters > a:hover {
-  color: #126dce;
-  text-decoration: underline;
-  cursor: auto;
 }
 
 mark,
