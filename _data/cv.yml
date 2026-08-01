@@ -55,7 +55,7 @@ cv:
         date: 2024
         awarder: MIT Technology Review
         url: http://tr35.mittrasia.com/awards
-        summary: Recognition for open-source systems contributions including vHive and ServerlessLLM.
+        summary: Recognition for open-source systems contributions including vHive and large-scale AI serving.
       - title: IEEE Micro Top Picks Honorable Mention
         date: 2023
         awarder: IEEE Micro

@@ -1,13 +1,15 @@
 ---
 layout: page
 permalink: /teaching/
-title: teaching
+title: Teaching
 description: Courses, invited lectures, and teaching experience.
-nav: true
+nav: false
 nav_order: 4
 ---
 
 ## Teaching
+
+The record below preserves the institutions, terms, and roles published on Professor Dmitrii Ustiugov's source site.
 
 ### Nanyang Technological University Singapore
 
@@ -31,4 +33,4 @@ nav_order: 4
 
 ## Research supervision
 
-The lab roster and current supervision information are maintained on [People]({{ '/people/' | relative_url }}). Former members and historical supervised projects are recorded on [Alumni]({{ '/alumni/' | relative_url }}).
+The lab roster and current supervision information are maintained on [People]({{ '/people/' | relative_url }}). Past lab membership is recorded under [Former Members]({{ '/people/former-members/' | relative_url }}), while historical supervised projects are listed separately under [Supervisees]({{ '/people/supervisees/' | relative_url }}).

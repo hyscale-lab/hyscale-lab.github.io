@@ -1,0 +1,74 @@
+principal_investigator:
+  name: Dmitrii Ustiugov
+  role: Assistant Professor
+  affiliation: Nanyang Technological University Singapore
+  url: https://ustiugov.github.io/
+  photo: member/dmitrii-ustiugov.jpg
+
+groups:
+  - key: postdocs
+    title: Postdoctoral researchers
+    members:
+      - name: Kevin Nguetchouang
+        url: https://nivekiba.github.io/
+        role: Postdoctoral researcher
+        affiliation: ENS de Lyon, France
+        period: 2025–ongoing
+      - name: Chengzhi Lu
+        url: https://blinkbear.github.io/
+        role: Postdoctoral researcher
+        affiliation: University of Chinese Academy of Sciences
+        period: 2025–ongoing
+      - name: Wenyan Chen
+        url: https://chenwenyan.github.io/
+        role: Postdoctoral researcher
+        affiliation: University of Macau
+        period: 2025–ongoing
+  - key: phd_students
+    title: PhD students
+    members:
+      - name: Leonid Kondrashov
+        url: http://leokondrashov.github.io/
+        role: PhD student
+        affiliation: MIPT
+        period: 2023–ongoing
+      - name: Ruiqi Lai
+        url: https://lrq619.github.io/
+        role: PhD student
+        affiliation: SJTU, China
+        period: 2023–ongoing
+      - name: JooYoung Park
+        url: https://jooyoung.me/
+        role: PhD student
+        affiliation: Korea University, South Korea
+        period: 2023–ongoing
+      - name: Yulin Zou
+        url: http://yulinzou.github.io/
+        role: PhD student
+        affiliation: NTU
+        period: 2024–ongoing
+      - name: Hongrui Liu
+        role: PhD student
+        affiliation: Beihang University
+        period: 2024–ongoing
+      - name: Colin Hong
+        url: https://www.linkedin.com/in/colinhong/?originalSubdomain=sg
+        role: PhD student
+        affiliation: NTU
+        period: 2025–ongoing
+        notes: FYP 2023–2024
+  - key: exchange_phd_students
+    title: Exchange PhD students
+    members:
+      - name: Yan Chen
+        role: Exchange PhD student
+        affiliation: Beihang University
+        period: 2025–2026
+  - key: research_assistants_interns
+    title: Research assistants and interns
+    members:
+      - name: Lakshitha Kakumani
+        role: Intern
+        affiliation: IIT Madras
+        period: "2025"
+        notes: Current in the source record

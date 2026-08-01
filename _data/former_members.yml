@@ -1,0 +1,56 @@
+groups:
+  - key: postdocs
+    title: Former postdoctoral researchers
+    members:
+      - name: Vlad Pandelea
+        url: https://www.linkedin.com/in/vlad-pandelea-21799015b/?locale=en_US
+        role: Former postdoctoral researcher
+        affiliation: NTU; University of Pisa
+        period: "2024"
+        destination: American Express, Singapore
+  - key: exchange_phd_students
+    title: Former exchange PhD students
+    members:
+      - name: Hancheng Wang
+        url: https://wanghanchengchn.github.io/
+        role: Former exchange PhD student
+        affiliation: Nanjing University
+        period: 2023–2024
+      - name: Junyi Chen
+        url: https://jinyucn.github.io/
+        role: Former exchange PhD student
+        affiliation: Hong Kong Polytechnic University
+        period: 2024–2025
+  - key: research_assistants
+    title: Former research assistants
+    members:
+      - name: Yixin Zhang
+        url: https://jasonzhang517.github.io/
+        role: Former research assistant
+        affiliation: NTU
+        period: "2025"
+        destination: Alibaba Cloud, Beijing
+      - name: Siyu Cao
+        url: https://www.linkedin.com/in/siyu-cao-69aa531a8/?locale=en_US
+        role: Former research assistant
+        affiliation: NTU
+        period: "2025"
+  - key: interns
+    title: Former interns
+    members:
+      - name: Aiza Maksutova
+        role: Former intern
+        affiliation: HSE
+        period: 2023–2024
+      - name: Georgiy Lebedev
+        role: Former intern
+        affiliation: MIPT
+        period: "2023"
+      - name: Haoyuan Ma
+        role: Former intern
+        affiliation: Zhejiang University
+        period: "2023"
+      - name: Anshal Shukla
+        role: Former intern
+        affiliation: BITS Pilani
+        period: "2023"
