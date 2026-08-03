@@ -1,0 +1,111 @@
+metadata:
+  last_updated: '2026-08-03'
+papers:
+  cZ9jA9oAAAAJ:2osOgNQ5qMEC:
+    citations: 180
+    title: The Mondrian data engine
+    year: '2017'
+  cZ9jA9oAAAAJ:4DMP91E08xMC:
+    citations: 3
+    title: 'MemTrust: A Zero-Trust Architecture for Unified AI Memory System'
+    year: '2026'
+  cZ9jA9oAAAAJ:4TOpqqG69KYC:
+    citations: 2
+    title: 'The High Cost of Keeping Warm: Characterizing Overhead in Serverless Autoscaling Policies'
+    year: '2025'
+  cZ9jA9oAAAAJ:7PzlFSSx8tAC:
+    citations: 0
+    title: 'Nexus: Transparent I/O Offloading for High-Density Serverless Computing'
+    year: '2026'
+  cZ9jA9oAAAAJ:9ZlFYXVOiuMC:
+    citations: 4
+    title: Melding the serverless control plane with the conventional cluster manager for speed and resource efficiency
+    year: '2025'
+  cZ9jA9oAAAAJ:IWHjjKOFINEC:
+    citations: 0
+    title: 'Spotlight: Synergizing Seed Exploration and Spot GPUs for DiT RL Post-Training'
+    year: '2026'
+  cZ9jA9oAAAAJ:IjCSPb-OGe4C:
+    citations: 7
+    title: Algorithm/architecture co-design for near-memory processing
+    year: '2018'
+  cZ9jA9oAAAAJ:L8Ckcad2t8MC:
+    citations: 1
+    title: 'CodecSight: Leveraging Video Codec Signals for Efficient Streaming VLM Inference'
+    year: '2026'
+  cZ9jA9oAAAAJ:LkGwnXOMwfcC:
+    citations: 53
+    title: Analyzing tail latency in serverless clouds with STeLLAR
+    year: '2021'
+  cZ9jA9oAAAAJ:M3ejUd6NZC8C:
+    citations: 12
+    title: 'Slim-SC: Thought pruning for efficient scaling with self-consistency'
+    year: '2025'
+  cZ9jA9oAAAAJ:MXK_kJrjxJIC:
+    citations: 24
+    title: Enabling in-vitro serverless systems research
+    year: '2023'
+  cZ9jA9oAAAAJ:QIV2ME_5wuYC:
+    citations: 0
+    title: 'PromptTuner: SLO-Aware Elastic System for LLM Prompt Tuning'
+    year: '2026'
+  cZ9jA9oAAAAJ:Se3iqnhoufwC:
+    citations: 68
+    title: 'Lukewarm serverless functions: Characterization and optimization'
+    year: '2022'
+  cZ9jA9oAAAAJ:Tyk-4Ss8FVUC:
+    citations: 23
+    title: Virtual address translation via learned page table indexes
+    year: '2018'
+  cZ9jA9oAAAAJ:ULOm3_A8WrAC:
+    citations: 14
+    title: Shattering the ephemeral storage cost barrier for data-intensive serverless workflows
+    year: '2025'
+  cZ9jA9oAAAAJ:UebtZRa9Y70C:
+    citations: 1
+    title: Data-centric serverless cloud architecture
+    year: '2022'
+  cZ9jA9oAAAAJ:W7OEmFMy1HYC:
+    citations: 16
+    title: Mitigating load imbalance in distributed data serving with rack-scale memory pooling
+    year: '2019'
+  cZ9jA9oAAAAJ:WF5omc3nYNoC:
+    citations: 7
+    title: 'Bankrupt Covert Channel: Turning Network Predictability into Vulnerability'
+    year: '2020'
+  cZ9jA9oAAAAJ:YOwf2qJgpHMC:
+    citations: 2
+    title: 'Manage the Workloads not the Cluster: Designing a Control Plane for Large-Scale AI Clusters'
+    year: '2025'
+  cZ9jA9oAAAAJ:YsMSGLbcyi4C:
+    citations: 108
+    title: Prefetched address translation
+    year: '2019'
+  cZ9jA9oAAAAJ:ZeXyd9-uunAC:
+    citations: 0
+    title: 'FASER: Fine-Grained Phase Management for Speculative Decoding in Dynamic LLM Serving'
+    year: '2026'
+  cZ9jA9oAAAAJ:Zph67rFs4hoC:
+    citations: 330
+    title: 'ServerlessLLM: Low-latency serverless inference for large language models'
+    year: '2024'
+  cZ9jA9oAAAAJ:_FxGoFyzp5QC:
+    citations: 343
+    title: Benchmarking, analysis, and optimization of serverless function snapshots
+    year: '2021'
+  cZ9jA9oAAAAJ:aqlVkmm33-oC:
+    citations: 9
+    title: 'TokenScale: Timely and accurate autoscaling for disaggregated LLM serving with token velocity'
+    year: '2025'
+  cZ9jA9oAAAAJ:u5HHmVD_uO8C:
+    citations: 30
+    title: 'SABRes: Atomic object reads for in-memory rack-scale computing'
+    year: '2016'
+  cZ9jA9oAAAAJ:ufrVoPGSRksC:
+    citations: 35
+    title: 'PTEMagnet: Fine-grained physical memory reservation for faster page walks in public clouds'
+    year: '2021'
+  cZ9jA9oAAAAJ:zYLM7Y9cAGgC:
+    citations: 39
+    title: Design guidelines for high-performance SCM hierarchies
+    year: '2018'
