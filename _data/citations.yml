@@ -1,8 +1,8 @@
 metadata:
-  last_updated: '2026-08-03'
+  last_updated: '2026-08-19'
 papers:
   cZ9jA9oAAAAJ:2osOgNQ5qMEC:
-    citations: 180
+    citations: 182
     title: The Mondrian data engine
     year: '2017'
   cZ9jA9oAAAAJ:4DMP91E08xMC:
@@ -34,7 +34,7 @@ papers:
     title: 'CodecSight: Leveraging Video Codec Signals for Efficient Streaming VLM Inference'
     year: '2026'
   cZ9jA9oAAAAJ:LkGwnXOMwfcC:
-    citations: 53
+    citations: 54
     title: Analyzing tail latency in serverless clouds with STeLLAR
     year: '2021'
   cZ9jA9oAAAAJ:M3ejUd6NZC8C:
@@ -50,7 +50,7 @@ papers:
     title: 'PromptTuner: SLO-Aware Elastic System for LLM Prompt Tuning'
     year: '2026'
   cZ9jA9oAAAAJ:Se3iqnhoufwC:
-    citations: 68
+    citations: 69
     title: 'Lukewarm serverless functions: Characterization and optimization'
     year: '2022'
   cZ9jA9oAAAAJ:Tyk-4Ss8FVUC:
@@ -78,7 +78,7 @@ papers:
     title: 'Manage the Workloads not the Cluster: Designing a Control Plane for Large-Scale AI Clusters'
     year: '2025'
   cZ9jA9oAAAAJ:YsMSGLbcyi4C:
-    citations: 108
+    citations: 110
     title: Prefetched address translation
     year: '2019'
   cZ9jA9oAAAAJ:ZeXyd9-uunAC:
@@ -86,26 +86,30 @@ papers:
     title: 'FASER: Fine-Grained Phase Management for Speculative Decoding in Dynamic LLM Serving'
     year: '2026'
   cZ9jA9oAAAAJ:Zph67rFs4hoC:
-    citations: 330
+    citations: 360
     title: 'ServerlessLLM: Low-latency serverless inference for large language models'
     year: '2024'
   cZ9jA9oAAAAJ:_FxGoFyzp5QC:
-    citations: 343
+    citations: 347
     title: Benchmarking, analysis, and optimization of serverless function snapshots
     year: '2021'
   cZ9jA9oAAAAJ:aqlVkmm33-oC:
     citations: 9
     title: 'TokenScale: Timely and accurate autoscaling for disaggregated LLM serving with token velocity'
     year: '2025'
+  cZ9jA9oAAAAJ:qUcmZB5y_30C:
+    citations: 0
+    title: Rethinking AI Cloud Infrastructure for Agentic Serving Systems with the Aries Experimentation Framework
+    year: '2026'
   cZ9jA9oAAAAJ:u5HHmVD_uO8C:
-    citations: 30
+    citations: 31
     title: 'SABRes: Atomic object reads for in-memory rack-scale computing'
     year: '2016'
   cZ9jA9oAAAAJ:ufrVoPGSRksC:
-    citations: 35
+    citations: 36
     title: 'PTEMagnet: Fine-grained physical memory reservation for faster page walks in public clouds'
     year: '2021'
   cZ9jA9oAAAAJ:zYLM7Y9cAGgC:
-    citations: 39
+    citations: 41
     title: Design guidelines for high-performance SCM hierarchies
     year: '2018'
