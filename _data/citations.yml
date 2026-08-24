@@ -1,12 +1,12 @@
 metadata:
-  last_updated: '2026-08-19'
+  last_updated: '2026-08-24'
 papers:
   cZ9jA9oAAAAJ:2osOgNQ5qMEC:
     citations: 182
     title: The Mondrian data engine
     year: '2017'
   cZ9jA9oAAAAJ:4DMP91E08xMC:
-    citations: 3
+    citations: 4
     title: 'MemTrust: A Zero-Trust Architecture for Unified AI Memory System'
     year: '2026'
   cZ9jA9oAAAAJ:4TOpqqG69KYC:
@@ -38,7 +38,7 @@ papers:
     title: Analyzing tail latency in serverless clouds with STeLLAR
     year: '2021'
   cZ9jA9oAAAAJ:M3ejUd6NZC8C:
-    citations: 12
+    citations: 14
     title: 'Slim-SC: Thought pruning for efficient scaling with self-consistency'
     year: '2025'
   cZ9jA9oAAAAJ:MXK_kJrjxJIC:
@@ -86,11 +86,11 @@ papers:
     title: 'FASER: Fine-Grained Phase Management for Speculative Decoding in Dynamic LLM Serving'
     year: '2026'
   cZ9jA9oAAAAJ:Zph67rFs4hoC:
-    citations: 360
+    citations: 365
     title: 'ServerlessLLM: Low-latency serverless inference for large language models'
     year: '2024'
   cZ9jA9oAAAAJ:_FxGoFyzp5QC:
-    citations: 347
+    citations: 349
     title: Benchmarking, analysis, and optimization of serverless function snapshots
     year: '2021'
   cZ9jA9oAAAAJ:aqlVkmm33-oC:
