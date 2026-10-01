@@ -17,7 +17,7 @@ Contact Professor Dmitrii Ustiugov before applying to a funding program:
 - [Nanyang President's Graduate Scholarship](https://www.ntu.edu.sg/admissions/graduate/financialmatters/scholarships/npgs)
 - [Singapore International Graduate Award (SINGA) application information](https://for.edu.sg/singa-apply)
 - [Alibaba–NTU](https://www.ntu.edu.sg/alibaba-ntu-jri)
-- [A\*STAR Graduate Scholarship (AGS)](https://www.a-star.edu.sg/Scholarships/for-graduate-studies/a-star-graduate-scholarship-singapore)
+- [A\*STAR Graduate Scholarship (AGS)](https://www.a-star.edu.sg/scholarships/home/scholarships/ags--scholarship)
 - [AI Singapore PhD Fellowship](https://aisingapore.org/research/phd-fellowship-programme/)
 - [A\*STAR Computing and Information Science Scholarship (ACIS)](https://www.a-star.edu.sg/Scholarships/for-graduate-studies/a-star-cis-scholarship)
 - [Other NTU graduate scholarships](https://www.ntu.edu.sg/graduate-college/admissions)
@@ -39,4 +39,4 @@ Potential external funding resources include:
 
 Students and early-career researchers may enquire about internships or research-assistant work across these three pillars. Send a CV and briefly describe relevant systems-programming, operating-systems, networking, computer-architecture, research, or open-source experience.
 
-The [A\*STAR Research Attachment Programme (ARAP)](https://www.a-star.edu.sg/Scholarships/for-graduate-studies/a-star-research-attachment-programme) may be a useful external resource for eligible applicants; applicants should verify current terms directly with the program.
+The [A\*STAR Research Attachment Programme (ARAP)](https://www.a-star.edu.sg/scholarships/home/international-awards/astar-research-attachment-programme-arap) may be a useful external resource for eligible applicants; applicants should verify current terms directly with the program.
