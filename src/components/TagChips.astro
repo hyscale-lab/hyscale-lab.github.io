@@ -17,7 +17,7 @@ const shown = tags.all.filter((t) => counts.has(t.id));
   {shown.map((t) => (
     <button type="button" class="chip" data-filter-tag={t.id} aria-pressed="false">
       {t.label}
-      <span class="ml-1.5 opacity-60">{counts.get(t.id)}</span>
+      <span class="ml-1.5 font-normal">{counts.get(t.id)}</span>
     </button>
   ))}
 </div>

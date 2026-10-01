@@ -8,7 +8,6 @@ order: 1
 papers: [jesalpura2025shattering, ustiugov2023invitro, schall2022lukewarm, ustiugov2021stellar, ustiugov2021snapshots]
 ---
 
-
 Cloud platforms must combine extreme multi-tenancy with strong isolation while preserving performance, cost efficiency, and security. This research direction explores those trade-offs across the distributed hardware/software stack.
 
 [vHive](https://vhive-serverless.github.io/) is a full-stack open-source framework and ecosystem for representative serverless experimentation. It integrates production-grade components including [AWS Firecracker](https://firecracker-microvm.github.io/), [containerd](https://containerd.io/), and [Kubernetes](https://kubernetes.io/). At the time of the source site, it was used for research and teaching at 30+ universities and supported or sponsored by 8 companies.

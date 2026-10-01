@@ -13,7 +13,7 @@ interface Props {
   secondary: { label: string; href: string };
 }
 const { eyebrow, title, subtitle, image, primary, secondary } = Astro.props;
-const bg = await getImage({ src: image, width: 2000, format: 'webp', quality: 70 });
+const bg = await getImage({ src: image, width: 1920, format: 'webp', quality: 55 });
 // Highlight the last two words of the title with the gradient.
 const words = title.split(' ');
 const head = words.slice(0, -2).join(' ');

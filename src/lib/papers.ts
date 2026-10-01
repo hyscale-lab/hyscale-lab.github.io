@@ -98,6 +98,20 @@ function exportBibtex(type: string, key: string, fields: Record<string, string>)
   return `@${type}{${key},\n${lines.join(',\n')}\n}`;
 }
 
+/** Darken a venue colour until white badge text meets WCAG AA (4.5:1). */
+function badgeColor(hex: string): string {
+  const rgb = hex.match(/^#([0-9a-f]{6})$/i) ? [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)) : null;
+  if (!rgb) return hex;
+  const lum = (c: number[]) =>
+    c
+      .map((v) => v / 255)
+      .map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4))
+      .reduce((a, v, i) => a + v * [0.2126, 0.7152, 0.0722][i], 0);
+  let c = rgb;
+  while (1.05 / (lum(c) + 0.05) < 4.6) c = c.map((v) => Math.round(v * 0.94));
+  return '#' + c.map((v) => v.toString(16).padStart(2, '0')).join('');
+}
+
 let cache: Paper[] | null = null;
 
 /** All papers, newest first (stable within a year by order in papers.bib). */
@@ -171,7 +185,7 @@ export function getPapers(): Paper[] {
       }),
       venue: cleanTex(f.booktitle ?? f.journal ?? (f.archiveprefix === 'arXiv' || f.arxiv ? 'arXiv preprint' : '')),
       abbr,
-      venueColor: venue?.color ?? DEFAULT_VENUE_COLOR,
+      venueColor: badgeColor(venue?.color ?? DEFAULT_VENUE_COLOR),
       venueUrl: venue?.url ?? null,
       links,
       preview: f.preview ?? null,

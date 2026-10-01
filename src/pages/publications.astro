@@ -13,6 +13,23 @@ const authorIds = new Set(papers.flatMap((p) => p.authors.flatMap((a) => (a.memb
 const authors = getPeople()
   .filter((p) => authorIds.has(p.id))
   .sort((a, b) => a.name.localeCompare(b.name));
+// Structured data so search engines can read the paper list.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: papers.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'ScholarlyArticle',
+      headline: p.title,
+      author: p.authors.map((a) => ({ '@type': 'Person', name: a.name })),
+      datePublished: String(p.year),
+      ...(p.venue && { isPartOf: { '@type': 'PublicationEvent', name: p.venue } }),
+      ...(p.links[0] && { url: new URL(p.links[0].href, Astro.site).href }),
+    },
+  })),
+};
 const field =
   'h-10 rounded-lg border border-line bg-raised px-3 text-sm text-ink focus:border-brand focus:outline-none';
 ---
@@ -21,6 +38,7 @@ const field =
   title="Publications"
   description="HyScale Lab publications across serverless, agentic, and multi-modal and embodied AI cloud systems."
   overlayHeader
+  jsonLd={jsonLd}
 >
   <PageHeader
     eyebrow="Research output"
