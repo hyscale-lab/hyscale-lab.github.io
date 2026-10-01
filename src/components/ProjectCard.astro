@@ -1,0 +1,34 @@
+---
+// Card for an open-source project, used on the research index and pillar pages.
+import Icon from './Icon.astro';
+import { repoStars } from '../lib/github';
+import { projectUrl, type Project } from '../lib/research';
+
+interface Props {
+  project: Project;
+}
+const { project: p } = Astro.props;
+const stars = await repoStars(p.data.repo);
+---
+
+<a
+  href={projectUrl(p)}
+  class="card reveal group relative flex flex-col overflow-hidden p-6 transition hover:-translate-y-1 hover:border-brand/40 hover:shadow-xl"
+>
+  <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand via-[#6b5bd6] to-accent opacity-0 transition group-hover:opacity-100"></span>
+  <p class="flex items-center justify-between gap-3 text-xs font-semibold text-muted">
+    <span class="inline-flex items-center gap-1.5">
+      <Icon name="github" class="size-3.5" /> Open source
+    </span>
+    {stars !== null && (
+      <span class="inline-flex items-center gap-1">
+        <Icon name="star" class="size-3.5" /> {stars.toLocaleString('en-US')}
+      </span>
+    )}
+  </p>
+  <h3 class="mt-4 text-xl font-semibold tracking-tight group-hover:text-brand">{p.data.title}</h3>
+  <p class="mt-2 flex-1 leading-relaxed text-muted">{p.data.tagline}</p>
+  <p class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand">
+    Project page <Icon name="arrow-right" class="size-4 transition group-hover:translate-x-1" />
+  </p>
+</a>

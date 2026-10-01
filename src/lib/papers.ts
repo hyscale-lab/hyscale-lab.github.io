@@ -35,7 +35,6 @@ export interface Paper {
   selected: boolean;
   tags: string[];
   bucket: string | null;
-  pillar: string | null;
   citations: number | null;
   bibtex: string;
 }
@@ -195,7 +194,6 @@ export function getPapers(): Paper[] {
       selected: (f.selected ?? '').toLowerCase() === 'true',
       tags: paperTags,
       bucket: f.research_bucket ?? null,
-      pillar: f.research_pillar ?? null,
       citations: cites ?? null,
       bibtex: exportBibtex(type, key, f),
     };

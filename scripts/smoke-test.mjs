@@ -14,13 +14,13 @@ const check = (name, ok, extra = '') => {
 const visible = (sel) => page.locator(`${sel}:visible`).count();
 
 // Publications: filters from the URL, combined with AND.
-await page.goto(`${base}/publications/?tag=serverless&tag=open-source`);
+await page.goto(`${base}/publications/?tag=cloud-systems&tag=open-source`);
 check('two tags → papers with both', (await visible('[data-item]')) === 3, `${await visible('[data-item]')} shown`);
 check('chips reflect URL', (await page.locator('[data-filter-tag="open-source"][aria-pressed=true]').count()) === 1);
 
 await page.goto(`${base}/publications/?author=jooyoung-park`);
 const jp = await visible('[data-item]');
-check('author filter', jp === 2, `${jp} shown`);
+check('author filter', jp === 3, `${jp} shown`);
 
 await page.goto(`${base}/publications/`);
 const total = await visible('[data-item]');
@@ -31,13 +31,13 @@ check('search kept in URL', page.url().includes('q=serverlessllm'));
 await page.locator('[data-filter-clear]:visible').first().click();
 check('clear filters', (await visible('[data-item]')) === total);
 
-await page.locator('[data-filter-tag="llm-serving"]').click();
-check('tag chip click', (await visible('[data-item]')) === 4 && page.url().includes('tag=llm-serving'));
-await page.locator('[data-filter-tag="llm-serving"]').click();
+await page.locator('[data-filter-tag="security"]').click();
+check('tag chip click', (await visible('[data-item]')) === 2 && page.url().includes('tag=security'));
+await page.locator('[data-filter-tag="security"]').click();
 
 // In-entry tag link filters in place.
-await page.locator('a[data-tag-link="security"]').first().click();
-check('tag link filters in place', page.url().includes('tag=security') && (await visible('[data-item]')) === 2);
+await page.locator('a[data-tag-link="ml-for-systems"]').first().click();
+check('tag link filters in place', page.url().includes('tag=ml-for-systems') && (await visible('[data-item]')) === 1);
 
 // Bib toggle + year groups hide when empty.
 await page.goto(`${base}/publications/?year=2024`);
@@ -48,15 +48,24 @@ check('Bib opens', (await page.locator('[id$="-bib"]:visible').count()) === 1);
 const bib = await page.locator('[id$="-bib"]:visible pre').innerText();
 check('Bib hides site-only fields', !/research_|google_scholar_id|tags =|selected/.test(bib));
 
-// Old URLs land on the right People tab.
-await page.goto(`${base}/people/former-members/`);
-await page.waitForURL(/\/people\/#alumni/);
+// People tabs open from the URL hash.
+await page.goto(`${base}/people/#alumni`);
 await page.waitForTimeout(300);
-check('former-members → alumni tab', await page.locator('#alumni').isVisible());
-await page.goto(`${base}/people/supervisees/`);
-await page.waitForURL(/#supervisees/);
-await page.waitForTimeout(300);
-check('supervisees redirect', await page.locator('#supervisees').isVisible());
+check('#alumni opens the Alumni tab', await page.locator('#alumni').isVisible());
+
+// Research → pillar → project pages.
+for (const path of [
+  '/research/',
+  '/research/serverless/',
+  '/research/serverless/vhive/',
+  '/research/serverless/invitro/',
+  '/research/agentic/aries/',
+]) {
+  const res = await page.goto(`${base}${path}`);
+  check(`${path} renders`, res?.status() === 200 && (await page.locator('h1').count()) === 1);
+}
+await page.goto(`${base}/research/`);
+check('pillars link their projects', (await page.locator('a[href="/research/agentic/aries/"]').count()) > 0);
 
 // Theme toggle persists across navigation.
 await page.goto(`${base}/`);
@@ -67,7 +76,7 @@ check('dark persists', await page.evaluate(() => document.documentElement.classL
 
 // Blog tag filter.
 await page.goto(`${base}/blog/`);
-check('blog page renders', (await page.locator('h1').innerText()).length > 0);
+check('blog lists the published post', (await page.locator('[data-item]').count()) === 1);
 
 check('no page errors', errors.length === 0, errors.join(' | '));
 await browser.close();

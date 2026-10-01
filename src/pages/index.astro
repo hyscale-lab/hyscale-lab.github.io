@@ -15,16 +15,20 @@ import { site } from '../lib/data';
 import { getPapers, totalCitations } from '../lib/papers';
 import { currentGroups } from '../lib/people';
 import { totalStars } from '../lib/github';
+import { getPillars, getProjects, projectUrl } from '../lib/research';
 import { getPosts } from '../lib/blog';
 import heroImage from '../../content/gallery/lab_2025-07-21.jpeg';
 import teamImage from '../../content/gallery/lab_2025-07-13.jpeg';
-import vhiveImage from '../assets/vhive-header.jpg';
+import vhiveImage from '../../content/projects/images/vhive-header.jpg';
 
 const s = site();
 const papers = getPapers();
 const selected = papers.filter((p) => p.selected).slice(0, 4);
 const members = currentGroups().reduce((n, g) => n + g.members.length, 0) + 1; // + PI
-const stars = await totalStars(s.stars_repos);
+const pillars = await getPillars();
+const projects = await getProjects();
+const vhive = projects.find((p) => p.id === 'vhive');
+const stars = await totalStars(projects.map((p) => p.data.repo));
 const fmt = (n: number) => (n >= 1000 ? `${(n / 1000).toFixed(1).replace(/\.0$/, '')}k` : String(n));
 const stats = [
   { value: String(papers.length), label: 'Publications' },
@@ -41,8 +45,8 @@ const posts = (await getPosts()).slice(0, 3);
     title={s.hero.title}
     subtitle={s.hero.subtitle}
     image={heroImage}
-    primary={{ label: 'Explore our research', href: '/projects/' }}
-    secondary={{ label: 'Join the lab', href: '/hiring/' }}
+    primary={{ label: 'Explore our research', href: '/research/' }}
+    secondary={{ label: 'Join the lab', href: '/join/' }}
   />
 
   <FeatureGrid
@@ -50,12 +54,16 @@ const posts = (await getPosts()).slice(0, 3);
     eyebrow="Research pillars"
     title="Three directions, one goal: efficient cloud systems."
     lead={s.description}
-    features={s.pillars.map((p) => ({
-      icon: p.icon,
-      title: p.title,
-      summary: p.summary,
-      href: `/projects/#${p.id}`,
-      meta: `${papers.filter((x) => x.tags.includes(p.tag)).length} papers`,
+    features={pillars.map((p) => ({
+      icon: p.data.icon,
+      title: p.data.title,
+      summary: p.data.summary,
+      href: `/research/${p.id}/`,
+      meta:
+        projects
+          .filter((x) => x.data.pillar === p.id)
+          .map((x) => x.data.title)
+          .join(' · ') || 'Learn more',
     }))}
   />
 
@@ -76,7 +84,7 @@ const posts = (await getPosts()).slice(0, 3);
     </p>
     <p>Its ASPLOS 2021 paper received the Distinguished Artifact Award.</p>
     <Fragment slot="actions">
-      <a href="/projects/cloud-serverless-vhive/" class="btn-primary">
+      <a href={vhive ? projectUrl(vhive) : '/research/serverless/'} class="btn-primary">
         About vHive <Icon name="arrow-right" class="size-4" />
       </a>
       <a href="https://github.com/vhive-serverless/vhive" class="btn-ghost text-white">
@@ -139,7 +147,7 @@ const posts = (await getPosts()).slice(0, 3);
   <CTA
     title="Build the next generation of cloud systems with us."
     text="We welcome enquiries from prospective PhD students, postdocs, interns and research assistants interested in serverless, agentic and multi-modal AI cloud systems."
-    primary={{ label: 'Join us', href: '/hiring/' }}
+    primary={{ label: 'Join us', href: '/join/' }}
     secondary={{ label: 'Contact the PI', href: `mailto:${s.contact.email}` }}
   />
 </Base>

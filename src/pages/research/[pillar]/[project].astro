@@ -1,0 +1,116 @@
+---
+import { render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../../../layouts/Base.astro';
+import PersonCard from '../../../components/PersonCard.astro';
+import PubList from '../../../components/pubs/PubList.astro';
+import Icon from '../../../components/Icon.astro';
+import { getPillars, getProjects, projectImage, type Project } from '../../../lib/research';
+import { papersByKeys } from '../../../lib/papers';
+import { getPerson } from '../../../lib/people';
+import { repoStars } from '../../../lib/github';
+
+export async function getStaticPaths() {
+  const pillars = await getPillars();
+  const projects = await getProjects();
+  return projects.map((p) => ({
+    params: { pillar: p.data.pillar, project: p.id },
+    props: { project: p, pillar: pillars.find((x) => x.id === p.data.pillar)! },
+  }));
+}
+
+const { project, pillar } = Astro.props as { project: Project; pillar: Awaited<ReturnType<typeof getPillars>>[number] };
+const { Content } = await render(project);
+const d = project.data;
+const logo = projectImage(project, d.logo);
+const figure = projectImage(project, d.image);
+const papers = papersByKeys(d.papers);
+const maintainers = d.maintainers.map((m) => getPerson(m)!);
+const stars = await repoStars(d.repo);
+const repoUrl = `https://github.com/${d.repo}`;
+---
+
+<Base title={d.title} description={`${d.title}: ${d.tagline}`} overlayHeader>
+  <section class="night-band">
+    <div class="container-x pt-32 pb-16 sm:pt-36 sm:pb-20">
+      <nav aria-label="Breadcrumb" class="eyebrow mb-5 flex flex-wrap items-center gap-2 text-[#ff8aa3]">
+        <a href="/research/" class="hover:text-white">
+          Research
+        </a>
+        <span aria-hidden="true">/</span>
+        <a href={`/research/${pillar.id}/`} class="hover:text-white">
+          {pillar.data.title}
+        </a>
+      </nav>
+      <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <h1 class="text-5xl font-bold tracking-tight sm:text-6xl">{d.title}</h1>
+          <p class="mt-4 max-w-2xl text-xl leading-relaxed text-night-muted">{d.tagline}</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href={repoUrl} class="btn-primary">
+              <Icon name="github" class="size-4" /> GitHub
+            </a>
+            {d.website && (
+              <a href={d.website} class="btn-ghost text-white">
+                <Icon name="globe" class="size-4" /> Website
+              </a>
+            )}
+            {d.docs && (
+              <a href={d.docs} class="btn-ghost text-white">
+                <Icon name="book-open" class="size-4" /> Get started
+              </a>
+            )}
+          </div>
+        </div>
+        <dl class="flex flex-wrap gap-x-10 gap-y-4 text-sm">
+          {stars !== null && (
+            <div>
+              <dt class="text-night-muted">GitHub stars</dt>
+              <dd class="text-2xl font-semibold">{stars.toLocaleString('en-US')}</dd>
+            </div>
+          )}
+          {d.license && (
+            <div>
+              <dt class="text-night-muted">License</dt>
+              <dd class="text-lg font-semibold">{d.license}</dd>
+            </div>
+          )}
+          <div>
+            <dt class="text-night-muted">Repository</dt>
+            <dd class="text-lg font-semibold">{d.repo}</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <div class="container-x max-w-5xl py-14">
+    {(figure ?? logo) && (
+      <figure class="reveal mb-12 overflow-hidden rounded-2xl border border-line bg-white p-4 shadow-sm sm:p-6">
+        <Image src={(figure ?? logo)!} alt={d.imageAlt ?? `${d.title} logo`} width={1600} class="mx-auto w-full" />
+      </figure>
+    )}
+    <article class="prose-lab mx-auto max-w-3xl">
+      <Content />
+    </article>
+
+    {maintainers.length > 0 && (
+      <section class="mx-auto mt-16 max-w-3xl">
+        <h2 class="mb-5 text-2xl font-bold tracking-tight">Lab maintainers</h2>
+        <ul class="grid gap-5 sm:grid-cols-3">
+          {maintainers.map((m) => (
+            <li>
+              <PersonCard person={m} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+    {papers.length > 0 && (
+      <section class="mx-auto mt-16 max-w-3xl">
+        <h2 class="mb-2 text-2xl font-bold tracking-tight">Publications</h2>
+        <PubList papers={papers} previews={false} />
+      </section>
+    )}
+  </div>
+</Base>

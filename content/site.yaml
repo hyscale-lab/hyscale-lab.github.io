@@ -8,42 +8,12 @@ description: >-
   The HyScale Systems and Cloud Architecture Lab at NTU Singapore builds scalable,
   efficient cloud systems and open-source research infrastructure.
 
-# TODO(PI review): hero copy is a draft for Checkpoint B.
 hero:
   eyebrow: Systems & Cloud Architecture · NTU Singapore
   title: Building the cloud for the AI era.
   subtitle: >-
     We study how systems software and computer architecture can make emerging cloud
     workloads faster, more elastic, and more resource-efficient.
-
-# Three research pillars shown on the landing page and the Projects page.
-# `bucket` matches `research_bucket` in papers.bib (papers listed on project pages);
-# `tag` (from tags.yaml) picks the papers counted and linked under the pillar.
-pillars:
-  - id: serverless
-    title: Serverless cloud systems
-    icon: bolt
-    bucket: current-serverless
-    tag: serverless
-    summary: >-
-      Systems for elastic computation and AI inference, built on vHive, our
-      open-source serverless research ecosystem.
-  - id: agentic
-    title: Agentic cloud systems
-    icon: sparkles
-    bucket: current-agentic
-    tag: agentic-ai
-    summary: >-
-      Supporting foundations for efficient reasoning and workload-aware AI
-      infrastructure.
-  - id: multimodal
-    title: Multi-modal and Embodied AI cloud systems
-    icon: eye
-    bucket: current-multimodal
-    tag: multimodal
-    summary: >-
-      An active systems research direction. We will add named artifacts when they
-      are ready to share.
 
 contact:
   email: dmitrii.ustiugov@ntu.edu.sg
@@ -57,14 +27,8 @@ socials:
 # Read by scripts/update_scholar_citations.py.
 scholar_userid: cZ9jA9oAAAAJ
 
-# GitHub repositories whose stars are summed on the landing page stats bar.
-stars_repos:
-  - vhive-serverless/vhive
-  - vhive-serverless/invitro
-  - hyscale-lab/aries
-
 nav:
-  - { label: Research, href: /projects/ }
+  - { label: Research, href: /research/ }
   - { label: Publications, href: /publications/ }
   - { label: People, href: /people/ }
   - { label: Blog, href: /blog/ }

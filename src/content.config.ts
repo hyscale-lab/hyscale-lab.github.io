@@ -3,14 +3,38 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-const projects = defineCollection({
-  loader: glob({ base: './content/projects', pattern: '**/*.md' }),
+// Research pillars: content/research/<id>.md → /research/<id>/
+const pillars = defineCollection({
+  loader: glob({ base: './content/research', pattern: '*.md' }),
   schema: z
     .object({
       title: z.string(),
-      description: z.string(),
-      pillar: z.enum(['serverless', 'agentic', 'multimodal']),
+      summary: z.string(),
+      icon: z.enum(['bolt', 'sparkles', 'eye']),
+      order: z.number(),
+      tag: z.string(),
+      bucket: z.string(),
+    })
+    .strict(),
+});
+
+// Open-source projects: content/projects/<id>.md → /research/<pillar>/<id>/
+const projects = defineCollection({
+  loader: glob({ base: './content/projects', pattern: '*.md' }),
+  schema: z
+    .object({
+      title: z.string(),
+      tagline: z.string(),
+      pillar: z.string(),
       order: z.number().default(99),
+      repo: z.string().regex(/^[\w.-]+\/[\w.-]+$/, 'use owner/name'),
+      website: z.url().optional(),
+      docs: z.url().optional(),
+      license: z.string().optional(),
+      logo: z.string().optional(), // file in content/projects/
+      image: z.string().optional(), // architecture figure, file in content/projects/
+      imageAlt: z.string().optional(),
+      maintainers: z.array(z.string()).default([]),
       papers: z.array(z.string()).default([]),
     })
     .strict(),
@@ -36,4 +60,4 @@ const pages = defineCollection({
   schema: z.object({ title: z.string(), description: z.string() }).strict(),
 });
 
-export const collections = { projects, blog, pages };
+export const collections = { pillars, projects, blog, pages };

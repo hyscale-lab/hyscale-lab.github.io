@@ -25,20 +25,9 @@ const schemas = {
     url,
     description: z.string(),
     hero: z.object({ eyebrow: z.string(), title: z.string(), subtitle: z.string() }),
-    pillars: z.array(
-      z.object({
-        id: z.string(),
-        title: z.string(),
-        icon: z.enum(['bolt', 'sparkles', 'eye']),
-        bucket: z.string(),
-        tag: z.string(),
-        summary: z.string(),
-      }),
-    ),
     contact: z.object({ email: z.email(), pi: z.string() }),
     socials: z.record(z.string(), url),
     scholar_userid: z.string(),
-    stars_repos: z.array(z.string().regex(/^[\w.-]+\/[\w.-]+$/)),
     nav: z.array(z.object({ label: z.string(), href: z.string() })),
   }),
   'people.yaml': z.array(
@@ -105,14 +94,7 @@ export function load<F extends ContentFile>(file: F): Content<F> {
   return res.data as Content<F>;
 }
 
-export function site() {
-  const s = load('site.yaml');
-  tagIndex().check(
-    s.pillars.map((p) => p.tag),
-    'content/site.yaml → pillars',
-  );
-  return s;
-}
+export const site = () => load('site.yaml');
 
 /** Tag lookup; throws on ids that are not in content/tags.yaml. */
 export function tagIndex() {

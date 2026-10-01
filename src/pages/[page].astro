@@ -1,5 +1,5 @@
 ---
-// Markdown pages from content/pages/ (hiring → /hiring/, teaching → /teaching/).
+// Markdown pages from content/pages/ (join → /join/, teaching → /teaching/).
 import { getCollection, render } from 'astro:content';
 import Prose from '../layouts/Prose.astro';
 import Icon from '../components/Icon.astro';
@@ -12,11 +12,11 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const s = site();
-const isHiring = entry.id === 'hiring';
+const isJoin = entry.id === 'join';
 ---
 
-<Prose title={entry.data.title} description={entry.data.description} eyebrow={isHiring ? 'Opportunities' : undefined}>
-  {isHiring && (
+<Prose title={entry.data.title} description={entry.data.description} eyebrow={isJoin ? 'Opportunities' : undefined}>
+  {isJoin && (
     <div class="not-prose card mb-12 flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
       <div>
         <p class="font-semibold">Interested? Email the PI with your CV.</p>

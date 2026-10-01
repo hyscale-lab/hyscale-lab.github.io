@@ -127,8 +127,7 @@ const tabBtn =
 </Base>
 
 <script>
-  // Accessible tabs; the URL hash (#current, #alumni, #supervisees) selects a tab,
-  // which is how the old /people/former-members/ style URLs land on the right one.
+  // Accessible tabs; the URL hash (#current, #alumni, #supervisees) selects a tab.
   const setup = () => {
     const list = document.querySelector<HTMLElement>('[data-tabs]');
     if (!list) return;
