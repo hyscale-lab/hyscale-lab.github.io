@@ -58,7 +58,7 @@ const tabBtn =
       {groups.map((g) => (
         <div>
           <h2 class="eyebrow mb-5 text-accent">{g.label}</h2>
-          <ul class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <ul class="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
             {g.members.map(({ person, stint }) => (
               <li>
                 <PersonCard person={person} subtitle={`Since ${stint.start}`} papers={paperCount(person.id)} />

@@ -21,7 +21,7 @@ async function mark(size, rgb) {
     .png();
 }
 
-await (await mark(512, '#ffffff')).toFile('public/brand/mark-white.png');
+await (await mark(128, '#ffffff')).toFile('public/brand/mark-white.png');
 await (await mark(512, '#181c62')).toFile('public/brand/mark-navy.png');
 await (await mark(64, '#181c62')).toFile('public/favicon.png');
 // Apple touch icon: white mark on the night background.

@@ -40,7 +40,7 @@ const primary = p.links?.website ?? p.links?.linkedin;
 <article
   class:list={[
     'card reveal group flex h-full gap-5 p-5 transition hover:border-brand/40 hover:shadow-lg',
-    large ? 'flex-col sm:flex-row sm:items-center sm:p-8' : 'flex-col items-center text-center',
+    large ? 'flex-col sm:flex-row sm:items-center sm:p-8' : 'flex-col items-center p-4 text-center sm:p-5',
   ]}
 >
   {photo ? (
@@ -49,13 +49,13 @@ const primary = p.links?.website ?? p.links?.linkedin;
       alt={`Portrait of ${p.name}`}
       width={large ? 320 : 192}
       height={large ? 320 : 192}
-      class:list={['shrink-0 rounded-2xl object-cover', large ? 'size-40 sm:size-48' : 'size-24']}
+      class:list={['shrink-0 rounded-2xl object-cover', large ? 'size-40 sm:size-48' : 'size-20 sm:size-24']}
     />
   ) : (
     <span
       class:list={[
         'grid shrink-0 place-items-center rounded-2xl font-semibold text-white',
-        large ? 'size-40 text-4xl' : 'size-24 text-2xl',
+        large ? 'size-40 text-4xl' : 'size-20 text-xl sm:size-24 sm:text-2xl',
       ]}
       style={`background: linear-gradient(135deg, hsl(${hue} 55% 42%), hsl(${(hue + 50) % 360} 60% 32%))`}
       aria-hidden="true"
