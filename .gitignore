@@ -1,27 +1,15 @@
-_site
-.bundle
-.DS_store
-.idea
-.jekyll-cache
-.jekyll-metadata
-.ruby-version
-.sass-cache
-.tweet-cache
-.venv
-assets/libs/
-assets/rendercv/rendercv_output/*.typ
-al-folio-upgrade-report.md
-node_modules/
-output/playwright/
-test-results/
-vendor
-
-# Python bytecode from bin/ helper scripts
-__pycache__/
-*.pyc
-
-ustiugov.github.io
-.omx
 # Astro
 dist/
 .astro/
+node_modules/
+
+# Editors / OS
+.DS_Store
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# Python helper scripts
+__pycache__/
+*.pyc
+.venv
