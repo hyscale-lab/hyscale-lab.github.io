@@ -12,8 +12,6 @@ const pillars = defineCollection({
       summary: z.string(),
       icon: z.enum(['bolt', 'sparkles', 'eye']),
       order: z.number(),
-      tag: z.string(),
-      bucket: z.string(),
     })
     .strict(),
 });

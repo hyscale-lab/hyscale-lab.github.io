@@ -18,7 +18,7 @@ const header = load('page-headers.yaml').research;
   <div class="container-x grid gap-20 py-16">
     {pillars.map((pillar, i) => {
       const items = projects.filter((p) => p.data.pillar === pillar.id);
-      const count = papers.filter((p) => p.tags.includes(pillar.data.tag)).length;
+      const count = papers.filter((p) => p.main === pillar.id).length;
       return (
         <section id={pillar.id} class="grid scroll-mt-24 gap-8 lg:grid-cols-[1fr_2fr] lg:gap-14">
           <div class="reveal">
@@ -37,7 +37,7 @@ const header = load('page-headers.yaml').research;
                 About this pillar <Icon name="arrow-right" class="size-4" />
               </a>
               {count > 0 && (
-                <a href={`/publications/?tag=${pillar.data.tag}`} class="inline-flex items-center gap-2 hover:gap-3">
+                <a href={`/publications/?tag=${pillar.id}`} class="inline-flex items-center gap-2 hover:gap-3">
                   {count} related papers <Icon name="arrow-right" class="size-4" />
                 </a>
               )}

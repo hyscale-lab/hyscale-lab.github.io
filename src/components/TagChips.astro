@@ -1,6 +1,8 @@
 ---
-// Tag filter chips for a [data-filter-root]. Only tags that are used are shown.
-import { tagIndex } from '../lib/data';
+// Tag filter chips for a [data-filter-root], grouped as Pillar (main tags),
+// Topic (sub tags) and Other (extra tags). Only tags that are used are shown.
+// Main-tag chips are exclusive: picking a pillar replaces the previous one.
+import { tagIndex, type TagKind } from '../lib/data';
 
 interface Props {
   used: string[];
@@ -10,14 +12,33 @@ const { used, label = 'Filter by tag' } = Astro.props;
 const tags = tagIndex();
 const counts = new Map<string, number>();
 used.forEach((t) => counts.set(t, (counts.get(t) ?? 0) + 1));
-const shown = tags.all.filter((t) => counts.has(t.id));
+const GROUPS: { kind: TagKind; label: string }[] = [
+  { kind: 'main', label: 'Pillar' },
+  { kind: 'sub', label: 'Topic' },
+  { kind: 'extra', label: 'Other' },
+];
+const groups = GROUPS.map((g) => ({
+  ...g,
+  tags: tags.all.filter((t) => t.kind === g.kind && counts.has(t.id)),
+})).filter((g) => g.tags.length);
 ---
 
-<div role="group" aria-label={label} class="flex flex-wrap gap-2">
-  {shown.map((t) => (
-    <button type="button" class="chip" data-filter-tag={t.id} aria-pressed="false">
-      {t.label}
-      <span class="ml-1.5 font-normal">{counts.get(t.id)}</span>
-    </button>
+<div role="group" aria-label={label} class="grid gap-3">
+  {groups.map((g) => (
+    <div class="flex flex-wrap items-center gap-2">
+      {groups.length > 1 && <span class="w-14 shrink-0 text-xs font-semibold text-muted">{g.label}</span>}
+      {g.tags.map((t) => (
+        <button
+          type="button"
+          class:list={['chip', t.kind === 'main' && 'font-semibold']}
+          data-filter-tag={t.id}
+          data-filter-kind={t.kind}
+          aria-pressed="false"
+        >
+          {t.label}
+          <span class="ml-1.5 font-normal">{counts.get(t.id)}</span>
+        </button>
+      ))}
+    </div>
   ))}
 </div>

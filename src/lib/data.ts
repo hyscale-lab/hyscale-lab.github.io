@@ -28,6 +28,10 @@ const pageHeader = z
   })
   .strict();
 
+const tagDef = z
+  .object({ id: z.string().regex(/^[a-z0-9-]+$/, 'tag ids are lowercase-kebab-case'), label: z.string() })
+  .strict();
+
 const schemas = {
   'site.yaml': z.object({
     name: z.string(),
@@ -117,7 +121,13 @@ const schemas = {
       })
       .strict(),
   ),
-  'tags.yaml': z.array(z.object({ id: z.string().regex(/^[a-z0-9-]+$/), label: z.string() }).strict()),
+  'tags.yaml': z
+    .object({
+      main: z.array(tagDef).min(1),
+      sub: z.array(tagDef.extend({ main: z.string() })),
+      extra: z.array(tagDef).default([]),
+    })
+    .strict(),
   'venues.yaml': z.record(z.string(), z.object({ color: z.string(), url: url.optional() })),
   'partners.yaml': z.array(
     z
@@ -157,20 +167,66 @@ export function load<F extends ContentFile>(file: F): Content<F> {
 
 export const site = () => load('site.yaml');
 
-/** Tag lookup; throws on ids that are not in content/tags.yaml. */
+export type TagKind = 'main' | 'sub' | 'extra';
+export interface Tag {
+  id: string;
+  label: string;
+  kind: TagKind;
+  /** For sub tags: the main tag (pillar) it belongs to. */
+  main?: string;
+}
+
+/** Tag lookup over content/tags.yaml (main / sub / extra tags). */
 export function tagIndex() {
-  const tags = load('tags.yaml');
-  const byId = new Map(tags.map((t) => [t.id, t]));
+  const t = load('tags.yaml');
+  const all: Tag[] = [
+    ...t.main.map((x) => ({ ...x, kind: 'main' as const })),
+    ...t.sub.map((x) => ({ ...x, kind: 'sub' as const })),
+    ...t.extra.map((x) => ({ ...x, kind: 'extra' as const })),
+  ];
+  const byId = new Map<string, Tag>();
+  for (const x of all) {
+    if (byId.has(x.id)) throw new Error(`[content] content/tags.yaml: tag "${x.id}" is listed twice`);
+    byId.set(x.id, x);
+  }
+  for (const x of t.sub)
+    if (byId.get(x.main)?.kind !== 'main')
+      throw new Error(`[content] content/tags.yaml: sub tag "${x.id}" has main: ${x.main}, which is not a main tag`);
+
+  const KIND_ORDER: Record<TagKind, number> = { main: 0, sub: 1, extra: 2 };
   return {
-    all: tags,
+    all,
+    get: (id: string) => byId.get(id),
     label: (id: string) => byId.get(id)?.label ?? id,
+    kind: (id: string) => byId.get(id)?.kind,
+    /** Sort ids main → sub → extra, keeping registry order within a kind. */
+    sort: (ids: string[]) =>
+      [...ids].sort(
+        (a, b) =>
+          KIND_ORDER[byId.get(a)!.kind] - KIND_ORDER[byId.get(b)!.kind] ||
+          all.indexOf(byId.get(a)!) - all.indexOf(byId.get(b)!),
+      ),
+    /** Throws if any id is not in content/tags.yaml. */
     check(ids: string[] | undefined, where: string) {
-      const unknown = (ids ?? []).filter((t) => !byId.has(t));
+      const unknown = (ids ?? []).filter((id) => !byId.has(id));
       if (unknown.length)
         throw new Error(
           `[content] ${where} uses tag(s) not listed in content/tags.yaml: ${unknown.join(', ')}. ` +
             'Add them to tags.yaml or fix the spelling.',
         );
+    },
+    /** Problems with a publication's tags: unknown ids, not exactly one main tag, or no sub tag. */
+    publicationProblems(ids: string[]): string[] {
+      const problems: string[] = [];
+      const unknown = ids.filter((id) => !byId.has(id));
+      if (unknown.length) problems.push(`unknown tag(s) ${unknown.join(', ')} (not in content/tags.yaml)`);
+      const mains = ids.filter((id) => byId.get(id)?.kind === 'main');
+      if (mains.length !== 1)
+        problems.push(
+          `needs exactly one main tag (${t.main.map((m) => m.id).join(' / ')}), has ${mains.length ? mains.join(', ') : 'none'}`,
+        );
+      if (!ids.some((id) => byId.get(id)?.kind === 'sub')) problems.push('needs at least one sub tag');
+      return problems;
     },
   };
 }
