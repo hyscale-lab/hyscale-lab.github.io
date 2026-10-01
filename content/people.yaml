@@ -104,14 +104,12 @@
 - id: boxi-zhou
   name: Boxi Zhou
   from: NTU
-  links:
   stints:
     - { role: phd, start: 2026 }
 
 - id: pang-wei-siong
   name: Pang Wei Siong
   from: NTU
-  links:
   stints:
     - { role: phd, start: 2026 }
 
