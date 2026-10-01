@@ -1,0 +1,7 @@
+# News items shown on the landing page, newest first. Markdown links are allowed in `text`.
+#   - date: 2026-09-01
+#     text: Our paper **X** was accepted at [OSDI 2027](https://www.usenix.org/conference/osdi27).
+#     tags: [serverless]    # optional, from tags.yaml
+#
+# TODO: add real news items. The section is hidden while this list is empty.
+[]

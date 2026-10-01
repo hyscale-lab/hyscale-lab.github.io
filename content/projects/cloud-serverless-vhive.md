@@ -1,13 +1,13 @@
 ---
-layout: page
 title: Cloud and Serverless with vHive
 description: Full-stack research on fast, isolated, and resource-efficient serverless clouds.
-category: research
-importance: 1
-related_publications: true
-research_status: current
-research_pillar: Serverless cloud systems
+pillar: serverless
+order: 1
+# Papers listed under "Related publications" (BibTeX keys). Papers whose
+# research_bucket matches the pillar are added automatically.
+papers: [jesalpura2025shattering, ustiugov2023invitro, schall2022lukewarm, ustiugov2021stellar, ustiugov2021snapshots]
 ---
+
 
 Cloud platforms must combine extreme multi-tenancy with strong isolation while preserving performance, cost efficiency, and security. This research direction explores those trade-offs across the distributed hardware/software stack.
 
@@ -20,4 +20,4 @@ Cloud platforms must combine extreme multi-tenancy with strong isolation while p
 - [SOSP 2023 tutorial slides](https://drive.google.com/drive/folders/1UOFjHjxILq2m3MX9QpDf5EAXLWVpEJVF?usp=sharing)
 - [ASPLOS 2022 tutorial videos](https://www.youtube.com/playlist?list=PLs4cWWn5uKac0A_quPr2jzsOMzaySI_w8)
 
-Related current work covers data-intensive workflows, in-vitro serverless research, lukewarm functions, tail latency, and function snapshots {% cite jesalpura2025shattering ustiugov2023invitro schall2022lukewarm ustiugov2021stellar ustiugov2021snapshots %}.
+Related current work covers data-intensive workflows, in-vitro serverless research, lukewarm functions, tail latency, and function snapshots.

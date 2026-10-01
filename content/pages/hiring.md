@@ -1,10 +1,6 @@
 ---
-layout: page
-permalink: /hiring/
 title: Join Us
 description: Enquiry information for prospective HyScale Lab researchers and students.
-nav: true
-nav_order: 5
 ---
 
 The HyScale Lab welcomes enquiries from researchers interested in **Serverless cloud systems**, **Agentic cloud systems**, and **Multi-modal and Embodied AI cloud systems**. Opportunities and funding availability change, so this page provides enquiry guidance rather than announcing vacancies. Email [Professor Dmitrii Ustiugov](mailto:dmitrii.ustiugov@ntu.edu.sg) with the materials relevant to your enquiry.
