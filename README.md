@@ -28,7 +28,7 @@ Add an entry to `content/papers.bib`. The al-folio fields still work:
 @inproceedings{doe2027example,
   title = {An Example Paper Title},
   google_scholar_id = {XXXXXXXXXXXX},
-  tags = {serverless, llm-serving},
+  tags = {serverless, cold-starts, llm-serving},
   author = {Doe, Jane and Ustiugov, Dmitrii},
   booktitle = {USENIX Symposium on Operating Systems Design and Implementation (OSDI)},
   abbr = {OSDI},
@@ -40,18 +40,19 @@ Add an entry to `content/papers.bib`. The al-folio fields still work:
 }
 ```
 
-| Field                                      | What it does                                                                                     |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `abbr`                                     | Venue badge. Colour and link come from `content/venues.yaml`; add new venues there.              |
-| `tags`                                     | Topic chips used for filtering. Every tag must be listed in `content/tags.yaml`.                 |
-| `google_scholar_id`                        | The part after the colon in a Scholar `citation_for_view=…:XXXX` link. Shows the citation count. |
-| `pdf`, `slides`                            | A URL, or a file name in `public/assets/pdf/`.                                                   |
-| `preview`                                  | A file name in `content/papers/previews/`.                                                       |
-| `code`, `video`, `website`, `arxiv`, `doi` | Buttons under the paper.                                                                         |
-| `abstract`                                 | Shown by the **Abs** button.                                                                     |
-| `award`, `additional_info`                 | Award badge, and a note after the venue.                                                         |
-| `selected = {true}`                        | Shown under "Recent highlights" on the landing page.                                             |
-| `research_bucket`                          | `current-serverless`, `current-agentic`, … Lists the paper on the matching research pillar page. |
+| Field                                      | What it does                                                                                                                                                                                                                                                                         |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `abbr`                                     | Venue badge. Colour and link come from `content/venues.yaml`; add new venues there.                                                                                                                                                                                                  |
+| `tags`                                     | **Exactly one main tag** (the pillar: `serverless`, `llm-agentic`, `multimodal`, or `foundations` for pre-lab work) **and at least one sub tag**, plus optional extra tags. All from `content/tags.yaml`; the build fails otherwise. The main tag puts the paper on its pillar page. |
+| `google_scholar_id`                        | The part after the colon in a Scholar `citation_for_view=…:XXXX` link. Shows the citation count.                                                                                                                                                                                     |
+| `pdf`, `slides`                            | A URL, or a file name in `public/assets/pdf/`.                                                                                                                                                                                                                                       |
+| `preview`                                  | A file name in `content/papers/previews/`.                                                                                                                                                                                                                                           |
+| `code`, `video`, `website`, `arxiv`, `doi` | Buttons under the paper.                                                                                                                                                                                                                                                             |
+| `abstract`                                 | Shown by the **Abs** button.                                                                                                                                                                                                                                                         |
+| `award`, `additional_info`                 | Award badge, and a note after the venue.                                                                                                                                                                                                                                             |
+| `selected = {true}`                        | Shown under "Recent highlights" on the landing page.                                                                                                                                                                                                                                 |
+
+Example: ServerlessLLM is `{serverless, cold-starts, llm-serving}`. A sub tag may come from another pillar.
 
 Lab members' names are highlighted and linked automatically when they match a name in `content/people.yaml`.
 
@@ -83,7 +84,7 @@ Create `content/blog/<slug>.md` (or `.mdx`). The URL will be `/blog/<slug>/`.
 title: A post title
 description: One sentence for the blog list and link previews.
 date: 2026-10-01
-tags: [serverless] # from content/tags.yaml
+tags: [lab-news] # from content/tags.yaml (any tags; the main/sub rule is for papers only)
 authors: [jane-doe] # ids from content/people.yaml
 draft: false # true = built but not listed
 ---
@@ -101,7 +102,7 @@ Create `content/projects/<id>.md`. It appears under its pillar on `/research/` a
 ---
 title: ARIES
 tagline: Agent Runtime & Infrastructure Experimentation System
-pillar: agentic # a file name in content/research/
+pillar: llm-agentic # a file name in content/research/
 repo: hyscale-lab/ARIES
 docs: https://github.com/hyscale-lab/ARIES/blob/main/docs/quick-start.md
 license: MIT

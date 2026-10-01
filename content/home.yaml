@@ -81,7 +81,7 @@ cta:
   title: Build the next generation of cloud systems with us.
   text: >-
     We welcome enquiries from prospective PhD students, postdocs, interns and research
-    assistants interested in serverless, agentic and multi-modal AI cloud systems.
+    assistants interested in serverless, LLM and agentic, and multi-modal AI cloud systems.
   primary: { label: Join us, href: /join/ }
   # `mailto:` with no address uses contact.email from site.yaml.
   secondary: { label: Contact the PI, href: 'mailto:' }

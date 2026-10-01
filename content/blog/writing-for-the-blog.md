@@ -19,7 +19,7 @@ This is a reference post for lab members. It is marked `draft: true`, so it is b
 title: Our paper at OSDI
 description: One sentence shown on the blog list and in link previews.
 date: 2026-10-01
-tags: [cloud-systems, ai-infrastructure] # ids from content/tags.yaml
+tags: [serverless, cold-starts] # ids from content/tags.yaml
 authors: [jooyoung-park] # ids from content/people.yaml
 draft: false
 ---

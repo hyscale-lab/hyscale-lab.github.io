@@ -10,7 +10,10 @@ export type Project = CollectionEntry<'projects'>;
 export async function getPillars(): Promise<Pillar[]> {
   const pillars = (await getCollection('pillars')).sort((a, b) => a.data.order - b.data.order);
   const tags = tagIndex();
-  for (const p of pillars) tags.check([p.data.tag], `content/research/${p.id}.md`);
+  // The file name doubles as the pillar's main tag.
+  for (const p of pillars)
+    if (tags.kind(p.id) !== 'main')
+      throw new Error(`[content] content/research/${p.id}.md: "${p.id}" must also be a main tag in content/tags.yaml`);
   return pillars;
 }
 

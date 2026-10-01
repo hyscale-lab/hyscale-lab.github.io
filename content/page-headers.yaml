@@ -7,7 +7,7 @@ publications:
   page_title: Publications
   eyebrow: Research output
   title: Publications
-  description: HyScale Lab publications across serverless, agentic, and multi-modal and embodied AI cloud systems.
+  description: HyScale Lab publications across serverless, LLM and agentic, and multi-modal and embodied AI cloud systems.
   lead: Peer-reviewed papers and preprints from HyScale Lab and the PI's earlier work.
 
 people:
@@ -23,7 +23,7 @@ research:
   page_title: Research
   eyebrow: Research
   title: Three pillars, built in the open
-  description: HyScale Lab research across serverless, agentic, and multi-modal and embodied AI cloud systems.
+  description: HyScale Lab research across serverless, LLM and agentic, and multi-modal and embodied AI cloud systems.
   lead: >-
     HyScale develops cloud systems through three research pillars, and releases the systems we build as
     open-source research infrastructure.

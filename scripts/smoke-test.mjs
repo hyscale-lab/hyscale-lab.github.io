@@ -14,7 +14,7 @@ const check = (name, ok, extra = '') => {
 const visible = (sel) => page.locator(`${sel}:visible`).count();
 
 // Publications: filters from the URL, combined with AND.
-await page.goto(`${base}/publications/?tag=cloud-systems&tag=open-source`);
+await page.goto(`${base}/publications/?tag=serverless&tag=open-source`);
 check('two tags → papers with both', (await visible('[data-item]')) === 3, `${await visible('[data-item]')} shown`);
 check('chips reflect URL', (await page.locator('[data-filter-tag="open-source"][aria-pressed=true]').count()) === 1);
 
@@ -34,6 +34,20 @@ check('clear filters', (await visible('[data-item]')) === total);
 await page.locator('[data-filter-tag="security"]').click();
 check('tag chip click', (await visible('[data-item]')) === 2 && page.url().includes('tag=security'));
 await page.locator('[data-filter-tag="security"]').click();
+
+// Pillar (main tag) chips are exclusive; topic chips combine with them.
+await page.goto(`${base}/publications/`);
+await page.locator('[data-filter-tag="serverless"]').click();
+await page.locator('[data-filter-tag="llm-agentic"]').click();
+check(
+  'picking a pillar replaces the previous one',
+  (await page.locator('[data-filter-kind="main"][aria-pressed=true]').count()) === 1 &&
+    (await visible('[data-item]')) === 7,
+  `${await visible('[data-item]')} shown`,
+);
+await page.locator('[data-filter-tag="llm-serving"]').click();
+check('pillar + topic', (await visible('[data-item]')) === 3, `${await visible('[data-item]')} shown`);
+await page.locator('[data-filter-clear]:visible').first().click();
 
 // In-entry tag link filters in place.
 await page.locator('a[data-tag-link="ml-for-systems"]').first().click();
@@ -59,13 +73,13 @@ for (const path of [
   '/research/serverless/',
   '/research/serverless/vhive/',
   '/research/serverless/invitro/',
-  '/research/agentic/aries/',
+  '/research/llm-agentic/aries/',
 ]) {
   const res = await page.goto(`${base}${path}`);
   check(`${path} renders`, res?.status() === 200 && (await page.locator('h1').count()) === 1);
 }
 await page.goto(`${base}/research/`);
-check('pillars link their projects', (await page.locator('a[href="/research/agentic/aries/"]').count()) > 0);
+check('pillars link their projects', (await page.locator('a[href="/research/llm-agentic/aries/"]').count()) > 0);
 
 // Landing page carousels.
 await page.goto(`${base}/`);

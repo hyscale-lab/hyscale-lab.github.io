@@ -1,14 +1,50 @@
-# Shared tag registry for publications (papers.bib `tags = {a, b}`) and blog
-# posts (front matter `tags: [a, b]`). Using a tag that is not listed here
-# fails the build. Keep ids kebab-case; `label` is what visitors see.
+# Tag registry for publications (papers.bib `tags = {a, b}`) and blog posts
+# (front matter `tags: [a, b]`). A tag that is not listed here fails the build.
+# Keep ids kebab-case; `label` is what visitors see.
+#
+# Every publication gets:
+#   - exactly ONE main tag: the research pillar it belongs to
+#   - at least ONE sub tag: what it is about within that pillar
+#   - any number of extra tags (optional, cross-cutting)
+# A sub tag names the pillar it belongs to (`main:`). A paper may also borrow a
+# sub tag from another pillar, e.g. ServerlessLLM is serverless + cold-starts +
+# llm-serving. Blog posts may use any tags and are not checked against these rules.
 
-- { id: ai-infrastructure, label: AI Infrastructure }
-- { id: agentic-ai, label: Agentic & Multi-modal AI }
-- { id: cloud-systems, label: Cloud & Serverless }
-- { id: cluster-management, label: Cluster & Rack-Scale Systems }
-- { id: memory-and-storage, label: Memory & Storage }
-- { id: microarchitecture, label: Architecture & Benchmarking }
-- { id: ml-for-systems, label: ML for Systems }
-- { id: security, label: Security }
-- { id: open-source, label: Open source }
-- { id: lab-news, label: Lab news }
+# Main tags: one per research pillar. Ids match the files in content/research/.
+main:
+  - { id: serverless, label: Serverless Cloud Systems }
+  - { id: llm-agentic, label: LLM & Agentic Cloud Systems }
+  - { id: multimodal, label: Multi-modal & Embodied AI Cloud Systems }
+  # The PI's pre-lab architecture and memory-systems papers (2016-2021), which
+  # fit none of the three pillars. Not a research pillar, so it has no page.
+  - { id: foundations, label: Systems & Architecture Foundations }
+
+# Sub tags: finer topics within a pillar.
+sub:
+  # Serverless Cloud Systems
+  - { id: cold-starts, label: Cold Starts & Snapshots, main: serverless }
+  - { id: autoscaling, label: Autoscaling & Control Planes, main: serverless }
+  - { id: serverless-storage, label: Storage & I/O, main: serverless }
+  - { id: benchmarking, label: Benchmarking & Characterization, main: serverless }
+
+  # LLM & Agentic Cloud Systems
+  - { id: llm-serving, label: LLM Serving, main: llm-agentic }
+  - { id: agent-runtimes, label: Agent Runtimes & Sandboxes, main: llm-agentic }
+  - { id: efficient-reasoning, label: Efficient Reasoning, main: llm-agentic }
+  - { id: ai-clusters, label: AI Cluster Management, main: llm-agentic }
+
+  # Multi-modal & Embodied AI Cloud Systems
+  - { id: vlm-inference, label: Vision-Language Inference, main: multimodal }
+  - { id: multimodal-training, label: Multi-modal Training & Post-Training, main: multimodal }
+
+  # Systems & Architecture Foundations
+  - { id: memory-systems, label: Memory Systems, main: foundations }
+  - { id: virtual-memory, label: Virtual Memory & Address Translation, main: foundations }
+  - { id: rack-scale, label: Rack-Scale Systems, main: foundations }
+
+# Extra tags: optional and cross-cutting.
+extra:
+  - { id: open-source, label: Open Source }
+  - { id: security, label: Security }
+  - { id: ml-for-systems, label: ML for Systems }
+  - { id: lab-news, label: Lab News }

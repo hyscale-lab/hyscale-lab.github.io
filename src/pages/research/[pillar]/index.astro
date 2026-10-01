@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 const { pillar } = Astro.props;
 const { Content } = await render(pillar);
 const projects = (await getProjects()).filter((p) => p.data.pillar === pillar.id);
-const papers = getPapers().filter((p) => p.bucket === pillar.data.bucket);
+const papers = getPapers().filter((p) => p.main === pillar.id);
 ---
 
 <Prose title={pillar.data.title} description={pillar.data.summary} eyebrow="Research pillar">
@@ -36,7 +36,7 @@ const papers = getPapers().filter((p) => p.bucket === pillar.data.bucket);
         <h2 class="mb-2 text-2xl font-bold tracking-tight">Related publications</h2>
         <PubList papers={papers} previews={false} />
         <a
-          href={`/publications/?tag=${pillar.data.tag}`}
+          href={`/publications/?tag=${pillar.id}`}
           class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:gap-3"
         >
           More on the publications page <Icon name="arrow-right" class="size-4" />

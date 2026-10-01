@@ -3,7 +3,8 @@
 // Markup contract (inside one [data-filter-root]):
 //   items     [data-item] with data-tags="a b", data-year, data-authors="id id", data-search="lowercase text"
 //   groups    [data-group] wrappers (e.g. one per year); hidden when all their items are hidden
-//   controls  button[data-filter-tag="id"], select[data-filter-year], select[data-filter-author],
+//   controls  button[data-filter-tag="id"] (data-filter-kind="main" chips are exclusive),
+//             select[data-filter-year], select[data-filter-author],
 //             input[data-filter-q], [data-filter-clear]
 //   output    [data-filter-count], [data-filter-empty]
 //
@@ -85,7 +86,13 @@ export function setupFilter(root: HTMLElement) {
   chips.forEach((c) =>
     c.addEventListener('click', () => {
       const t = c.dataset.filterTag!;
-      state.tags.has(t) ? state.tags.delete(t) : state.tags.add(t);
+      if (state.tags.has(t)) state.tags.delete(t);
+      else {
+        // A paper has exactly one main tag, so picking a pillar replaces the previous one.
+        if (c.dataset.filterKind === 'main')
+          chips.forEach((o) => o.dataset.filterKind === 'main' && state.tags.delete(o.dataset.filterTag!));
+        state.tags.add(t);
+      }
       apply();
     }),
   );

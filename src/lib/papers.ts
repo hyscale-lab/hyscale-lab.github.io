@@ -33,8 +33,8 @@ export interface Paper {
   note: string | null; // additional_info
   abstract: string | null;
   selected: boolean;
-  tags: string[];
-  bucket: string | null;
+  tags: string[]; // main tag first, then sub, then extra
+  main: string; // the paper's main tag (research pillar or foundations)
   citations: number | null;
   bibtex: string;
 }
@@ -71,9 +71,6 @@ const INTERNAL_FIELDS = new Set([
   'html',
   'pdf',
   'preview',
-  'research_bucket',
-  'research_pillar',
-  'research_status',
   'selected',
   'slides',
   'poster',
@@ -140,12 +137,12 @@ export function getPapers(): Paper[] {
     if (!year) problems.push(`${key}: missing or invalid year`);
     if (!f.title) problems.push(`${key}: missing title`);
 
-    const paperTags = list(f.tags);
-    try {
-      tags.check(paperTags, `content/papers.bib → ${key}`);
-    } catch (e) {
-      problems.push((e as Error).message.replace(/^\[content\] /, ''));
-    }
+    // Exactly one main tag (pillar) and at least one sub tag; see content/tags.yaml.
+    const rawTags = list(f.tags);
+    const tagProblems = tags.publicationProblems(rawTags);
+    for (const msg of tagProblems) problems.push(`${key}: ${msg}`);
+    const paperTags = tagProblems.length ? rawTags : tags.sort(rawTags);
+    const main = paperTags.find((t) => tags.kind(t) === 'main') ?? '';
 
     const links: PaperLink[] = [];
     if (f.pdf) {
@@ -193,7 +190,7 @@ export function getPapers(): Paper[] {
       abstract: f.abstract ? cleanTex(f.abstract) : null,
       selected: (f.selected ?? '').toLowerCase() === 'true',
       tags: paperTags,
-      bucket: f.research_bucket ?? null,
+      main,
       citations: cites ?? null,
       bibtex: exportBibtex(type, key, f),
     };
