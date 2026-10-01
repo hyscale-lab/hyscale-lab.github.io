@@ -2,10 +2,15 @@ name: Update Google Scholar Citations
 
 on:
   schedule:
-    - cron: "0 0 * * 1" # Monday
-    - cron: "0 0 * * 3" # Wednesday
-    - cron: "0 0 * * 5" # Friday
+    - cron: '0 0 * * 1' # Monday
+    - cron: '0 0 * * 3' # Wednesday
+    - cron: '0 0 * * 5' # Friday
   workflow_dispatch:
+
+# contents: push the updated citations.yml; actions: start a deploy afterwards.
+permissions:
+  contents: write
+  actions: write
 
 jobs:
   update-citations:
@@ -21,20 +26,20 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.13"
+          python-version: '3.13'
 
       - name: Install dependencies
         run: |
           echo "🔧 Installing dependencies..."
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r scripts/requirements.txt
 
       - name: Save current citations.yml hash
         id: before
         run: |
           echo "📦 Checking existing citations.yml hash..."
-          if [ -f _data/citations.yml ]; then
-            sha_before=$(sha256sum _data/citations.yml | awk '{print $1}')
+          if [ -f content/citations.yml ]; then
+            sha_before=$(sha256sum content/citations.yml | awk '{print $1}')
             echo "sha_before=$sha_before" >> $GITHUB_OUTPUT
             echo "📝 SHA before: $sha_before"
           else
@@ -49,7 +54,7 @@ jobs:
           set +e
           echo "🚀 Running citation update script (single attempt)..."
           start_time=$(date)
-          timeout 90 python bin/update_scholar_citations.py
+          timeout 90 python scripts/update_scholar_citations.py
           status=$?
           end_time=$(date)
           if [ $status -eq 0 ]; then
@@ -65,8 +70,8 @@ jobs:
         id: after
         run: |
           echo "🔍 Checking updated citations.yml hash..."
-          if [ -f _data/citations.yml ]; then
-            sha_after=$(sha256sum _data/citations.yml | awk '{print $1}')
+          if [ -f content/citations.yml ]; then
+            sha_after=$(sha256sum content/citations.yml | awk '{print $1}')
             echo "sha_after=$sha_after" >> $GITHUB_OUTPUT
             echo "📝 SHA after: $sha_after"
           else
@@ -78,11 +83,11 @@ jobs:
         run: |
           echo "📋 Comparing citation file hashes..."
           if [ "${{ steps.before.outputs.sha_before }}" != "${{ steps.after.outputs.sha_after }}" ]; then
-            echo "✅ _data/citations.yml was updated."
-            echo "✅ _data/citations.yml was updated." >> $GITHUB_STEP_SUMMARY
+            echo "✅ content/citations.yml was updated."
+            echo "✅ content/citations.yml was updated." >> $GITHUB_STEP_SUMMARY
           else
-            echo "ℹ️ _data/citations.yml was not changed."
-            echo "ℹ️ _data/citations.yml was not changed." >> $GITHUB_STEP_SUMMARY
+            echo "ℹ️ content/citations.yml was not changed."
+            echo "ℹ️ content/citations.yml was not changed." >> $GITHUB_STEP_SUMMARY
           fi
 
       - name: Configure Git
@@ -93,9 +98,13 @@ jobs:
 
       - name: Commit and push if changed
         run: |
-          git add _data/citations.yml
+          git add content/citations.yml
           git diff --staged --quiet || (
             echo "📤 Committing and pushing changes..."
             git commit -m "Update Google Scholar citations"
             git push
+            # Pushes made with GITHUB_TOKEN don't trigger other workflows, so start the deploy explicitly.
+            gh workflow run deploy.yml --ref "${{ github.ref_name }}"
           )
+        env:
+          GH_TOKEN: ${{ github.token }}
