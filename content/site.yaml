@@ -11,7 +11,7 @@ description: >-
 # Landing page. Image paths are relative to content/ (e.g. a Lab Life photo in gallery/).
 hero:
   # Full-screen background photo; a wide (landscape) image of at least 2000px works best.
-  image: gallery/lab_2025-07-21.jpeg
+  image: gallery/main.jpg
   eyebrow: Systems & Cloud Architecture · NTU Singapore
   title: Building the cloud for the AI era.
   subtitle: >-
