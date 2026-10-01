@@ -10,38 +10,40 @@
  * THEME COLOURS LIVE HERE. Change a value below and the whole site follows.
  *   :root     light theme (default)       .dark   dark theme
  *   @theme    dark bands (hero, page headers, CTA, footer) and gradients
- * Colours come from the HyScale logo: navy cloud (#171d63), slate wordmark
- * (#3b3a5a) and crimson brackets (#a82e48). Light is the default palette;
- * `.dark` swaps the same tokens. Components use the Tailwind names below
- * (bg-surface, text-muted, border-line, …), never raw hex values. */
+ * Palette follows the NTU brand guide (2018): NTU Blue #181C62 (also the
+ * HyScale logo navy) and NTU Red #D71440 are the primary colours; the other
+ * hues come from NTU's secondary palette (blues #0054A6, #5DA9DD, magenta
+ * #A5247F). Light is the default palette; `.dark` swaps the same tokens.
+ * Components use the Tailwind names below (bg-surface, text-muted,
+ * border-line, …), never raw hex values. */
 :root {
   --c-bg: #ffffff;
-  --c-surface: #f5f6fb;
+  --c-surface: #f4f6fb;
   --c-raised: #ffffff;
-  --c-ink: #0f1330;
-  --c-muted: #555b78;
-  --c-line: #e3e5ef;
-  --c-brand: #252c8c;
-  --c-brand-strong: #171d63;
-  --c-brand-soft: #e9eafb;
-  --c-accent: #b32d4b;
-  --c-accent-soft: #fbe9ed;
-  --c-highlight: #fff3c4;
+  --c-ink: #10143f;
+  --c-muted: #535a7a;
+  --c-line: #e1e5ef;
+  --c-brand: #0054a6;
+  --c-brand-strong: #181c62;
+  --c-brand-soft: #e5eef8;
+  --c-accent: #d71440;
+  --c-accent-soft: #fff1f4;
+  --c-highlight: #fff4b8;
 }
 
 .dark {
-  --c-bg: #0a0d1f;
-  --c-surface: #10142b;
-  --c-raised: #151a36;
-  --c-ink: #e9ebf7;
-  --c-muted: #a1a6c4;
-  --c-line: #252b4d;
-  --c-brand: #9ea4ff;
-  --c-brand-strong: #c3c7ff;
-  --c-brand-soft: #1c2150;
-  --c-accent: #ff6b8a;
-  --c-accent-soft: #3a1622;
-  --c-highlight: #4a3d0c;
+  --c-bg: #090c24;
+  --c-surface: #0f1433;
+  --c-raised: #141a3e;
+  --c-ink: #e8ebf8;
+  --c-muted: #a3a9c8;
+  --c-line: #242b55;
+  --c-brand: #5da9dd;
+  --c-brand-strong: #a9cdee;
+  --c-brand-soft: #0f2a4d;
+  --c-accent: #ff5a7e;
+  --c-accent-soft: #3d0f1e;
+  --c-highlight: #4d4200;
   color-scheme: dark;
 }
 
@@ -64,19 +66,19 @@
   --font-sans: 'Rubik Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
   /* Night palette for the bands that stay dark in both themes (hero, CTA, footer). */
-  --color-night: #0a0d24;
-  --color-night-2: #141a4a;
-  --color-night-ink: #eef0ff;
-  --color-night-muted: #aab0d6;
-  --color-night-accent: #ff8aa3; /* eyebrow labels on dark bands */
-  --color-night-accent-soft: #ffb3c3; /* hero eyebrow pill */
-  --color-glow-warm: #b32d4b; /* top-right glow on dark bands */
-  --color-glow-cool: #252c8c; /* bottom-left glow on dark bands */
+  --color-night: #0a0d2b;
+  --color-night-2: #181c62; /* NTU Blue */
+  --color-night-ink: #eef1ff;
+  --color-night-muted: #abb3d9;
+  --color-night-accent: #ff7d99; /* eyebrow labels on dark bands */
+  --color-night-accent-soft: #ffadbf; /* hero eyebrow pill */
+  --color-glow-warm: #d71440; /* NTU Red: top-right glow on dark bands */
+  --color-glow-cool: #0054a6; /* NTU secondary blue: bottom-left glow */
   /* Gradient used for highlighted headline words, stat numbers and card accents. */
-  --color-grad-from: #8f96ff;
-  --color-grad-via: #c7b8ff;
-  --color-grad-to: #ff7d98;
-  --color-grad-mid: #6b5bd6; /* middle stop of the thin card accent bar */
+  --color-grad-from: #5da9dd; /* NTU secondary light blue */
+  --color-grad-via: #b98fd8;
+  --color-grad-to: #ff5a7e; /* light NTU Red */
+  --color-grad-mid: #a5247f; /* NTU secondary magenta: middle of the card accent bar */
   --animate-marquee: marquee 40s linear infinite;
 }
 

@@ -1,59 +1,61 @@
+# Venue badges on publications. Colours come from the NTU secondary palette; light ones are
+# darkened automatically so white badge text stays readable.
 'arXiv':
-  color: '#b31b1b'
+  color: '#8c8c8c'
   url: https://arxiv.org/
 
 'EMNLP':
-  color: '#1f6f8b'
+  color: '#007c48'
   url: https://aclanthology.org/venues/emnlp/
 
 'EuroMLSys':
-  color: '#6f42c1'
+  color: '#a5247f'
   url: https://2025.euromlsys.eu/
 
 'SESAME':
-  color: '#c25d17'
+  color: '#1b75bc'
   url: https://sesame25.github.io/
 
 'OSDI':
-  color: '#005a9c'
+  color: '#181c62'
   url: https://www.usenix.org/conference/osdi24
 
 'WORDS':
-  color: '#8b5a2b'
+  color: '#32bcad'
   url: https://www.wordsworkshop.org/
 
 'ISCA':
-  color: '#006d5b'
+  color: '#a72244'
   url: https://iscaconf.org/
 
 'IISWC':
-  color: '#8c3a6b'
+  color: '#07b152'
   url: https://iiswc.org/
 
 'ASPLOS':
-  color: '#4f5d95'
+  color: '#0054a6'
   url: https://www.asplos-conference.org/
 
 'MICRO':
-  color: '#7a3e00'
+  color: '#7c223f'
   url: https://www.microarch.org/
 
 'WOOT':
-  color: '#9b1c31'
+  color: '#5c004d'
   url: https://www.usenix.org/conference/woot20
 
 'MLSys@NeurIPS':
-  color: '#5b2c83'
+  color: '#a5247f'
   url: https://mlsys.org/
 
 'MEMSYS':
-  color: '#2e7d32'
+  color: '#5da9dd'
   url: https://www.memsys.io/
 
 'SIGOPS OSR':
-  color: '#455a64'
+  color: '#d71440'
   url: https://dl.acm.org/journal/sigops
 
 'TOCS':
-  color: '#7b1fa2'
+  color: '#ed1556'
   url: https://dl.acm.org/journal/tocs
