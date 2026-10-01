@@ -42,7 +42,7 @@
   name: Chengzhi Lu
   from: University of Chinese Academy of Sciences
   links:
-    website: https://blinkbear.github.io/
+    website: https://chengzhi-lu.github.io/
   stints:
     - { role: postdoc, start: 2025 }
 
@@ -100,6 +100,20 @@
   stints:
     - { role: fyp, start: 2023, end: 2024 }
     - { role: phd, start: 2025 }
+
+- id: boxi-zhou
+  name: Boxi Zhou
+  from: NTU
+  links:
+  stints:
+    - { role: phd, start: 2026 }
+
+- id: pang-wei-siong
+  name: Pang Wei Siong
+  from: NTU
+  links:
+  stints:
+    - { role: phd, start: 2026 }
 
 - id: yan-chen
   name: Yan Chen
