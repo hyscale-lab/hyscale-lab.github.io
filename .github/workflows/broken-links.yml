@@ -13,12 +13,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # Root-relative links in content/ are resolved against the built site.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
       - name: Link checker
         uses: lycheeverse/lychee-action@v2
         with:
           fail: true
-          # LinkedIn and X block automated requests.
+          # Accepted codes and bot-hostile hosts are in lychee.toml.
           args: >-
-            --user-agent 'curl/7.54' --max-retries 3 --retry-wait-time 2
-            --exclude 'linkedin\.com' --exclude 'x\.com' --exclude 'twitter\.com'
-            --no-progress 'content/**/*.md' 'content/**/*.yaml' 'content/papers.bib'
+            --config lychee.toml --root-dir "${{ github.workspace }}/dist" --no-progress
+            'content/**/*.md' 'content/**/*.yaml' 'content/papers.bib'

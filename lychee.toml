@@ -1,0 +1,24 @@
+# Settings for the weekly external link check (.github/workflows/broken-links.yml).
+# Root-relative links in content/ (/research/…, /assets/pdf/…) are resolved
+# against the built site, so run `npm run build` first and pass --root-dir dist.
+
+user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"
+max_retries = 3
+retry_wait_time = 2
+max_concurrency = 8
+timeout = 20
+
+# 403 and 429 mean "bots not welcome" or "slow down", not "page gone".
+accept = ["200..=299", "403", "429"]
+
+exclude = [
+  # Sites that block automated checks or serve certificate chains lychee rejects.
+  'linkedin\.com',
+  '(^|\.)x\.com',
+  'twitter\.com',
+  'dl\.acm\.org',
+  'labs\.oracle\.com',
+  'amd\.com',
+  'ics\.forth\.gr',
+  'join\.slack\.com',
+]
