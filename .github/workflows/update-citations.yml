@@ -24,9 +24,11 @@ jobs:
       #          token: ${{ secrets.PAT }}
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
 
       - name: Install dependencies
         run: |
@@ -63,8 +65,9 @@ jobs:
           else
             echo "❌ Citation update script failed with exit code $status (started at $start_time, ended at $end_time)."
             echo "❌ Citation update script failed with exit code $status." >> $GITHUB_STEP_SUMMARY
+            # Fail the run so a broken update shows as a red X instead of a silent green run.
+            exit $status
           fi
-          set -e
 
       - name: Save new citations.yml hash
         id: after

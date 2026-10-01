@@ -1,2 +1,6 @@
-pyyaml
-scholarly
+# Dependencies for scripts/update_scholar_citations.py (used by update-citations.yml).
+# scholarly 1.7.11 (its latest release) imports the bibtexparser 1.x API
+# (bibtexparser.bibdatabase), which bibtexparser 2.0 removed, so keep it below 2.
+scholarly==1.7.11
+bibtexparser>=1.4,<2
+pyyaml>=6
