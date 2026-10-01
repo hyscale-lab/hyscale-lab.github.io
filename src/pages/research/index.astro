@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import Icon from '../../components/Icon.astro';
+import { getPillars, getProjects } from '../../lib/research';
+import { getPapers } from '../../lib/papers';
+
+const pillars = await getPillars();
+const projects = await getProjects();
+const papers = getPapers();
+---
+
+<Base
+  title="Research"
+  description="HyScale Lab research across serverless, agentic, and multi-modal and embodied AI cloud systems."
+  overlayHeader
+>
+  <PageHeader
+    eyebrow="Research"
+    title="Three pillars, built in the open"
+    lead="HyScale develops cloud systems through three research pillars, and releases the systems we build as open-source research infrastructure."
+  />
+  <div class="container-x grid gap-20 py-16">
+    {pillars.map((pillar, i) => {
+      const items = projects.filter((p) => p.data.pillar === pillar.id);
+      const count = papers.filter((p) => p.tags.includes(pillar.data.tag)).length;
+      return (
+        <section id={pillar.id} class="grid scroll-mt-24 gap-8 lg:grid-cols-[1fr_2fr] lg:gap-14">
+          <div class="reveal">
+            <p class="eyebrow mb-3 text-accent">Pillar {i + 1}</p>
+            <h2 class="flex items-center gap-3 text-3xl font-bold tracking-tight">
+              <span class="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-soft text-brand">
+                <Icon name={pillar.data.icon} class="size-5" />
+              </span>
+              <a href={`/research/${pillar.id}/`} class="hover:text-brand">
+                {pillar.data.title}
+              </a>
+            </h2>
+            <p class="mt-4 leading-relaxed text-muted">{pillar.data.summary}</p>
+            <div class="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-brand">
+              <a href={`/research/${pillar.id}/`} class="inline-flex items-center gap-2 hover:gap-3">
+                About this pillar <Icon name="arrow-right" class="size-4" />
+              </a>
+              {count > 0 && (
+                <a href={`/publications/?tag=${pillar.data.tag}`} class="inline-flex items-center gap-2 hover:gap-3">
+                  {count} related papers <Icon name="arrow-right" class="size-4" />
+                </a>
+              )}
+            </div>
+          </div>
+          <div class="grid content-start gap-5 sm:grid-cols-2">
+            {items.length ? (
+              items.map((p) => <ProjectCard project={p} />)
+            ) : (
+              <div class="reveal rounded-2xl border border-dashed border-line p-7 text-muted sm:col-span-2">
+                An active research focus for the lab. Open-source artifacts will be listed here when they are ready to
+                share.
+              </div>
+            )}
+          </div>
+        </section>
+      );
+    })}
+  </div>
+</Base>

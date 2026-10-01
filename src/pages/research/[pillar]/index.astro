@@ -1,0 +1,47 @@
+---
+import { render } from 'astro:content';
+import Prose from '../../../layouts/Prose.astro';
+import ProjectCard from '../../../components/ProjectCard.astro';
+import PubList from '../../../components/pubs/PubList.astro';
+import Icon from '../../../components/Icon.astro';
+import { getPillars, getProjects } from '../../../lib/research';
+import { getPapers } from '../../../lib/papers';
+
+export async function getStaticPaths() {
+  const pillars = await getPillars();
+  return pillars.map((p) => ({ params: { pillar: p.id }, props: { pillar: p } }));
+}
+
+const { pillar } = Astro.props;
+const { Content } = await render(pillar);
+const projects = (await getProjects()).filter((p) => p.data.pillar === pillar.id);
+const papers = getPapers().filter((p) => p.bucket === pillar.data.bucket);
+---
+
+<Prose title={pillar.data.title} description={pillar.data.summary} eyebrow="Research pillar">
+  <Content />
+  <div slot="after">
+    {projects.length > 0 && (
+      <section class="mt-14">
+        <h2 class="mb-5 text-2xl font-bold tracking-tight">Open-source systems</h2>
+        <div class="grid gap-5 sm:grid-cols-2">
+          {projects.map((p) => (
+            <ProjectCard project={p} />
+          ))}
+        </div>
+      </section>
+    )}
+    {papers.length > 0 && (
+      <section class="mt-14">
+        <h2 class="mb-2 text-2xl font-bold tracking-tight">Related publications</h2>
+        <PubList papers={papers} previews={false} />
+        <a
+          href={`/publications/?tag=${pillar.data.tag}`}
+          class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:gap-3"
+        >
+          More on the publications page <Icon name="arrow-right" class="size-4" />
+        </a>
+      </section>
+    )}
+  </div>
+</Prose>
