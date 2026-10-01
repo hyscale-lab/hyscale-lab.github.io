@@ -28,7 +28,7 @@
     x: https://x.com/DmitriiUstiugov
     email: dmitrii.ustiugov@ntu.edu.sg
   stints:
-  - {role: pi, start: 2023}
+    - { role: pi, start: 2023 }
 
 - id: kevin-nguetchouang
   name: Kevin Nguetchouang
@@ -36,7 +36,7 @@
   links:
     website: https://nivekiba.github.io/
   stints:
-  - {role: postdoc, start: 2025}
+    - { role: postdoc, start: 2025 }
 
 - id: chengzhi-lu
   name: Chengzhi Lu
@@ -44,7 +44,7 @@
   links:
     website: https://blinkbear.github.io/
   stints:
-  - {role: postdoc, start: 2025}
+    - { role: postdoc, start: 2025 }
 
 - id: wenyan-chen
   name: Wenyan Chen
@@ -52,7 +52,7 @@
   links:
     website: https://chenwenyan.github.io/
   stints:
-  - {role: postdoc, start: 2025}
+    - { role: postdoc, start: 2025 }
 
 - id: leonid-kondrashov
   name: Leonid Kondrashov
@@ -60,7 +60,7 @@
   links:
     website: http://leokondrashov.github.io/
   stints:
-  - {role: phd, start: 2023}
+    - { role: phd, start: 2023 }
 
 - id: ruiqi-lai
   name: Ruiqi Lai
@@ -68,7 +68,7 @@
   links:
     website: https://lrq619.github.io/
   stints:
-  - {role: phd, start: 2023}
+    - { role: phd, start: 2023 }
 
 - id: jooyoung-park
   name: JooYoung Park
@@ -76,7 +76,7 @@
   links:
     website: https://jooyoung.me/
   stints:
-  - {role: phd, start: 2023}
+    - { role: phd, start: 2023 }
 
 - id: yulin-zou
   name: Yulin Zou
@@ -84,13 +84,13 @@
   links:
     website: http://yulinzou.github.io/
   stints:
-  - {role: phd, start: 2024}
+    - { role: phd, start: 2024 }
 
 - id: hongrui-liu
   name: Hongrui Liu
   from: Beihang University
   stints:
-  - {role: phd, start: 2024}
+    - { role: phd, start: 2024 }
 
 - id: colin-hong
   name: Colin Hong
@@ -98,20 +98,20 @@
   links:
     linkedin: https://www.linkedin.com/in/colinhong/
   stints:
-  - {role: fyp, start: 2023, end: 2024}
-  - {role: phd, start: 2025}
+    - { role: fyp, start: 2023, end: 2024 }
+    - { role: phd, start: 2025 }
 
 - id: yan-chen
   name: Yan Chen
   from: Beihang University
   stints:
-  - {role: exchange-phd, start: 2025, end: 2026}
+    - { role: exchange-phd, start: 2025, end: 2026 }
 
 - id: lakshitha-kakumani
   name: Lakshitha Kakumani
   from: IIT Madras
   stints:
-  - {role: intern, start: 2025}
+    - { role: intern, start: 2025 }
 
 - id: vlad-pandelea
   name: Vlad Pandelea
@@ -119,7 +119,7 @@
   links:
     linkedin: https://www.linkedin.com/in/vlad-pandelea-21799015b/
   stints:
-  - {role: postdoc, start: 2024, end: 2024}
+    - { role: postdoc, start: 2024, end: 2024 }
   now: American Express, Singapore
 
 - id: hancheng-wang
@@ -128,7 +128,7 @@
   links:
     website: https://wanghanchengchn.github.io/
   stints:
-  - {role: exchange-phd, start: 2023, end: 2024}
+    - { role: exchange-phd, start: 2023, end: 2024 }
 
 - id: jinyu-chen
   name: Jinyu Chen
@@ -136,7 +136,7 @@
   links:
     website: https://jinyucn.github.io/
   stints:
-  - {role: exchange-phd, start: 2024, end: 2025}
+    - { role: exchange-phd, start: 2024, end: 2025 }
 
 - id: yixin-zhang
   name: Yixin Zhang
@@ -144,7 +144,7 @@
   links:
     website: https://jasonzhang517.github.io/
   stints:
-  - {role: ra, start: 2025, end: 2025}
+    - { role: ra, start: 2025, end: 2025 }
   now: Alibaba Cloud, Beijing
 
 - id: siyu-cao
@@ -153,134 +153,134 @@
   links:
     linkedin: https://www.linkedin.com/in/siyu-cao-69aa531a8/
   stints:
-  - {role: ra, start: 2025, end: 2025}
+    - { role: ra, start: 2025, end: 2025 }
 
 - id: aiza-maksutova
   name: Aiza Maksutova
   from: HSE
   stints:
-  - {role: intern, start: 2023, end: 2024}
+    - { role: intern, start: 2023, end: 2024 }
 
 - id: georgiy-lebedev
   name: Georgiy Lebedev
   from: MIPT
   stints:
-  - {role: intern, start: 2023, end: 2023}
+    - { role: intern, start: 2023, end: 2023 }
 
 - id: haoyuan-ma
   name: Haoyuan Ma
   from: Zhejiang University
   stints:
-  - {role: intern, start: 2023, end: 2023}
+    - { role: intern, start: 2023, end: 2023 }
 
 - id: anshal-shukla
   name: Anshal Shukla
   from: BITS Pilani
   stints:
-  - {role: intern, start: 2023, end: 2023}
+    - { role: intern, start: 2023, end: 2023 }
 
 - id: vidit-jain
   name: Vidit Jain
   stints:
-  - {role: ureca, start: 2024, end: 2025}
+    - { role: ureca, start: 2024, end: 2025 }
 
 - id: aryan-sharma
   name: Aryan Sharma
   stints:
-  - {role: fyp, start: 2024, end: 2025}
+    - { role: fyp, start: 2024, end: 2025 }
 
 - id: chaanan-anand-singh
   name: Chaanan Anand Singh
   stints:
-  - {role: fyp, start: 2024, end: 2025}
+    - { role: fyp, start: 2024, end: 2025 }
 
 - id: dhairya-rungta
   name: Dhairya Rungta
   stints:
-  - {role: fyp, start: 2024, end: 2025}
+    - { role: fyp, start: 2024, end: 2025 }
 
 - id: greg-lim
   name: Greg Lim
   stints:
-  - {role: fyp, start: 2024, end: 2025}
+    - { role: fyp, start: 2024, end: 2025 }
 
 - id: ian-yeoh
   name: Ian Yeoh
   stints:
-  - {role: fyp, start: 2024, end: 2025}
+    - { role: fyp, start: 2024, end: 2025 }
 
 - id: jia-xuan-koh
   name: Jia Xuan Koh
   stints:
-  - {role: fyp, start: 2024, end: 2025}
+    - { role: fyp, start: 2024, end: 2025 }
 
 - id: joel-tan
   name: Joel Tan
   stints:
-  - {role: fyp, start: 2024, end: 2025}
+    - { role: fyp, start: 2024, end: 2025 }
 
 - id: kavita-sriram
   name: Kavita Sriram
   stints:
-  - {role: fyp, start: 2024, end: 2025}
+    - { role: fyp, start: 2024, end: 2025 }
 
 - id: kavithran-ravisankar
   name: Kavithran Ravisankar
   stints:
-  - {role: fyp, start: 2024, end: 2025}
+    - { role: fyp, start: 2024, end: 2025 }
 
 - id: lenson-lim
   name: Lenson Lim
   stints:
-  - {role: fyp, start: 2024, end: 2025}
+    - { role: fyp, start: 2024, end: 2025 }
 
 - id: siyang-shao
   name: Siyang Shao
   stints:
-  - {role: ureca, start: 2023, end: 2024}
-  - {role: fyp, start: 2024, end: 2025}
+    - { role: ureca, start: 2023, end: 2024 }
+    - { role: fyp, start: 2024, end: 2025 }
 
 - id: benjamin-chun
   name: Benjamin Chun
   stints:
-  - {role: fyp, start: 2023, end: 2024}
+    - { role: fyp, start: 2023, end: 2024 }
 
 - id: jason-chua
   name: Jason Chua
   stints:
-  - {role: fyp, start: 2023, end: 2024}
+    - { role: fyp, start: 2023, end: 2024 }
 
 - id: min-kabar-kyaw
   name: Min Kabar Kyaw
   stints:
-  - {role: fyp, start: 2023, end: 2024}
+    - { role: fyp, start: 2023, end: 2024 }
 
 - id: lee-xuan-hua
   name: Lee Xuan Hua
   stints:
-  - {role: fyp, start: 2023, end: 2024}
+    - { role: fyp, start: 2023, end: 2024 }
 
 - id: sokunthea-eang
   name: Sokunthea Eang
   stints:
-  - {role: fyp, start: 2023, end: 2024}
+    - { role: fyp, start: 2023, end: 2024 }
 
 - id: yan-kai-lim
   name: Yan Kai Lim
   stints:
-  - {role: fyp, start: 2023, end: 2024}
+    - { role: fyp, start: 2023, end: 2024 }
 
 - id: xingjian-li
   name: Xingjian Li
   stints:
-  - {role: fyp, start: 2023, end: 2024}
+    - { role: fyp, start: 2023, end: 2024 }
 
 - id: yi-pun-wong
   name: Yi Pun Wong
   stints:
-  - {role: fyp, start: 2023, end: 2024}
+    - { role: fyp, start: 2023, end: 2024 }
 
 - id: yi-shen-kwai
   name: Yi Shen Kwai
   stints:
-  - {role: fyp, start: 2023, end: 2024}
+    - { role: fyp, start: 2023, end: 2024 }

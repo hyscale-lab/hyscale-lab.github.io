@@ -31,10 +31,10 @@ draft: false
 
 Text can be **bold**, _italic_, `inline code` and [links](https://vhive-serverless.github.io/). Lists, tables and quotes work as usual:
 
-| System | Venue       | Year |
-| ------ | ----------- | ---- |
-| REAP   | ASPLOS      | 2021 |
-| Jukebox| ISCA        | 2022 |
+| System  | Venue  | Year |
+| ------- | ------ | ---- |
+| REAP    | ASPLOS | 2021 |
+| Jukebox | ISCA   | 2022 |
 
 > Quotes are good for highlighting a key result.
 

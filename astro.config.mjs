@@ -48,7 +48,7 @@ export default defineConfig({
   markdown: {
     // remark/rehype pipeline so math ($…$, $$…$$) is rendered by KaTeX at build time.
     processor: unified({ remarkPlugins: [remarkMath], rehypePlugins: [rehypeKatex] }),
-    shikiConfig: { themes: { light: 'github-light', dark: 'github-dark' } },
+    shikiConfig: { themes: { light: 'github-light-high-contrast', dark: 'github-dark-high-contrast' } },
   },
   // Old al-folio people URLs → tabs on the merged People page.
   redirects: {
