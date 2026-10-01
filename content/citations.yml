@@ -1,8 +1,8 @@
 metadata:
-  last_updated: '2026-08-28'
+  last_updated: '2026-10-01'
 papers:
   cZ9jA9oAAAAJ:2osOgNQ5qMEC:
-    citations: 182
+    citations: 184
     title: The Mondrian data engine
     year: '2017'
   cZ9jA9oAAAAJ:4DMP91E08xMC:
@@ -10,7 +10,7 @@ papers:
     title: 'MemTrust: A Zero-Trust Architecture for Unified AI Memory System'
     year: '2026'
   cZ9jA9oAAAAJ:4TOpqqG69KYC:
-    citations: 2
+    citations: 5
     title: 'The High Cost of Keeping Warm: Characterizing Overhead in Serverless Autoscaling Policies'
     year: '2025'
   cZ9jA9oAAAAJ:7PzlFSSx8tAC:
@@ -18,7 +18,7 @@ papers:
     title: 'Nexus: Transparent I/O Offloading for High-Density Serverless Computing'
     year: '2026'
   cZ9jA9oAAAAJ:9ZlFYXVOiuMC:
-    citations: 4
+    citations: 5
     title: Melding the serverless control plane with the conventional cluster manager for speed and resource efficiency
     year: '2025'
   cZ9jA9oAAAAJ:IWHjjKOFINEC:
@@ -34,7 +34,7 @@ papers:
     title: 'CodecSight: Leveraging Video Codec Signals for Efficient Streaming VLM Inference'
     year: '2026'
   cZ9jA9oAAAAJ:LkGwnXOMwfcC:
-    citations: 54
+    citations: 55
     title: Analyzing tail latency in serverless clouds with STeLLAR
     year: '2021'
   cZ9jA9oAAAAJ:M3ejUd6NZC8C:
@@ -42,7 +42,7 @@ papers:
     title: 'Slim-SC: Thought pruning for efficient scaling with self-consistency'
     year: '2025'
   cZ9jA9oAAAAJ:MXK_kJrjxJIC:
-    citations: 24
+    citations: 25
     title: Enabling in-vitro serverless systems research
     year: '2023'
   cZ9jA9oAAAAJ:QIV2ME_5wuYC:
@@ -50,7 +50,7 @@ papers:
     title: 'PromptTuner: SLO-Aware Elastic System for LLM Prompt Tuning'
     year: '2026'
   cZ9jA9oAAAAJ:Se3iqnhoufwC:
-    citations: 69
+    citations: 72
     title: 'Lukewarm serverless functions: Characterization and optimization'
     year: '2022'
   cZ9jA9oAAAAJ:Tyk-4Ss8FVUC:
@@ -58,7 +58,7 @@ papers:
     title: Virtual address translation via learned page table indexes
     year: '2018'
   cZ9jA9oAAAAJ:ULOm3_A8WrAC:
-    citations: 14
+    citations: 15
     title: Shattering the ephemeral storage cost barrier for data-intensive serverless workflows
     year: '2025'
   cZ9jA9oAAAAJ:UebtZRa9Y70C:
@@ -78,7 +78,7 @@ papers:
     title: 'Manage the Workloads not the Cluster: Designing a Control Plane for Large-Scale AI Clusters'
     year: '2025'
   cZ9jA9oAAAAJ:YsMSGLbcyi4C:
-    citations: 111
+    citations: 112
     title: Prefetched address translation
     year: '2019'
   cZ9jA9oAAAAJ:ZeXyd9-uunAC:
@@ -86,15 +86,15 @@ papers:
     title: 'FASER: Fine-Grained Phase Management for Speculative Decoding in Dynamic LLM Serving'
     year: '2026'
   cZ9jA9oAAAAJ:Zph67rFs4hoC:
-    citations: 367
+    citations: 402
     title: 'ServerlessLLM: Low-latency serverless inference for large language models'
     year: '2024'
   cZ9jA9oAAAAJ:_FxGoFyzp5QC:
-    citations: 350
+    citations: 358
     title: Benchmarking, analysis, and optimization of serverless function snapshots
     year: '2021'
   cZ9jA9oAAAAJ:aqlVkmm33-oC:
-    citations: 9
+    citations: 11
     title: 'TokenScale: Timely and accurate autoscaling for disaggregated LLM serving with token velocity'
     year: '2025'
   cZ9jA9oAAAAJ:qUcmZB5y_30C:
