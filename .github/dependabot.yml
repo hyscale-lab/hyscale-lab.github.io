@@ -1,0 +1,51 @@
+# Dependabot: weekly pull requests that keep dependencies up to date.
+# Minor and patch updates are grouped into one PR per ecosystem so the lab
+# isn't flooded; major updates arrive as separate PRs because they can need
+# code changes. Every PR runs ci.yml (type check, build, link check), so a
+# green check means the site still builds.
+# Docs: https://docs.github.com/code-security/dependabot/working-with-dependabot/dependabot-options-reference
+
+version: 2
+updates:
+  # Site dependencies (package.json / package-lock.json).
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: Asia/Singapore
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: deps
+    groups:
+      npm-minor-and-patch:
+        update-types: [minor, patch]
+
+  # Versions of the actions used in .github/workflows/.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+      timezone: Asia/Singapore
+    commit-message:
+      prefix: ci
+    groups:
+      actions:
+        patterns: ['*']
+
+  # Google Scholar citation updater (scripts/requirements.txt).
+  - package-ecosystem: pip
+    directory: /scripts
+    schedule:
+      interval: monthly
+      timezone: Asia/Singapore
+    commit-message:
+      prefix: deps
+    groups:
+      python:
+        patterns: ['*']
+    ignore:
+      # scholarly 1.7.11 imports the bibtexparser 1.x API, removed in 2.0.
+      # Remove this once scholarly supports bibtexparser 2.
+      - dependency-name: bibtexparser
+        versions: ['>=2']
