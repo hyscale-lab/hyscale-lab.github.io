@@ -28,6 +28,7 @@ const schemas = {
     contact: z.object({ email: z.email(), pi: z.string() }),
     socials: z.record(z.string(), url),
     scholar_userid: z.string(),
+    google_site_verification: z.string().optional(),
     nav: z.array(z.object({ label: z.string(), href: z.string() })),
   }),
   'people.yaml': z.array(

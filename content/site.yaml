@@ -27,6 +27,10 @@ socials:
 # Read by scripts/update_scholar_citations.py.
 scholar_userid: cZ9jA9oAAAAJ
 
+# Google Search Console ownership check: paste the `content` value of the
+# <meta name="google-site-verification" …> tag Search Console gives you.
+google_site_verification: ''
+
 nav:
   - { label: Research, href: /research/ }
   - { label: Publications, href: /publications/ }
