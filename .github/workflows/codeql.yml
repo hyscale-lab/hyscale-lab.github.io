@@ -9,15 +9,15 @@
 # the `language` matrix defined below to confirm you have the correct set of
 # supported CodeQL languages.
 #
-name: "CodeQL Advanced"
+name: 'CodeQL Advanced'
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
   pull_request:
-    branches: ["main"]
+    branches: ['main']
   schedule:
-    - cron: "45 4 * * 3"
+    - cron: '45 4 * * 3'
 
 jobs:
   analyze:
@@ -45,7 +45,7 @@ jobs:
         include:
           - language: javascript-typescript
             build-mode: none
-          - language: ruby
+          - language: python
             build-mode: none
         # CodeQL supports the following values keywords for 'language': 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'swift'
         # Use `c-cpp` to analyze code written in C, C++ or both
@@ -91,4 +91,4 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
-          category: "/language:${{matrix.language}}"
+          category: '/language:${{matrix.language}}'

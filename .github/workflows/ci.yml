@@ -1,0 +1,31 @@
+name: Check
+
+# Runs on pull requests so content mistakes (bad YAML, unknown tags, missing
+# PDFs, broken internal links) are caught before they reach main.
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Type check
+        run: npm run check
+      - name: Build
+        run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check internal links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          fail: true
+          args: --offline --root-dir "${{ github.workspace }}/dist" --no-progress 'dist/**/*.html'
