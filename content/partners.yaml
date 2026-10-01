@@ -1,0 +1,18 @@
+# "Collaboration & Funding" logos on the landing page.
+#   logo  file in content/partners/
+#   type  sponsor | collaborator
+#
+# TODO(O1): this list is copied from ustiugov.github.io. Confirm with the PI which
+# logos belong on the lab site and which are sponsors before launch.
+
+- { name: Nanyang Technological University, logo: ntu.jpg, url: https://www.ntu.edu.sg/, type: collaborator }
+- { name: ETH Zürich, logo: eth-zurich.png, url: https://ethz.ch/, type: collaborator }
+- { name: EPFL, logo: epfl.png, url: https://www.epfl.ch/, type: collaborator }
+- { name: University of Edinburgh, logo: edinburgh.png, url: https://www.ed.ac.uk/, type: collaborator }
+- { name: FORTH-ICS, logo: forth-ics.jpg, url: https://www.ics.forth.gr/, type: collaborator }
+- { name: Google, logo: google.png, url: https://research.google/, type: collaborator }
+- { name: Microsoft, logo: microsoft.jpeg, url: https://www.microsoft.com/research/, type: collaborator }
+- { name: Amazon Web Services, logo: aws.jpeg, url: https://aws.amazon.com/, type: collaborator }
+- { name: Oracle Labs, logo: oracle-labs.png, url: https://labs.oracle.com/, type: collaborator }
+- { name: Arm, logo: arm.png, url: https://www.arm.com/, type: collaborator }
+- { name: AMD, logo: amd.png, url: https://www.amd.com/, type: collaborator }

@@ -3,6 +3,7 @@
 #   id         slug, used for the photo (content/people/photos/<id>.jpg) and ?author=<id>
 #   name       display name; also matched against BibTeX author names
 #   bib_names  optional extra spellings used in papers.bib (e.g. "D. Ustiugov")
+#   title, bio optional; shown on the PI card
 #   from       prior institution, shown on member cards
 #   links      website / github / scholar / linkedin / x / email
 #   stints     list of { role, start, end }; omit `end` while ongoing
@@ -15,9 +16,17 @@
 
 - id: dmitrii-ustiugov
   name: Dmitrii Ustiugov
-  from: Nanyang Technological University Singapore
+  title: Assistant Professor, Nanyang Technological University Singapore
+  bio: >-
+    Researcher in fast, scalable, and resource-efficient cloud systems, serverless architectures, and
+    systems support for large-scale LLM inference serving. Leads the vHive open-source ecosystem and
+    the HyScale Lab at NTU Singapore.
   links:
     website: https://ustiugov.github.io/
+    github: https://github.com/ustiugov
+    scholar: https://scholar.google.com/citations?user=cZ9jA9oAAAAJ
+    x: https://x.com/DmitriiUstiugov
+    email: dmitrii.ustiugov@ntu.edu.sg
   stints:
   - {role: pi, start: 2023}
 
