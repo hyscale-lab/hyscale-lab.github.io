@@ -7,6 +7,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ---- Design tokens -------------------------------------------------------
+ * THEME COLOURS LIVE HERE. Change a value below and the whole site follows.
+ *   :root     light theme (default)       .dark   dark theme
+ *   @theme    dark bands (hero, page headers, CTA, footer) and gradients
  * Colours come from the HyScale logo: navy cloud (#171d63), slate wordmark
  * (#3b3a5a) and crimson brackets (#a82e48). Light is the default palette;
  * `.dark` swaps the same tokens. Components use the Tailwind names below
@@ -65,6 +68,15 @@
   --color-night-2: #141a4a;
   --color-night-ink: #eef0ff;
   --color-night-muted: #aab0d6;
+  --color-night-accent: #ff8aa3; /* eyebrow labels on dark bands */
+  --color-night-accent-soft: #ffb3c3; /* hero eyebrow pill */
+  --color-glow-warm: #b32d4b; /* top-right glow on dark bands */
+  --color-glow-cool: #252c8c; /* bottom-left glow on dark bands */
+  /* Gradient used for highlighted headline words, stat numbers and card accents. */
+  --color-grad-from: #8f96ff;
+  --color-grad-via: #c7b8ff;
+  --color-grad-to: #ff7d98;
+  --color-grad-mid: #6b5bd6; /* middle stop of the thin card accent bar */
   --animate-marquee: marquee 40s linear infinite;
 }
 
@@ -131,14 +143,22 @@
   }
 }
 @utility gradient-text {
-  @apply bg-gradient-to-r from-[#8f96ff] via-[#c7b8ff] to-[#ff7d98] bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-grad-from via-grad-via to-grad-to bg-clip-text text-transparent;
 }
 /* Grid-and-glow backdrop used by the dark bands (hero, page headers, CTA, footer). */
 @utility night-band {
   @apply relative isolate overflow-hidden bg-night text-night-ink;
   background-image:
-    radial-gradient(60rem 30rem at 85% -10%, rgb(179 45 75 / 0.35), transparent 60%),
-    radial-gradient(50rem 30rem at 0% 110%, rgb(37 44 140 / 0.6), transparent 60%);
+    radial-gradient(
+      60rem 30rem at 85% -10%,
+      color-mix(in srgb, var(--color-glow-warm) 35%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      50rem 30rem at 0% 110%,
+      color-mix(in srgb, var(--color-glow-cool) 60%, transparent),
+      transparent 60%
+    );
   &::before {
     content: '';
     @apply pointer-events-none absolute inset-0 -z-10 opacity-[0.12];

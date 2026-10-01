@@ -15,11 +15,9 @@ import { site } from '../lib/data';
 import { getPapers, totalCitations } from '../lib/papers';
 import { currentGroups } from '../lib/people';
 import { totalStars } from '../lib/github';
-import { getPillars, getProjects, projectUrl } from '../lib/research';
+import { getPillars, getProjects, projectImage, projectUrl } from '../lib/research';
 import { getPosts } from '../lib/blog';
-import heroImage from '../../content/gallery/lab_2025-07-21.jpeg';
-import teamImage from '../../content/gallery/lab_2025-07-13.jpeg';
-import vhiveImage from '../../content/projects/images/vhive-header.jpg';
+import { contentImage } from '../lib/images';
 
 const s = site();
 const papers = getPapers();
@@ -28,6 +26,9 @@ const members = currentGroups().reduce((n, g) => n + g.members.length, 0) + 1; /
 const pillars = await getPillars();
 const projects = await getProjects();
 const vhive = projects.find((p) => p.id === 'vhive');
+const heroImage = contentImage(s.hero.image, 'content/site.yaml → hero.image');
+const teamImage = contentImage(s.team_image, 'content/site.yaml → team_image');
+const vhiveImage = vhive && projectImage(vhive, vhive.data.logo);
 const stars = await totalStars(projects.map((p) => p.data.repo));
 const fmt = (n: number) => (n >= 1000 ? `${(n / 1000).toFixed(1).replace(/\.0$/, '')}k` : String(n));
 const stats = [
@@ -69,29 +70,31 @@ const posts = (await getPosts()).slice(0, 3);
 
   <StatsBar stats={stats} />
 
-  <SplitSection
-    eyebrow="Open-source systems"
-    title="vHive: the serverless research platform used by 30+ universities"
-    image={vhiveImage}
-    imageAlt="vHive logo: open-source framework for serverless experimentation"
-    imageClass="bg-white p-8"
-    dark
-  >
-    <p>
-      vHive is our full-stack open-source environment for representative serverless experimentation across the
-      distributed hardware/software stack. It integrates production-grade components including AWS Firecracker,
-      containerd and Kubernetes.
-    </p>
-    <p>Its ASPLOS 2021 paper received the Distinguished Artifact Award.</p>
-    <Fragment slot="actions">
-      <a href={vhive ? projectUrl(vhive) : '/research/serverless/'} class="btn-primary">
-        About vHive <Icon name="arrow-right" class="size-4" />
-      </a>
-      <a href="https://github.com/vhive-serverless/vhive" class="btn-ghost text-white">
-        <Icon name="github" class="size-4" /> GitHub
-      </a>
-    </Fragment>
-  </SplitSection>
+  {vhive && vhiveImage && (
+    <SplitSection
+      eyebrow="Open-source systems"
+      title="vHive: the serverless research platform used by 30+ universities"
+      image={vhiveImage}
+      imageAlt="vHive logo: open-source framework for serverless experimentation"
+      imageClass="bg-white p-8"
+      dark
+    >
+      <p>
+        vHive is our full-stack open-source environment for representative serverless experimentation across the
+        distributed hardware/software stack. It integrates production-grade components including AWS Firecracker,
+        containerd and Kubernetes.
+      </p>
+      <p>Its ASPLOS 2021 paper received the Distinguished Artifact Award.</p>
+      <Fragment slot="actions">
+        <a href={projectUrl(vhive)} class="btn-primary">
+          About vHive <Icon name="arrow-right" class="size-4" />
+        </a>
+        <a href="https://github.com/vhive-serverless/vhive" class="btn-ghost text-white">
+          <Icon name="github" class="size-4" /> GitHub
+        </a>
+      </Fragment>
+    </SplitSection>
+  )}
 
   <section class="py-24 sm:py-28">
     <div class="container-x">
