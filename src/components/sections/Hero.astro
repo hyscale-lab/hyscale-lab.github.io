@@ -11,7 +11,7 @@ interface Props {
   subtitle: string;
   image: ImageMetadata;
   primary: { label: string; href: string };
-  secondary: { label: string; href: string };
+  secondary?: { label: string; href: string };
 }
 const { eyebrow, title, subtitle, image, primary, secondary } = Astro.props;
 // Highlight the last two words of the title with the gradient.
@@ -50,9 +50,11 @@ const tail = words.slice(-2).join(' ');
       <a href={primary.href} class="btn-primary">
         {primary.label} <Icon name="arrow-right" class="size-4" />
       </a>
-      <a href={secondary.href} class="btn-ghost text-white">
-        {secondary.label}
-      </a>
+      {secondary && (
+        <a href={secondary.href} class="btn-ghost text-white">
+          {secondary.label}
+        </a>
+      )}
     </div>
     <slot />
   </div>

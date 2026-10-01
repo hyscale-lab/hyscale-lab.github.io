@@ -15,14 +15,11 @@ const gallery = await Promise.all(
     return { ...g, img, full: full.src };
   }),
 );
+const header = load('page-headers.yaml').lab_life;
 ---
 
-<Base title="Lab Life" description="Photos from HyScale Lab events and team-building activities." overlayHeader>
-  <PageHeader
-    eyebrow="Beyond research"
-    title="Lab Life"
-    lead="Photos from HyScale Lab events and team-building activities."
-  />
+<Base title={header.page_title} description={header.description} overlayHeader>
+  <PageHeader eyebrow={header.eyebrow} title={header.title} lead={header.lead} />
   <div class="container-x py-14">
     {gallery.length ? (
       <ul class="columns-1 gap-5 sm:columns-2 lg:columns-3">

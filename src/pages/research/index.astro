@@ -5,22 +5,16 @@ import ProjectCard from '../../components/ProjectCard.astro';
 import Icon from '../../components/Icon.astro';
 import { getPillars, getProjects } from '../../lib/research';
 import { getPapers } from '../../lib/papers';
+import { load } from '../../lib/data';
 
 const pillars = await getPillars();
 const projects = await getProjects();
 const papers = getPapers();
+const header = load('page-headers.yaml').research;
 ---
 
-<Base
-  title="Research"
-  description="HyScale Lab research across serverless, agentic, and multi-modal and embodied AI cloud systems."
-  overlayHeader
->
-  <PageHeader
-    eyebrow="Research"
-    title="Three pillars, built in the open"
-    lead="HyScale develops cloud systems through three research pillars, and releases the systems we build as open-source research infrastructure."
-  />
+<Base title={header.page_title} description={header.description} overlayHeader>
+  <PageHeader eyebrow={header.eyebrow} title={header.title} lead={header.lead} />
   <div class="container-x grid gap-20 py-16">
     {pillars.map((pillar, i) => {
       const items = projects.filter((p) => p.data.pillar === pillar.id);

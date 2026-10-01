@@ -67,6 +67,43 @@ for (const path of [
 await page.goto(`${base}/research/`);
 check('pillars link their projects', (await page.locator('a[href="/research/agentic/aries/"]').count()) > 0);
 
+// Landing page carousels.
+await page.goto(`${base}/`);
+const os = page.locator('[data-carousel]').first();
+const current = () => os.locator('[data-dot][aria-current=true]').getAttribute('data-dot');
+check('open-source carousel has 3 slides', (await os.locator('[data-slide]').count()) === 3);
+await os.scrollIntoViewIfNeeded();
+await os.locator('[data-next]').click();
+await page.waitForTimeout(600);
+check('next → slide 2', (await current()) === '1');
+await os.locator('[data-dot="2"]').click();
+await page.waitForTimeout(600);
+check('dot → slide 3', (await current()) === '2');
+await os.locator('[data-next]').click();
+await page.waitForTimeout(600);
+check('next wraps to slide 1', (await current()) === '0');
+check('off-screen slides are inert', (await os.locator('[data-slide][inert]').count()) === 2);
+await os.locator('[data-track]').evaluate((t) => t.scrollTo({ left: t.clientWidth }));
+await page.waitForTimeout(500);
+check('swipe/scroll updates dots', (await current()) === '1');
+const team = page.locator('[data-carousel]').nth(1);
+check('team carousel has photos', (await team.locator('[data-slide] img').count()) >= 1);
+
+// Autoplay advances on its own and the pause button stops it.
+const auto = await browser.newPage();
+await auto.clock.install();
+await auto.goto(`${base}/`);
+const a0 = auto.locator('[data-carousel]').first();
+await a0.scrollIntoViewIfNeeded();
+await auto.mouse.move(0, 0);
+await auto.clock.runFor(7500);
+check('autoplay advances', (await a0.locator('[data-dot][aria-current=true]').getAttribute('data-dot')) === '1');
+await a0.locator('[data-pause]').click();
+await auto.mouse.move(0, 0);
+await auto.clock.runFor(15000);
+check('pause stops autoplay', (await a0.locator('[data-dot][aria-current=true]').getAttribute('data-dot')) === '1');
+await auto.close();
+
 // Theme toggle persists across navigation.
 await page.goto(`${base}/`);
 check('light by default', !(await page.evaluate(() => document.documentElement.classList.contains('dark'))));

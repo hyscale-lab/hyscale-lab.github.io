@@ -25,6 +25,8 @@ const projects = defineCollection({
     .object({
       title: z.string(),
       tagline: z.string(),
+      highlight: z.string().optional(), // landing page slide headline (defaults to the title)
+      summary: z.string().optional(), // landing page slide text (defaults to the tagline)
       pillar: z.string(),
       order: z.number().default(99),
       repo: z.string().regex(/^[\w.-]+\/[\w.-]+$/, 'use owner/name'),
@@ -57,7 +59,7 @@ const blog = defineCollection({
 
 const pages = defineCollection({
   loader: glob({ base: './content/pages', pattern: '**/*.md' }),
-  schema: z.object({ title: z.string(), description: z.string() }).strict(),
+  schema: z.object({ title: z.string(), description: z.string(), eyebrow: z.string().optional() }).strict(),
 });
 
 export const collections = { pillars, projects, blog, pages };

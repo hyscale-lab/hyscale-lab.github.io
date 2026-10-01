@@ -3,7 +3,7 @@
 import { getCollection, render } from 'astro:content';
 import Prose from '../layouts/Prose.astro';
 import Icon from '../components/Icon.astro';
-import { site } from '../lib/data';
+import { load, site } from '../lib/data';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
@@ -13,17 +13,18 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 const s = site();
 const isJoin = entry.id === 'join';
+const box = load('page-headers.yaml').join_box;
 ---
 
-<Prose title={entry.data.title} description={entry.data.description} eyebrow={isJoin ? 'Opportunities' : undefined}>
+<Prose title={entry.data.title} description={entry.data.description} eyebrow={entry.data.eyebrow}>
   {isJoin && (
     <div class="not-prose card mb-12 flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
       <div>
-        <p class="font-semibold">Interested? Email the PI with your CV.</p>
+        <p class="font-semibold">{box.text}</p>
         <p class="mt-1 text-sm break-all text-muted">{s.contact.email}</p>
       </div>
       <a href={`mailto:${s.contact.email}`} class="btn-primary shrink-0 justify-center">
-        <Icon name="mail" class="size-4" /> Get in touch
+        <Icon name="mail" class="size-4" /> {box.button}
       </a>
     </div>
   )}

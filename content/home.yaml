@@ -1,0 +1,87 @@
+# Landing page (/), top to bottom. Every heading, sentence and button here is
+# editable. Image paths are relative to content/ (e.g. a photo in gallery/).
+# Remove a section's block to hide that section (hero is required).
+
+hero:
+  # Full-screen background photo; a wide (landscape) image of at least 2000px works best.
+  image: gallery/main.jpg
+  eyebrow: Systems & Cloud Architecture · NTU Singapore
+  # The last two words get the colour gradient.
+  title: Building the cloud for the AI era.
+  subtitle: >-
+    We study how systems software and computer architecture can make emerging cloud
+    workloads faster, more elastic, and more resource-efficient.
+  primary: { label: Explore our research, href: /research/ }
+  secondary: { label: Join the lab, href: /join/ }
+
+# Cards for the research pillars (content/research/*.md).
+pillars:
+  eyebrow: Research pillars
+  title: 'Three directions, one goal: efficient cloud systems.'
+  lead: >-
+    The HyScale Systems and Cloud Architecture Lab at NTU Singapore builds scalable,
+    efficient cloud systems and open-source research infrastructure.
+
+# Numbers bar. `stat` is one of: publications, citations, members, stars.
+stats:
+  - { stat: publications, label: Publications }
+  - { stat: citations, label: Google Scholar citations }
+  - { stat: members, label: Lab members }
+  - { stat: stars, label: GitHub stars on our open source }
+
+# Slideshow of open-source projects. Each slide's headline and text come from
+# `highlight` and `summary` in content/projects/<id>.md; list ids in display order.
+open_source:
+  eyebrow: Open-source systems
+  projects: [vhive, invitro, aries]
+  # Seconds per slide; 0 turns autoplay off.
+  autoplay: 7
+
+publications:
+  eyebrow: Selected publications
+  title: Recent highlights
+  # Papers with `selected = {true}` in papers.bib, newest first.
+  limit: 4
+  link_label: All publications
+
+news:
+  eyebrow: News
+  title: What's new
+  limit: 5
+
+team:
+  eyebrow: People
+  title: A team across systems, architecture and AI
+  text: >-
+    Postdocs, PhD students, research assistants, interns and undergraduate researchers
+    from around the world work together on open problems in cloud systems.
+  # One photo, or several to cycle through.
+  images:
+    - { image: gallery/lab_2025-07-13.jpeg, alt: HyScale Lab group photo at Nanyang Technological University }
+    - { image: gallery/lab_2026-06-19.jpeg, alt: HyScale Lab group standing together on an outdoor deck }
+    - { image: gallery/lab_2024-12-10.jpeg, alt: HyScale Lab group gathered indoors around a table }
+  autoplay: 6
+  primary: { label: Meet the team, href: /people/ }
+  secondary: { label: Lab life, href: /lab-life/ }
+
+blog:
+  eyebrow: From the blog
+  title: Latest posts
+  limit: 3
+
+# Logos come from content/partners.yaml.
+partners:
+  eyebrow: Collaboration & Funding
+  title: Working with industry and academia
+  lead: >-
+    We thank our past and present collaborators around the globe for their professional
+    and financial support.
+
+cta:
+  title: Build the next generation of cloud systems with us.
+  text: >-
+    We welcome enquiries from prospective PhD students, postdocs, interns and research
+    assistants interested in serverless, agentic and multi-modal AI cloud systems.
+  primary: { label: Join us, href: /join/ }
+  # `mailto:` with no address uses contact.email from site.yaml.
+  secondary: { label: Contact the PI, href: 'mailto:' }

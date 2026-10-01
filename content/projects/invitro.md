@@ -1,6 +1,10 @@
 ---
 title: InVitro
 tagline: Load generator and trace sampler for serverless computing
+# Landing page slide (content/home.yaml → open_source).
+highlight: 'InVitro: realistic serverless load from production traces'
+summary: >-
+  A sampler and load generator that turns production traces from Azure, Huawei and IBM into representative invocation traffic for studying serverless clusters. Supports vHive and OpenWhisk.
 pillar: serverless
 order: 2
 repo: vhive-serverless/invitro
