@@ -9,14 +9,13 @@ builds and publishes the site with GitHub Actions.
 
 ## Quick start
 
-Needs Node.js 22.12 or newer.
+Needs Node.js 22.12 or newer and `make`.
 
 ```bash
-npm install
-npm run dev        # http://localhost:4321, reloads when content/ changes
-npm run build      # production build into dist/
-npm run check      # type check
-npm run format     # Prettier
+make install       # install dependencies
+make start         # dev server in the background at http://localhost:4321 (reloads on edits)
+make stop          # stop it
+make               # list the other targets: status, logs, build, preview, check, format
 ```
 
 ## Common edits
@@ -52,7 +51,7 @@ Add an entry to `content/papers.bib`. The al-folio fields still work:
 | `abstract`                                 | Shown by the **Abs** button.                                                                     |
 | `award`, `additional_info`                 | Award badge, and a note after the venue.                                                         |
 | `selected = {true}`                        | Shown under "Recent highlights" on the landing page.                                             |
-| `research_bucket`                          | `current-serverless`, `current-agentic`, … Lists the paper on the matching project page.         |
+| `research_bucket`                          | `current-serverless`, `current-agentic`, … Lists the paper on the matching research pillar page. |
 
 Lab members' names are highlighted and linked automatically when they match a name in `content/people.yaml`.
 
@@ -93,17 +92,38 @@ draft: false # true = built but not listed
 Markdown, code blocks and KaTeX math (`$…$`, `$$…$$`) all work. See the draft post
 `content/blog/writing-for-the-blog.md` for examples.
 
+### Add an open-source project
+
+Create `content/projects/<id>.md`. It appears under its pillar on `/research/` and gets a page at
+`/research/<pillar>/<id>/` with live GitHub stars:
+
+```yaml
+---
+title: ARIES
+tagline: Agent Runtime & Infrastructure Experimentation System
+pillar: agentic # a file name in content/research/
+repo: hyscale-lab/ARIES
+docs: https://github.com/hyscale-lab/ARIES/blob/main/docs/quick-start.md
+license: MIT
+image: images/aries-architecture.png # optional figure in content/projects/images/
+maintainers: [jooyoung-park] # ids from content/people.yaml
+papers: [kondrashov2026rethinkingaicloudinfrastructure] # BibTeX keys
+---
+Markdown description…
+```
+
 ### Other content
 
-| What                                              | Where                                                  |
-| ------------------------------------------------- | ------------------------------------------------------ |
-| News on the landing page                          | `content/news.yaml`                                    |
-| Sponsor / collaborator logos                      | `content/partners.yaml` + image in `content/partners/` |
-| Lab Life photos                                   | `content/gallery.yaml` + image in `content/gallery/`   |
-| Hiring and teaching text                          | `content/pages/hiring.md`, `content/pages/teaching.md` |
-| Research projects                                 | `content/projects/*.md`                                |
-| Tags                                              | `content/tags.yaml`                                    |
-| Lab name, hero text, research pillars, navigation | `content/site.yaml`                                    |
+| What                            | Where                                                           |
+| ------------------------------- | --------------------------------------------------------------- |
+| News on the landing page        | `content/news.yaml`                                             |
+| Sponsor / collaborator logos    | `content/partners.yaml` + image in `content/partners/`          |
+| Lab Life photos                 | `content/gallery.yaml` + image in `content/gallery/`            |
+| Join us and teaching text       | `content/pages/join.md`, `content/pages/teaching.md`            |
+| Research pillars                | `content/research/*.md` (one file per pillar)                   |
+| Open-source projects            | `content/projects/*.md` + figures in `content/projects/images/` |
+| Tags                            | `content/tags.yaml`                                             |
+| Lab name, hero text, navigation | `content/site.yaml`                                             |
 
 ## Automation
 
@@ -124,7 +144,7 @@ GitHub Pages must be set to **Settings → Pages → Source: GitHub Actions**.
 ```
 content/      everything people edit (see above)
 src/lib/      loaders and schemas: data.ts (YAML + Zod), bibtex.ts, papers.ts, people.ts, blog.ts
-src/pages/    routes; URLs match the old al-folio site
+src/pages/    routes: /, /research/<pillar>/<project>/, /publications/, /people/, /blog/, /lab-life/, /teaching/, /join/
 src/components/, src/layouts/, src/styles/global.css (design tokens)
 scripts/      Scholar citation updater, brand-asset generator, screenshot and smoke-test helpers
 public/       files served as-is (PDFs, favicons, robots.txt)
