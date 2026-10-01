@@ -1,0 +1,79 @@
+---
+// Full-screen hero: parallax photo behind a dark gradient overlay.
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Icon from '../Icon.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  image: ImageMetadata;
+  primary: { label: string; href: string };
+  secondary: { label: string; href: string };
+}
+const { eyebrow, title, subtitle, image, primary, secondary } = Astro.props;
+const bg = await getImage({ src: image, width: 2000, format: 'webp', quality: 70 });
+// Highlight the last two words of the title with the gradient.
+const words = title.split(' ');
+const head = words.slice(0, -2).join(' ');
+const tail = words.slice(-2).join(' ');
+---
+
+<section class="night-band relative flex min-h-[100svh] items-center">
+  <div
+    data-parallax
+    class="absolute inset-0 -z-20 scale-110 bg-cover bg-center will-change-transform"
+    style={`background-image: url(${bg.src})`}
+    aria-hidden="true"
+  ></div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-night/85 via-night/75 to-night" aria-hidden="true"></div>
+
+  <div class="container-x pt-28 pb-24">
+    <p class="eyebrow reveal mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[#ffb3c3] backdrop-blur">
+      <span class="size-1.5 rounded-full bg-accent"></span>
+      {eyebrow}
+    </p>
+    <h1 class="reveal max-w-4xl text-5xl leading-[1.05] font-bold tracking-tight sm:text-6xl lg:text-7xl">
+      {head} <span class="gradient-text">{tail}</span>
+    </h1>
+    <p class="reveal mt-7 max-w-2xl text-lg leading-relaxed text-night-muted sm:text-xl">{subtitle}</p>
+    <div class="reveal mt-10 flex flex-wrap gap-3">
+      <a href={primary.href} class="btn-primary">
+        {primary.label} <Icon name="arrow-right" class="size-4" />
+      </a>
+      <a href={secondary.href} class="btn-ghost text-white">
+        {secondary.label}
+      </a>
+    </div>
+    <slot />
+  </div>
+
+  <a
+    href="#research"
+    class="absolute bottom-8 left-1/2 hidden -translate-x-1/2 animate-bounce text-night-muted hover:text-white sm:block"
+    aria-label="Scroll to research"
+  >
+    <Icon name="chevron-down" class="size-6" />
+  </a>
+</section>
+
+<script>
+  // Gentle parallax on the hero photo; skipped when the visitor prefers reduced motion.
+  const setup = () => {
+    const el = document.querySelector<HTMLElement>('[data-parallax]');
+    if (!el || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(
+        () => (el.style.transform = `translate3d(0, ${window.scrollY * 0.35}px, 0) scale(1.1)`),
+      );
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    document.addEventListener('astro:before-swap', () => window.removeEventListener('scroll', onScroll), {
+      once: true,
+    });
+  };
+  document.addEventListener('astro:page-load', setup);
+</script>

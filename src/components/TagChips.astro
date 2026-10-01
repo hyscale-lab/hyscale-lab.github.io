@@ -1,0 +1,23 @@
+---
+// Tag filter chips for a [data-filter-root]. Only tags that are used are shown.
+import { tagIndex } from '../lib/data';
+
+interface Props {
+  used: string[];
+  label?: string;
+}
+const { used, label = 'Filter by tag' } = Astro.props;
+const tags = tagIndex();
+const counts = new Map<string, number>();
+used.forEach((t) => counts.set(t, (counts.get(t) ?? 0) + 1));
+const shown = tags.all.filter((t) => counts.has(t.id));
+---
+
+<div role="group" aria-label={label} class="flex flex-wrap gap-2">
+  {shown.map((t) => (
+    <button type="button" class="chip" data-filter-tag={t.id} aria-pressed="false">
+      {t.label}
+      <span class="ml-1.5 opacity-60">{counts.get(t.id)}</span>
+    </button>
+  ))}
+</div>

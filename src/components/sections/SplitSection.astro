@@ -1,0 +1,41 @@
+---
+// Image + text side by side. `dark` renders on the night band; `flip` puts the image on the right.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  image: ImageMetadata;
+  imageAlt: string;
+  dark?: boolean;
+  flip?: boolean;
+  imageClass?: string;
+}
+const { eyebrow, title, image, imageAlt, dark = false, flip = false, imageClass = '' } = Astro.props;
+---
+
+<section class:list={['py-24 sm:py-28', dark ? 'night-band' : 'bg-surface']}>
+  <div class="container-x grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+    <div class:list={['reveal', flip && 'lg:order-2']}>
+      <div
+        class:list={[
+          'overflow-hidden rounded-3xl shadow-2xl ring-1',
+          dark ? 'shadow-black/40 ring-white/10' : 'shadow-brand/10 ring-line',
+        ]}
+      >
+        <Image src={image} alt={imageAlt} width={1200} class:list={['w-full', imageClass]} />
+      </div>
+    </div>
+    <div class="reveal">
+      {eyebrow && <p class:list={['eyebrow mb-3', dark ? 'text-[#ff8aa3]' : 'text-accent']}>{eyebrow}</p>}
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
+      <div class:list={['mt-5 space-y-4 text-lg leading-relaxed', dark ? 'text-night-muted' : 'text-muted']}>
+        <slot />
+      </div>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <slot name="actions" />
+      </div>
+    </div>
+  </div>
+</section>

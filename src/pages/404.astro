@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found" noindex overlayHeader>
+  <section class="night-band flex min-h-[80svh] items-center">
+    <div class="container-x py-32 text-center">
+      <p class="gradient-text text-8xl font-bold">404</p>
+      <h1 class="mt-6 text-3xl font-bold tracking-tight">This page doesn't exist.</h1>
+      <p class="mt-4 text-night-muted">It may have moved when the site was redesigned.</p>
+      <div class="mt-10 flex flex-wrap justify-center gap-3">
+        <a href="/" class="btn-primary">
+          Home
+        </a>
+        <a href="/publications/" class="btn-ghost text-white">
+          Publications
+        </a>
+        <a href="/people/" class="btn-ghost text-white">
+          People
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

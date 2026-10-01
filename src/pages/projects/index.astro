@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Icon from '../../components/Icon.astro';
+import { site } from '../../lib/data';
+import { getPapers } from '../../lib/papers';
+
+const s = site();
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const papers = getPapers();
+---
+
+<Base
+  title="Research"
+  description="HyScale Lab research across serverless, agentic, and multi-modal and embodied AI cloud systems."
+  overlayHeader
+>
+  <PageHeader
+    eyebrow="Research"
+    title="Projects"
+    lead="HyScale develops cloud systems through three research pillars. Our open-source systems include vHive, a full-stack environment for serverless research."
+  />
+  <div class="container-x grid gap-20 py-16">
+    {s.pillars.map((pillar, i) => {
+      const items = projects.filter((p) => p.data.pillar === pillar.id);
+      const count = papers.filter((p) => p.tags.includes(pillar.tag)).length;
+      return (
+        <section id={pillar.id} class="scroll-mt-24 grid gap-8 lg:grid-cols-[1fr_2fr] lg:gap-14">
+          <div class="reveal">
+            <p class="eyebrow mb-3 text-accent">Pillar {i + 1}</p>
+            <h2 class="flex items-center gap-3 text-3xl font-bold tracking-tight">
+              <span class="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-soft text-brand">
+                <Icon name={pillar.icon} class="size-5" />
+              </span>
+              {pillar.title}
+            </h2>
+            <p class="mt-4 leading-relaxed text-muted">{pillar.summary}</p>
+            {count > 0 && (
+              <a
+                href={`/publications/?tag=${pillar.tag}`}
+                class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:gap-3"
+              >
+                {count} related papers <Icon name="arrow-right" class="size-4" />
+              </a>
+            )}
+          </div>
+          <div class="grid gap-5">
+            {items.length ? (
+              items.map((p) => (
+                <a
+                  href={`/projects/${p.id}/`}
+                  class="card reveal group block p-7 transition hover:-translate-y-1 hover:border-brand/40 hover:shadow-xl"
+                >
+                  <h3 class="text-xl font-semibold tracking-tight group-hover:text-brand">{p.data.title}</h3>
+                  <p class="mt-2 leading-relaxed text-muted">{p.data.description}</p>
+                  <p class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand">
+                    Read more <Icon name="arrow-right" class="size-4 transition group-hover:translate-x-1" />
+                  </p>
+                </a>
+              ))
+            ) : (
+              <div class="reveal rounded-2xl border border-dashed border-line p-7 text-muted">
+                This is an active research focus for the lab; no current projects are listed in this pillar yet.
+              </div>
+            )}
+          </div>
+        </section>
+      );
+    })}
+  </div>
+</Base>

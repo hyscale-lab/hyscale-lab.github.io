@@ -1,0 +1,77 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { site } from '../lib/data';
+
+const s = site();
+const socials = [
+  { href: s.socials.github, icon: 'github', label: 'GitHub' },
+  { href: s.socials.x, icon: 'x-social', label: 'X' },
+  { href: s.socials.scholar, icon: 'scholar', label: 'Google Scholar' },
+  { href: '/rss.xml', icon: 'rss', label: 'Blog RSS feed' },
+] as const;
+---
+
+<footer class="night-band mt-auto">
+  <div class="container-x grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
+    <div class="space-y-4">
+      <Logo />
+      <p class="max-w-sm text-sm leading-relaxed text-night-muted">
+        {s.full_name}
+        <br />
+        <a href={s.institution_url} class="hover:text-night-ink">
+          {s.institution}
+        </a>
+      </p>
+      <ul class="flex gap-2">
+        {socials.map((x) => (
+          <li>
+            <a
+              href={x.href}
+              class="grid size-9 place-items-center rounded-full border border-white/15 text-night-muted transition hover:border-white/40 hover:text-white"
+              aria-label={x.label}
+            >
+              <Icon name={x.icon} class="size-4" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <nav aria-label="Footer">
+      <p class="eyebrow mb-4 text-night-muted">Explore</p>
+      <ul class="grid gap-2 text-sm">
+        {s.nav.map((n) => (
+          <li>
+            <a href={n.href} class="text-night-ink/85 hover:text-white">
+              {n.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <div>
+      <p class="eyebrow mb-4 text-night-muted">Get in touch</p>
+      <p class="text-sm text-night-ink/85">
+        Interested in joining or collaborating? See{' '}
+        <a href="/hiring/" class="underline underline-offset-4 hover:text-white">
+          Join us
+        </a>{' '}
+        or email
+      </p>
+      <p class="mt-1 text-sm font-medium break-all text-white">{s.contact.email}</p>
+    </div>
+  </div>
+  <div class="border-t border-white/10">
+    <div class="container-x flex flex-wrap justify-between gap-2 py-5 text-xs text-night-muted">
+      <p>
+        © {new Date().getFullYear()} {s.name}, {s.institution}
+      </p>
+      <p>
+        Logo by{' '}
+        <a href="https://www.behance.net/konvpalto00973" class="hover:text-white">
+          Anna Kondrashova
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
