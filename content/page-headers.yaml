@@ -1,0 +1,61 @@
+# Title bands at the top of inner pages, plus a few small pieces of shared text.
+#   page_title   browser tab and link-preview title
+#   description  used for search results and link previews
+#   lead         the sentence under the title
+
+publications:
+  page_title: Publications
+  eyebrow: Research output
+  title: Publications
+  description: HyScale Lab publications across serverless, agentic, and multi-modal and embodied AI cloud systems.
+  lead: Peer-reviewed papers and preprints from HyScale Lab and the PI's earlier work.
+
+people:
+  page_title: People
+  eyebrow: The team
+  title: People
+  description: The HyScale Lab principal investigator, current members, alumni, and supervisees.
+  lead: >-
+    HyScale Lab brings together researchers working across cloud systems, computer architecture and AI
+    infrastructure.
+
+research:
+  page_title: Research
+  eyebrow: Research
+  title: Three pillars, built in the open
+  description: HyScale Lab research across serverless, agentic, and multi-modal and embodied AI cloud systems.
+  lead: >-
+    HyScale develops cloud systems through three research pillars, and releases the systems we build as
+    open-source research infrastructure.
+
+blog:
+  page_title: Blog
+  eyebrow: Blog
+  title: Notes from the lab
+  description: Notes, tutorials and news from HyScale Lab.
+  lead: Research stories, tutorials and lab news.
+
+lab_life:
+  page_title: Lab Life
+  eyebrow: Beyond research
+  title: Lab Life
+  description: Photos from HyScale Lab events and team-building activities.
+  lead: Photos from HyScale Lab events and team-building activities.
+
+not_found:
+  title: This page doesn't exist.
+  lead: It may have moved when the site was redesigned.
+  links:
+    - { label: Home, href: / }
+    - { label: Publications, href: /publications/ }
+    - { label: People, href: /people/ }
+
+# Contact box at the top of the Join us page.
+join_box:
+  text: Interested? Email the PI with your CV.
+  button: Get in touch
+
+footer:
+  nav_title: Explore
+  contact_title: Get in touch
+  contact_text: Interested in joining or collaborating? See [Join us](/join/) or email

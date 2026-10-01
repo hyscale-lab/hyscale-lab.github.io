@@ -1,0 +1,78 @@
+---
+// Landing page slideshow of open-source projects (content/home.yaml → open_source).
+// Headline and text per slide come from each project's `highlight` and `summary`.
+import { Image } from 'astro:assets';
+import Carousel from '../Carousel.astro';
+import Icon from '../Icon.astro';
+import { repoStars } from '../../lib/github';
+import { projectImage, projectUrl, type Project } from '../../lib/research';
+
+interface Props {
+  eyebrow: string;
+  projects: Project[];
+  autoplay?: number;
+}
+const { eyebrow, projects, autoplay = 0 } = Astro.props;
+const slides = await Promise.all(
+  projects.map(async (p) => ({
+    p,
+    visual: projectImage(p, p.data.logo) ?? projectImage(p, p.data.image),
+    stars: await repoStars(p.data.repo),
+  })),
+);
+---
+
+<section class="night-band py-24 sm:py-28">
+  <div class="container-x">
+    <h2 class="eyebrow reveal mb-8 text-night-accent">{eyebrow}</h2>
+    <Carousel label={eyebrow} count={slides.length} autoplay={autoplay} dark>
+      {slides.map(({ p, visual, stars }) => (
+        <div data-slide class="w-full shrink-0 snap-start">
+          <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            <a
+              href={projectUrl(p)}
+              tabindex="-1"
+              aria-hidden="true"
+              class="block overflow-hidden rounded-3xl shadow-2xl ring-1 shadow-black/40 ring-white/10"
+            >
+              {visual ? (
+                <Image
+                  src={visual}
+                  alt=""
+                  widths={[480, 800, 1200]}
+                  sizes="(min-width: 1024px) 560px, 100vw"
+                  class="aspect-[2/1] w-full bg-white object-contain p-6 sm:p-8"
+                />
+              ) : (
+                // No logo or figure: a branded tile with the project name.
+                <div class="relative grid aspect-[2/1] place-items-center bg-gradient-to-br from-brand-strong via-night-2 to-night">
+                  <span class="absolute top-5 left-6 inline-flex items-center gap-2 text-xs font-semibold text-night-muted">
+                    <Icon name="github" class="size-4" /> {p.data.repo}
+                  </span>
+                  <span class="text-5xl font-bold tracking-tight text-white sm:text-6xl">{p.data.title}</span>
+                </div>
+              )}
+            </a>
+            <div>
+              <h3 class="text-3xl font-bold tracking-tight sm:text-4xl">{p.data.highlight ?? p.data.title}</h3>
+              <p class="mt-5 text-lg leading-relaxed text-night-muted">{p.data.summary ?? p.data.tagline}</p>
+              <div class="mt-8 flex flex-wrap items-center gap-3">
+                <a href={projectUrl(p)} class="btn-primary">
+                  About {p.data.title} <Icon name="arrow-right" class="size-4" />
+                </a>
+                <a href={`https://github.com/${p.data.repo}`} class="btn-ghost text-white">
+                  <Icon name="github" class="size-4" /> GitHub
+                  {stars !== null && (
+                    <span class="inline-flex items-center gap-1 text-night-muted">
+                      <Icon name="star" class="size-3.5" /> {stars.toLocaleString('en-US')}
+                    </span>
+                  )}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </Carousel>
+  </div>
+</section>

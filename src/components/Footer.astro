@@ -1,9 +1,11 @@
 ---
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
-import { site } from '../lib/data';
+import { marked } from 'marked';
+import { load, site } from '../lib/data';
 
 const s = site();
+const f = load('page-headers.yaml').footer;
 const socials = [
   { href: s.socials.github, icon: 'github', label: 'GitHub' },
   { href: s.socials.x, icon: 'x-social', label: 'X' },
@@ -38,7 +40,7 @@ const socials = [
       </ul>
     </div>
     <nav aria-label="Footer">
-      <p class="eyebrow mb-4 text-night-muted">Explore</p>
+      <p class="eyebrow mb-4 text-night-muted">{f.nav_title}</p>
       <ul class="grid gap-2 text-sm">
         {s.nav.map((n) => (
           <li>
@@ -50,14 +52,11 @@ const socials = [
       </ul>
     </nav>
     <div>
-      <p class="eyebrow mb-4 text-night-muted">Get in touch</p>
-      <p class="text-sm text-night-ink/85">
-        Interested in joining or collaborating? See{' '}
-        <a href="/join/" class="underline underline-offset-4 hover:text-white">
-          Join us
-        </a>{' '}
-        or email
-      </p>
+      <p class="eyebrow mb-4 text-night-muted">{f.contact_title}</p>
+      <p
+        class="text-sm text-night-ink/85 [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-white"
+        set:html={marked.parseInline(f.contact_text)}
+      />
       <p class="mt-1 text-sm font-medium break-all text-white">{s.contact.email}</p>
     </div>
   </div>

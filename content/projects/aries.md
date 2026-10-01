@@ -1,6 +1,10 @@
 ---
 title: ARIES
 tagline: Agent Runtime & Infrastructure Experimentation System
+# Landing page slide (content/home.yaml → open_source).
+highlight: 'ARIES: an experimentation framework for agent serving systems'
+summary: >-
+  Run reproducible agent benchmarks while observing the full trajectory: model calls, harness decisions, stateful tool execution and resource telemetry. Ships with a production trace from Ant Group.
 pillar: agentic
 order: 1
 repo: hyscale-lab/ARIES

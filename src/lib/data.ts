@@ -16,6 +16,18 @@ const url = z.url();
 export const ROLES = ['pi', 'postdoc', 'phd', 'exchange-phd', 'ra', 'intern', 'fyp', 'ureca'] as const;
 export type Role = (typeof ROLES)[number];
 
+const link = z.object({ label: z.string(), href: z.string() }).strict();
+const heading = z.object({ eyebrow: z.string().optional(), title: z.string(), lead: z.string().optional() }).strict();
+const pageHeader = z
+  .object({
+    page_title: z.string(),
+    eyebrow: z.string().optional(),
+    title: z.string(),
+    description: z.string(),
+    lead: z.string(),
+  })
+  .strict();
+
 const schemas = {
   'site.yaml': z.object({
     name: z.string(),
@@ -24,14 +36,61 @@ const schemas = {
     institution_url: url,
     url,
     description: z.string(),
-    hero: z.object({ image: z.string(), eyebrow: z.string(), title: z.string(), subtitle: z.string() }),
-    team_image: z.string(),
     contact: z.object({ email: z.email(), pi: z.string() }),
     socials: z.record(z.string(), url),
     scholar_userid: z.string(),
     google_site_verification: z.string().optional(),
     nav: z.array(z.object({ label: z.string(), href: z.string() })),
   }),
+  'home.yaml': z
+    .object({
+      hero: z.object({
+        image: z.string(),
+        eyebrow: z.string(),
+        title: z.string(),
+        subtitle: z.string(),
+        primary: link,
+        secondary: link.optional(),
+      }),
+      pillars: heading.optional(),
+      stats: z
+        .array(z.object({ stat: z.enum(['publications', 'citations', 'members', 'stars']), label: z.string() }))
+        .optional(),
+      open_source: z
+        .object({ eyebrow: z.string(), projects: z.array(z.string()).min(1), autoplay: z.number().min(0).default(0) })
+        .strict()
+        .optional(),
+      publications: heading.extend({ limit: z.number().int().min(1).default(4), link_label: z.string() }).optional(),
+      news: heading.extend({ limit: z.number().int().min(1).default(5) }).optional(),
+      team: heading
+        .extend({
+          text: z.string(),
+          images: z.array(z.object({ image: z.string(), alt: z.string() }).strict()).min(1),
+          autoplay: z.number().min(0).default(0),
+          primary: link.optional(),
+          secondary: link.optional(),
+        })
+        .optional(),
+      blog: heading.extend({ limit: z.number().int().min(1).default(3) }).optional(),
+      partners: heading.optional(),
+      cta: z
+        .object({ title: z.string(), text: z.string(), primary: link, secondary: link.optional() })
+        .strict()
+        .optional(),
+    })
+    .strict(),
+  'page-headers.yaml': z
+    .object({
+      publications: pageHeader,
+      people: pageHeader,
+      research: pageHeader,
+      blog: pageHeader,
+      lab_life: pageHeader,
+      not_found: z.object({ title: z.string(), lead: z.string(), links: z.array(link) }).strict(),
+      join_box: z.object({ text: z.string(), button: z.string() }).strict(),
+      footer: z.object({ nav_title: z.string(), contact_title: z.string(), contact_text: z.string() }).strict(),
+    })
+    .strict(),
   'people.yaml': z.array(
     z
       .object({

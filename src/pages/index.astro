@@ -1,4 +1,6 @@
 ---
+// Landing page. All text, photos and section choices are in content/home.yaml.
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/sections/Hero.astro';
 import FeatureGrid from '../components/sections/FeatureGrid.astro';
@@ -7,135 +9,154 @@ import StatsBar from '../components/sections/StatsBar.astro';
 import SectionHeading from '../components/sections/SectionHeading.astro';
 import NewsList from '../components/sections/NewsList.astro';
 import LogoCarousel from '../components/sections/LogoCarousel.astro';
+import OpenSourceShowcase from '../components/sections/OpenSourceShowcase.astro';
 import CTA from '../components/sections/CTA.astro';
+import Carousel from '../components/Carousel.astro';
 import PubList from '../components/pubs/PubList.astro';
 import PostCard from '../components/PostCard.astro';
 import Icon from '../components/Icon.astro';
-import { site } from '../lib/data';
+import { load, site } from '../lib/data';
 import { getPapers, totalCitations } from '../lib/papers';
 import { currentGroups } from '../lib/people';
 import { totalStars } from '../lib/github';
-import { getPillars, getProjects, projectImage, projectUrl } from '../lib/research';
+import { getPillars, getProjects } from '../lib/research';
 import { getPosts } from '../lib/blog';
 import { contentImage } from '../lib/images';
 
 const s = site();
+const home = load('home.yaml');
 const papers = getPapers();
-const selected = papers.filter((p) => p.selected).slice(0, 4);
-const members = currentGroups().reduce((n, g) => n + g.members.length, 0) + 1; // + PI
 const pillars = await getPillars();
 const projects = await getProjects();
-const vhive = projects.find((p) => p.id === 'vhive');
-const heroImage = contentImage(s.hero.image, 'content/site.yaml → hero.image');
-const teamImage = contentImage(s.team_image, 'content/site.yaml → team_image');
-const vhiveImage = vhive && projectImage(vhive, vhive.data.logo);
-const stars = await totalStars(projects.map((p) => p.data.repo));
+
+const heroImage = contentImage(home.hero.image, 'content/home.yaml → hero.image');
+
+// Stats bar.
 const fmt = (n: number) => (n >= 1000 ? `${(n / 1000).toFixed(1).replace(/\.0$/, '')}k` : String(n));
-const stats = [
-  { value: String(papers.length), label: 'Publications' },
-  { value: `${fmt(totalCitations())}+`, label: 'Google Scholar citations' },
-  { value: String(members), label: 'Lab members' },
-  ...(stars !== null ? [{ value: `${fmt(stars)}+`, label: 'GitHub stars on our open source' }] : []),
-];
-const posts = (await getPosts()).slice(0, 3);
+const members = currentGroups().reduce((n, g) => n + g.members.length, 0) + 1; // + PI
+const stars = await totalStars(projects.map((p) => p.data.repo));
+const statValue = {
+  publications: String(papers.length),
+  citations: `${fmt(totalCitations())}+`,
+  members: String(members),
+  stars: stars === null ? null : `${fmt(stars)}+`,
+};
+const stats = (home.stats ?? []).flatMap((x) =>
+  statValue[x.stat] === null ? [] : [{ value: statValue[x.stat]!, label: x.label }],
+);
+
+// Open-source slideshow, in the order listed in home.yaml.
+const showcase = (home.open_source?.projects ?? []).map((id) => {
+  const p = projects.find((x) => x.id === id);
+  if (!p)
+    throw new Error(`[content] content/home.yaml → open_source.projects: "${id}" is not a file in content/projects/`);
+  return p;
+});
+
+const selected = home.publications ? papers.filter((p) => p.selected).slice(0, home.publications.limit) : [];
+const posts = home.blog ? (await getPosts()).slice(0, home.blog.limit) : [];
+const teamImages = (home.team?.images ?? []).map((x, i) => ({
+  ...x,
+  img: contentImage(x.image, `content/home.yaml → team.images[${i}]`),
+}));
+// "mailto:" with no address means the lab contact email.
+const href = (h: string) => (h === 'mailto:' ? `mailto:${s.contact.email}` : h);
 ---
 
 <Base overlayHeader>
   <Hero
-    eyebrow={s.hero.eyebrow}
-    title={s.hero.title}
-    subtitle={s.hero.subtitle}
+    eyebrow={home.hero.eyebrow}
+    title={home.hero.title}
+    subtitle={home.hero.subtitle}
     image={heroImage}
-    primary={{ label: 'Explore our research', href: '/research/' }}
-    secondary={{ label: 'Join the lab', href: '/join/' }}
+    primary={home.hero.primary}
+    secondary={home.hero.secondary}
   />
 
-  <FeatureGrid
-    id="research"
-    eyebrow="Research pillars"
-    title="Three directions, one goal: efficient cloud systems."
-    lead={s.description}
-    features={pillars.map((p) => ({
-      icon: p.data.icon,
-      title: p.data.title,
-      summary: p.data.summary,
-      href: `/research/${p.id}/`,
-      meta:
-        projects
-          .filter((x) => x.data.pillar === p.id)
-          .map((x) => x.data.title)
-          .join(' · ') || 'Learn more',
-    }))}
-  />
+  {home.pillars && (
+    <FeatureGrid
+      id="research"
+      eyebrow={home.pillars.eyebrow}
+      title={home.pillars.title}
+      lead={home.pillars.lead}
+      features={pillars.map((p) => ({
+        icon: p.data.icon,
+        title: p.data.title,
+        summary: p.data.summary,
+        href: `/research/${p.id}/`,
+        meta:
+          projects
+            .filter((x) => x.data.pillar === p.id)
+            .map((x) => x.data.title)
+            .join(' · ') || 'Learn more',
+      }))}
+    />
+  )}
 
-  <StatsBar stats={stats} />
+  {stats.length > 0 && <StatsBar stats={stats} />}
 
-  {vhive && vhiveImage && (
-    <SplitSection
-      eyebrow="Open-source systems"
-      title="vHive: the serverless research platform used by 30+ universities"
-      image={vhiveImage}
-      imageAlt="vHive logo: open-source framework for serverless experimentation"
-      imageClass="bg-white p-8"
-      dark
-    >
-      <p>
-        vHive is our full-stack open-source environment for representative serverless experimentation across the
-        distributed hardware/software stack. It integrates production-grade components including AWS Firecracker,
-        containerd and Kubernetes.
-      </p>
-      <p>Its ASPLOS 2021 paper received the Distinguished Artifact Award.</p>
+  {home.open_source && showcase.length > 0 && (
+    <OpenSourceShowcase eyebrow={home.open_source.eyebrow} projects={showcase} autoplay={home.open_source.autoplay} />
+  )}
+
+  {home.publications && selected.length > 0 && (
+    <section class="py-24 sm:py-28">
+      <div class="container-x">
+        <SectionHeading
+          eyebrow={home.publications.eyebrow}
+          title={home.publications.title}
+          lead={home.publications.lead}
+        >
+          <a href="/publications/" class="mt-6 inline-flex items-center gap-2 font-semibold text-brand hover:gap-3">
+            {home.publications.link_label} ({papers.length}) <Icon name="arrow-right" class="size-4" />
+          </a>
+        </SectionHeading>
+        <div class="reveal">
+          <PubList papers={selected} previews={false} showTags={false} />
+        </div>
+      </div>
+    </section>
+  )}
+
+  {home.news && <NewsList eyebrow={home.news.eyebrow} title={home.news.title} limit={home.news.limit} />}
+
+  {home.team && (
+    <SplitSection eyebrow={home.team.eyebrow} title={home.team.title} flip>
+      <Fragment slot="media">
+        <Carousel label={home.team.title} count={teamImages.length} autoplay={home.team.autoplay} overlay>
+          {teamImages.map((t) => (
+            <div data-slide class="w-full shrink-0 snap-start">
+              <Image
+                src={t.img}
+                alt={t.alt}
+                widths={[480, 800, 1200]}
+                sizes="(min-width: 1024px) 560px, 100vw"
+                class="aspect-[4/3] w-full object-cover"
+              />
+            </div>
+          ))}
+        </Carousel>
+      </Fragment>
+      <p>{home.team.text}</p>
       <Fragment slot="actions">
-        <a href={projectUrl(vhive)} class="btn-primary">
-          About vHive <Icon name="arrow-right" class="size-4" />
-        </a>
-        <a href="https://github.com/vhive-serverless/vhive" class="btn-ghost text-white">
-          <Icon name="github" class="size-4" /> GitHub
-        </a>
+        {home.team.primary && (
+          <a href={home.team.primary.href} class="btn-primary">
+            {home.team.primary.label} <Icon name="arrow-right" class="size-4" />
+          </a>
+        )}
+        {home.team.secondary && (
+          <a href={home.team.secondary.href} class="btn-ghost text-ink">
+            {home.team.secondary.label}
+          </a>
+        )}
       </Fragment>
     </SplitSection>
   )}
 
-  <section class="py-24 sm:py-28">
-    <div class="container-x">
-      <SectionHeading eyebrow="Selected publications" title="Recent highlights">
-        <a href="/publications/" class="mt-6 inline-flex items-center gap-2 font-semibold text-brand hover:gap-3">
-          All {papers.length} publications <Icon name="arrow-right" class="size-4" />
-        </a>
-      </SectionHeading>
-      <div class="reveal">
-        <PubList papers={selected} previews={false} showTags={false} />
-      </div>
-    </div>
-  </section>
-
-  <NewsList />
-
-  <SplitSection
-    eyebrow="People"
-    title="A team across systems, architecture and AI"
-    image={teamImage}
-    imageAlt="HyScale Lab group photo at Nanyang Technological University"
-    flip
-  >
-    <p>
-      Postdocs, PhD students, research assistants, interns and undergraduate researchers from around the world work
-      together on open problems in cloud systems.
-    </p>
-    <Fragment slot="actions">
-      <a href="/people/" class="btn-primary">
-        Meet the team <Icon name="arrow-right" class="size-4" />
-      </a>
-      <a href="/lab-life/" class="btn-ghost text-ink">
-        Lab life
-      </a>
-    </Fragment>
-  </SplitSection>
-
-  {posts.length > 0 && (
+  {home.blog && posts.length > 0 && (
     <section class="py-24 sm:py-28">
       <div class="container-x">
-        <SectionHeading eyebrow="From the blog" title="Latest posts" />
+        <SectionHeading eyebrow={home.blog.eyebrow} title={home.blog.title} lead={home.blog.lead} />
         <div class="grid gap-6 md:grid-cols-3">
           {posts.map((p) => (
             <PostCard post={p} />
@@ -145,12 +166,16 @@ const posts = (await getPosts()).slice(0, 3);
     </section>
   )}
 
-  <LogoCarousel />
+  {home.partners && (
+    <LogoCarousel eyebrow={home.partners.eyebrow} title={home.partners.title} lead={home.partners.lead} />
+  )}
 
-  <CTA
-    title="Build the next generation of cloud systems with us."
-    text="We welcome enquiries from prospective PhD students, postdocs, interns and research assistants interested in serverless, agentic and multi-modal AI cloud systems."
-    primary={{ label: 'Join us', href: '/join/' }}
-    secondary={{ label: 'Contact the PI', href: `mailto:${s.contact.email}` }}
-  />
+  {home.cta && (
+    <CTA
+      title={home.cta.title}
+      text={home.cta.text}
+      primary={{ ...home.cta.primary, href: href(home.cta.primary.href) }}
+      secondary={home.cta.secondary && { ...home.cta.secondary, href: href(home.cta.secondary.href) }}
+    />
+  )}
 </Base>

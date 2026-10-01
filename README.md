@@ -114,28 +114,31 @@ Markdown description…
 
 ### Other content
 
-| What                            | Where                                                           |
-| ------------------------------- | --------------------------------------------------------------- |
-| News on the landing page        | `content/news.yaml`                                             |
-| Sponsor / collaborator logos    | `content/partners.yaml` + image in `content/partners/`          |
-| Lab Life photos                 | `content/gallery.yaml` + image in `content/gallery/`            |
-| Join us and teaching text       | `content/pages/join.md`, `content/pages/teaching.md`            |
-| Research pillars                | `content/research/*.md` (one file per pillar)                   |
-| Open-source projects            | `content/projects/*.md` + figures in `content/projects/images/` |
-| Tags                            | `content/tags.yaml`                                             |
-| Lab name, hero text, navigation | `content/site.yaml`                                             |
+| What                                                             | Where                                                           |
+| ---------------------------------------------------------------- | --------------------------------------------------------------- |
+| News on the landing page                                         | `content/news.yaml`                                             |
+| Sponsor / collaborator logos                                     | `content/partners.yaml` + image in `content/partners/`          |
+| Lab Life photos                                                  | `content/gallery.yaml` + image in `content/gallery/`            |
+| Join us and teaching text                                        | `content/pages/join.md`, `content/pages/teaching.md`            |
+| Research pillars                                                 | `content/research/*.md` (one file per pillar)                   |
+| Open-source projects                                             | `content/projects/*.md` + figures in `content/projects/images/` |
+| Tags                                                             | `content/tags.yaml`                                             |
+| Lab name, contact, socials, navigation                           | `content/site.yaml`                                             |
+| Every heading, sentence, photo and button on the landing page    | `content/home.yaml`                                             |
+| Inner page titles and intros, 404 text, footer text, Join us box | `content/page-headers.yaml`                                     |
 
 ## Change the look
 
-| What                                               | Where                                                                                                 |
-| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Hero photo, hero text                              | `content/site.yaml` → `hero` (`image` is a path under `content/`, e.g. `gallery/lab_2026-06-19.jpeg`) |
-| Team photo on the landing page                     | `content/site.yaml` → `team_image`                                                                    |
-| Theme colours (light, dark, dark bands, gradients) | `src/styles/global.css`, the token block at the top                                                   |
-| Logo, favicons, link-preview image                 | `src/assets/hyscale-circle.png`, then `node scripts/make-brand-assets.mjs`                            |
+| What                                               | Where                                                                                                                             |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Hero photo and text                                | `content/home.yaml` → `hero` (`image` is a path under `content/`, e.g. `gallery/main.jpg`)                                        |
+| Open-source slideshow                              | `content/home.yaml` → `open_source` (order, autoplay); each slide's text is `highlight` / `summary` in `content/projects/<id>.md` |
+| Team photo slideshow                               | `content/home.yaml` → `team.images` (one photo, or several to cycle)                                                              |
+| Theme colours (light, dark, dark bands, gradients) | `src/styles/global.css`, the token block at the top                                                                               |
+| Logo, favicons, link-preview image                 | `src/assets/hyscale-circle.png`, then `node scripts/make-brand-assets.mjs`                                                        |
 
 To add a new hero photo, put it in `content/gallery/` (and list it in `content/gallery.yaml` if it should also
-appear on Lab Life), then point `hero.image` at it.
+appear on Lab Life), then point `hero.image` at it. To hide a landing page section, delete its block in `content/home.yaml`.
 
 ## Automation
 

@@ -1,5 +1,6 @@
 ---
 title: Join Us
+eyebrow: Opportunities
 description: Enquiry information for prospective HyScale Lab researchers and students.
 ---
 

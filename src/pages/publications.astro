@@ -6,6 +6,7 @@ import TagChips from '../components/TagChips.astro';
 import Icon from '../components/Icon.astro';
 import { getPapers, totalCitations } from '../lib/papers';
 import { getPeople } from '../lib/people';
+import { load } from '../lib/data';
 
 const papers = getPapers();
 const years = [...new Set(papers.map((p) => p.year))];
@@ -32,19 +33,11 @@ const jsonLd = {
 };
 const field =
   'h-10 rounded-lg border border-line bg-raised px-3 text-sm text-ink focus:border-brand focus:outline-none';
+const header = load('page-headers.yaml').publications;
 ---
 
-<Base
-  title="Publications"
-  description="HyScale Lab publications across serverless, agentic, and multi-modal and embodied AI cloud systems."
-  overlayHeader
-  jsonLd={jsonLd}
->
-  <PageHeader
-    eyebrow="Research output"
-    title="Publications"
-    lead="Peer-reviewed papers and preprints from HyScale Lab and the PI's earlier work, generated from our BibTeX file."
-  >
+<Base title={header.page_title} description={header.description} overlayHeader jsonLd={jsonLd}>
+  <PageHeader eyebrow={header.eyebrow} title={header.title} lead={header.lead}>
     <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-4 text-sm">
       <div>
         <dt class="text-night-muted">Papers</dt>

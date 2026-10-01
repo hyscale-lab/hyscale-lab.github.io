@@ -4,6 +4,7 @@ import PageHeader from '../components/PageHeader.astro';
 import PersonCard from '../components/PersonCard.astro';
 import { alumni, currentGroups, period, pi, roleLabel, supervisees } from '../lib/people';
 import { getPapers } from '../lib/papers';
+import { load } from '../lib/data';
 
 const papers = getPapers();
 const paperCount = (id: string) => papers.filter((p) => p.authors.some((a) => a.member?.id === id)).length;
@@ -18,18 +19,11 @@ const tabs = [
 ];
 const tabBtn =
   'rounded-full px-4 py-2 text-sm font-semibold text-muted transition hover:text-ink aria-selected:bg-brand aria-selected:text-white dark:aria-selected:text-night';
+const header = load('page-headers.yaml').people;
 ---
 
-<Base
-  title="People"
-  description="The HyScale Lab principal investigator, current members, alumni, and supervisees."
-  overlayHeader
->
-  <PageHeader
-    eyebrow="The team"
-    title="People"
-    lead="HyScale Lab brings together researchers working across cloud systems, computer architecture and AI infrastructure."
-  />
+<Base title={header.page_title} description={header.description} overlayHeader>
+  <PageHeader eyebrow={header.eyebrow} title={header.title} lead={header.lead} />
 
   <div class="container-x py-12">
     <div role="tablist" aria-label="People" class="card mb-10 inline-flex flex-wrap gap-1 p-1.5" data-tabs>

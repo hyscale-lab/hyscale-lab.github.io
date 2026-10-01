@@ -8,18 +8,7 @@ description: >-
   The HyScale Systems and Cloud Architecture Lab at NTU Singapore builds scalable,
   efficient cloud systems and open-source research infrastructure.
 
-# Landing page. Image paths are relative to content/ (e.g. a Lab Life photo in gallery/).
-hero:
-  # Full-screen background photo; a wide (landscape) image of at least 2000px works best.
-  image: gallery/main.jpg
-  eyebrow: Systems & Cloud Architecture · NTU Singapore
-  title: Building the cloud for the AI era.
-  subtitle: >-
-    We study how systems software and computer architecture can make emerging cloud
-    workloads faster, more elastic, and more resource-efficient.
-
-# Photo next to "A team across systems, architecture and AI" on the landing page.
-team_image: gallery/lab_2025-07-13.jpeg
+# Landing page text and photos live in home.yaml; page headings in page-headers.yaml.
 
 contact:
   email: dmitrii.ustiugov@ntu.edu.sg

@@ -15,6 +15,7 @@ validated, rather than hard-coding content in a component.
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | Papers                                      | `content/papers.bib` (parsed by `src/lib/bibtex.ts`, modelled in `src/lib/papers.ts`)                                  |
 | People                                      | `content/people.yaml` (stints model, `src/lib/people.ts`)                                                              |
+| Landing page / inner page text              | `content/home.yaml`, `content/page-headers.yaml`: no user-visible copy hard-coded in `src/`                            |
 | Other YAML schemas                          | `src/lib/data.ts`: every YAML file in `content/` has a Zod schema there                                                |
 | Pillar, project, blog and page front matter | `src/content.config.ts`                                                                                                |
 | Design tokens (colours, fonts)              | `src/styles/global.css`: use the token names (`bg-surface`, `text-muted`, `border-line`, `text-brand`, …), not raw hex |

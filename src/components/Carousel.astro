@@ -1,0 +1,216 @@
+---
+// Accessible slideshow. Slides are the direct children passed in the default
+// slot (give each `data-slide`). Swiping uses native CSS scroll-snap, so it is
+// cheap on low-end phones; arrows, dots and keyboard arrows move between
+// slides. Autoplay (seconds, 0 = off) runs only while the carousel is on
+// screen, pauses on hover/focus, stops for good after the visitor interacts,
+// and never runs when the visitor prefers reduced motion. A pause button is
+// shown whenever autoplay is on (WCAG 2.2.2).
+import Icon from './Icon.astro';
+
+interface Props {
+  label: string;
+  count: number;
+  autoplay?: number;
+  /** Controls on a dark band. */
+  dark?: boolean;
+  /** Float the controls over the bottom of the slides (for photo slideshows). */
+  overlay?: boolean;
+  class?: string;
+}
+const { label, count, autoplay = 0, dark = false, overlay = false, class: cls = '' } = Astro.props;
+const btn = overlay
+  ? 'border-white/30 bg-black/35 text-white backdrop-blur hover:bg-black/55'
+  : dark
+    ? 'border-white/20 text-night-ink hover:border-white/60 hover:bg-white/10'
+    : 'border-line bg-raised text-ink hover:border-brand hover:text-brand';
+---
+
+<div
+  data-carousel
+  data-autoplay={count > 1 ? autoplay : 0}
+  role="region"
+  aria-roledescription="carousel"
+  aria-label={label}
+  class:list={['relative', cls]}
+>
+  <div
+    data-track
+    tabindex="0"
+    class="flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain [scrollbar-width:none] focus-visible:outline-2 [&::-webkit-scrollbar]:hidden"
+  >
+    <slot />
+  </div>
+
+  {count > 1 && (
+    <div class:list={['flex items-center justify-center gap-3', overlay ? 'absolute inset-x-0 bottom-3' : 'mt-6']}>
+      <button
+        type="button"
+        data-prev
+        class:list={['grid place-items-center rounded-full border transition', overlay ? 'size-8' : 'size-9', btn]}
+        aria-label="Previous slide"
+      >
+        <Icon name="arrow-right" class="size-4 rotate-180" />
+      </button>
+      <div class="flex items-center gap-2">
+        {Array.from({ length: count }, (_, i) => (
+          <button
+            type="button"
+            data-dot={i}
+            aria-label={`Go to slide ${i + 1} of ${count}`}
+            aria-current={i === 0 ? 'true' : undefined}
+            class:list={[
+              'h-2 rounded-full transition-all aria-[current=true]:w-6',
+              dark || overlay
+                ? 'w-2 bg-white/50 aria-[current=true]:bg-white'
+                : 'w-2 bg-line aria-[current=true]:bg-accent',
+            ]}
+          />
+        ))}
+      </div>
+      <button
+        type="button"
+        data-next
+        class:list={['grid place-items-center rounded-full border transition', overlay ? 'size-8' : 'size-9', btn]}
+        aria-label="Next slide"
+      >
+        <Icon name="arrow-right" class="size-4" />
+      </button>
+      {autoplay > 0 && (
+        <button
+          type="button"
+          data-pause
+          hidden
+          class:list={[
+            'ml-2 grid place-items-center rounded-full border transition',
+            overlay ? 'size-8' : 'size-9',
+            btn,
+          ]}
+          aria-label="Pause slideshow"
+        >
+          <span class="flex gap-0.5" data-icon-pause aria-hidden="true">
+            <span class="h-3 w-1 rounded-sm bg-current" />
+            <span class="h-3 w-1 rounded-sm bg-current" />
+          </span>
+          <Icon name="play" class="hidden size-4" />
+        </button>
+      )}
+    </div>
+  )}
+</div>
+
+<script>
+  const setup = () => {
+    document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
+      const track = root.querySelector<HTMLElement>('[data-track]')!;
+      const slides = [...track.querySelectorAll<HTMLElement>(':scope > [data-slide]')];
+      const dots = [...root.querySelectorAll<HTMLButtonElement>('[data-dot]')];
+      const pause = root.querySelector<HTMLButtonElement>('[data-pause]');
+      const n = slides.length;
+      let index = 0;
+
+      slides.forEach((s, i) => {
+        s.setAttribute('role', 'group');
+        s.setAttribute('aria-roledescription', 'slide');
+        s.setAttribute('aria-label', `${i + 1} of ${n}`);
+      });
+
+      // Hide off-screen slides from keyboard and screen readers.
+      const sync = () => {
+        slides.forEach((s, i) => {
+          s.inert = i !== index;
+        });
+        dots.forEach((d, i) =>
+          i === index ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current'),
+        );
+      };
+      // While we scroll the track ourselves, ignore the scroll positions it
+      // passes through (otherwise wrapping 3 → 1 would land on slide 2).
+      let moving: number | undefined;
+      const go = (i: number) => {
+        index = (i + n) % n;
+        clearTimeout(moving);
+        moving = window.setTimeout(() => (moving = undefined), 1000);
+        track.scrollTo({ left: slides[index].offsetLeft - track.offsetLeft, behavior: 'smooth' });
+        sync();
+      };
+      track.addEventListener('scrollend', () => {
+        clearTimeout(moving);
+        moving = undefined;
+      });
+
+      let t: number | undefined;
+      track.addEventListener(
+        'scroll',
+        () => {
+          clearTimeout(t);
+          t = window.setTimeout(() => {
+            if (moving !== undefined) return;
+            const i = Math.round(track.scrollLeft / track.clientWidth);
+            if (i !== index && i >= 0 && i < n) {
+              index = i;
+              sync();
+            }
+          }, 80);
+        },
+        { passive: true },
+      );
+
+      // Autoplay.
+      const secs = Number(root.dataset.autoplay || 0);
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let timer: number | undefined;
+      let stopped = !secs || reduce || n < 2;
+      let hovered = false;
+      let visible = false;
+      const tick = () => {
+        clearInterval(timer);
+        if (!stopped && !hovered && visible && !document.hidden)
+          timer = window.setInterval(() => go(index + 1), secs * 1000);
+      };
+      const stop = () => {
+        stopped = true;
+        clearInterval(timer);
+        if (pause) {
+          pause.setAttribute('aria-label', 'Play slideshow');
+          pause.querySelector('[data-icon-pause]')?.classList.add('hidden');
+          pause.querySelector('svg')?.classList.remove('hidden');
+        }
+      };
+      if (pause && !stopped) {
+        pause.hidden = false;
+        pause.onclick = () => {
+          if (stopped) {
+            stopped = false;
+            pause.setAttribute('aria-label', 'Pause slideshow');
+            pause.querySelector('[data-icon-pause]')?.classList.remove('hidden');
+            pause.querySelector('svg')?.classList.add('hidden');
+            tick();
+          } else stop();
+        };
+      }
+
+      root.querySelector<HTMLButtonElement>('[data-prev]')?.addEventListener('click', () => (stop(), go(index - 1)));
+      root.querySelector<HTMLButtonElement>('[data-next]')?.addEventListener('click', () => (stop(), go(index + 1)));
+      dots.forEach((d, i) => d.addEventListener('click', () => (stop(), go(i))));
+      track.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          stop();
+          go(index + (e.key === 'ArrowRight' ? 1 : -1));
+        }
+      });
+      track.addEventListener('pointerdown', stop, { passive: true });
+      track.addEventListener('touchstart', stop, { passive: true });
+      root.addEventListener('pointerenter', () => ((hovered = true), tick()));
+      root.addEventListener('pointerleave', () => ((hovered = false), tick()));
+      root.addEventListener('focusin', () => ((hovered = true), tick()));
+      root.addEventListener('focusout', () => ((hovered = false), tick()));
+      document.addEventListener('visibilitychange', tick);
+      new IntersectionObserver(([e]) => ((visible = e.isIntersecting), tick()), { threshold: 0.4 }).observe(root);
+
+      sync();
+    });
+  };
+  document.addEventListener('astro:page-load', setup);
+</script>

@@ -1,6 +1,10 @@
 ---
 title: vHive
 tagline: Open-source framework for serverless experimentation
+# Landing page slide (content/home.yaml → open_source).
+highlight: 'vHive: the serverless research platform used by 30+ universities'
+summary: >-
+  Our full-stack open-source environment for representative serverless experimentation, built on AWS Firecracker, containerd and Kubernetes. Its ASPLOS 2021 paper received the Distinguished Artifact Award.
 pillar: serverless
 order: 1
 repo: vhive-serverless/vHive

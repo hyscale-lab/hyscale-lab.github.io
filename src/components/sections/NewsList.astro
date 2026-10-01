@@ -4,9 +4,11 @@ import { load } from '../../lib/data';
 import SectionHeading from './SectionHeading.astro';
 
 interface Props {
+  eyebrow?: string;
+  title: string;
   limit?: number;
 }
-const { limit = 5 } = Astro.props;
+const { eyebrow, title, limit = 5 } = Astro.props;
 const news = load('news.yaml')
   .sort((a, b) => +b.date - +a.date)
   .slice(0, limit);
@@ -16,7 +18,7 @@ const fmt = new Intl.DateTimeFormat('en-GB', { month: 'short', year: 'numeric', 
 {news.length > 0 && (
   <section class="py-24 sm:py-28">
     <div class="container-x">
-      <SectionHeading eyebrow="News" title="What's new" />
+      <SectionHeading eyebrow={eyebrow} title={title} />
       <ol class="reveal relative grid gap-6 border-l border-line pl-8">
         {news.map((n) => (
           <li class="relative">
