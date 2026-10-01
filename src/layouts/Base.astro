@@ -1,10 +1,12 @@
 ---
 import '../styles/global.css';
-import 'katex/dist/katex.min.css';
 import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../lib/data';
+// Preloaded so headings render in Rubik straight away instead of shifting
+// when the web font arrives (the hero headline is the largest element on the page).
+import rubikLatin from '@fontsource-variable/rubik/files/rubik-latin-wght-normal.woff2?url';
 
 interface Props {
   title?: string;
@@ -34,6 +36,7 @@ const ogImage = new URL('/og.png', Astro.site);
 <html lang="en" class="no-js">
   <head>
     <meta charset="utf-8" />
+    <link rel="preload" href={rubikLatin} as="font" type="font/woff2" crossorigin />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />

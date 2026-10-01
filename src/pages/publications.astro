@@ -133,6 +133,10 @@ const field =
   import { setupFilter } from '../scripts/filter';
   document.addEventListener('astro:page-load', () => {
     const root = document.querySelector<HTMLElement>('[data-filter-root]');
-    if (root) setupFilter(root);
+    if (!root) return;
+    // Fold the topic chips on phones unless a tag filter is already active.
+    const topics = root.querySelector<HTMLDetailsElement>('details');
+    if (topics && innerWidth < 640 && !location.search.includes('tag=')) topics.open = false;
+    setupFilter(root);
   });
 </script>
