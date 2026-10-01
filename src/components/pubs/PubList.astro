@@ -1,0 +1,41 @@
+---
+// A list of publications, optionally grouped by year. Used on the publications
+// page, the landing page (selected papers) and project pages.
+import PubEntry from './PubEntry.astro';
+import type { Paper } from '../../lib/papers';
+
+interface Props {
+  papers: Paper[];
+  groupByYear?: boolean;
+  previews?: boolean;
+  showTags?: boolean;
+}
+const { papers, groupByYear = false, previews = true, showTags = true } = Astro.props;
+const years = [...new Set(papers.map((p) => p.year))];
+---
+
+{groupByYear ? (
+  years.map((y) => (
+    <section data-group class="grid gap-x-8 border-t border-line pt-6 md:grid-cols-[6rem_1fr]">
+      <h2 class="text-3xl font-bold tracking-tight text-muted md:sticky md:top-24 md:self-start">{y}</h2>
+      <ol class="divide-y divide-line">
+        {papers
+          .filter((p) => p.year === y)
+          .map((p) => (
+            <PubEntry paper={p} previews={previews} showTags={showTags} />
+          ))}
+      </ol>
+    </section>
+  ))
+) : (
+  <ol class="divide-y divide-line">
+    {papers.map((p) => (
+      <PubEntry paper={p} previews={previews} showTags={showTags} />
+    ))}
+  </ol>
+)}
+
+<script>
+  import { setupPubActions } from '../../scripts/pub-actions';
+  document.addEventListener('astro:page-load', () => setupPubActions());
+</script>

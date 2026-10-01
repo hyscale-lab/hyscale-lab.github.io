@@ -1,0 +1,100 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Icon from '../components/Icon.astro';
+import { load } from '../lib/data';
+
+const files = import.meta.glob<{ default: ImageMetadata }>('/content/gallery/*.{jpg,jpeg,png,webp}', { eager: true });
+const gallery = await Promise.all(
+  load('gallery.yaml').map(async (g) => {
+    const img = files[`/content/gallery/${g.image}`]?.default;
+    if (!img) throw new Error(`[content] content/gallery.yaml: image "${g.image}" not found in content/gallery/`);
+    const full = await getImage({ src: img, width: 2000, format: 'webp' });
+    return { ...g, img, full: full.src };
+  }),
+);
+---
+
+<Base title="Lab Life" description="Photos from HyScale Lab events and team-building activities." overlayHeader>
+  <PageHeader
+    eyebrow="Beyond research"
+    title="Lab Life"
+    lead="Photos from HyScale Lab events and team-building activities."
+  />
+  <div class="container-x py-14">
+    {gallery.length ? (
+      <ul class="columns-1 gap-5 sm:columns-2 lg:columns-3">
+        {gallery.toReversed().map((g, i) => (
+          <li class="reveal mb-5 break-inside-avoid">
+            <figure class="card overflow-hidden">
+              <button
+                type="button"
+                class="group block w-full cursor-zoom-in overflow-hidden"
+                data-lightbox={g.full}
+                data-caption={[g.caption, g.date].filter(Boolean).join(' · ')}
+                data-alt={g.alt}
+                aria-label={`Open photo: ${g.alt}`}
+              >
+                <Image
+                  src={g.img}
+                  alt={g.alt}
+                  width={800}
+                  class="w-full transition duration-500 group-hover:scale-105"
+                  loading={i < 3 ? 'eager' : 'lazy'}
+                />
+              </button>
+              <figcaption class="flex items-center justify-between gap-3 px-4 py-3 text-sm">
+                <span>{g.caption}</span>
+                {g.date && <span class="shrink-0 text-xs text-muted">{g.date}</span>}
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="text-muted">
+        Lab Life photos will be added as the group shares approved event and team-building images.
+      </p>
+    )}
+  </div>
+
+  <dialog
+    data-lightbox-dialog
+    class="m-auto max-h-none max-w-none bg-transparent p-0 backdrop:bg-black/85 backdrop:backdrop-blur-sm"
+  >
+    <figure class="relative">
+      <img alt="" class="max-h-[85vh] max-w-[92vw] rounded-lg object-contain" />
+      <figcaption class="mt-3 text-center text-sm text-white/85"></figcaption>
+      <button
+        type="button"
+        data-close
+        class="absolute -top-3 -right-3 grid size-10 place-items-center rounded-full bg-white text-night shadow-lg"
+        aria-label="Close"
+      >
+        <Icon name="x" class="size-5" />
+      </button>
+    </figure>
+  </dialog>
+</Base>
+
+<script>
+  const setup = () => {
+    const dialog = document.querySelector<HTMLDialogElement>('[data-lightbox-dialog]');
+    if (!dialog) return;
+    const img = dialog.querySelector('img')!;
+    const cap = dialog.querySelector('figcaption')!;
+    document.querySelectorAll<HTMLButtonElement>('[data-lightbox]').forEach((b) => {
+      b.onclick = () => {
+        img.src = b.dataset.lightbox!;
+        img.alt = b.dataset.alt ?? '';
+        cap.textContent = b.dataset.caption ?? '';
+        dialog.showModal();
+      };
+    });
+    dialog.querySelector<HTMLButtonElement>('[data-close]')!.onclick = () => dialog.close();
+    dialog.onclick = (e) => e.target === dialog && dialog.close();
+  };
+  document.addEventListener('astro:page-load', setup);
+</script>

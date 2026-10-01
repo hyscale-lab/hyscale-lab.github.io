@@ -1,0 +1,99 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Icon from './Icon.astro';
+import { initials, type Person } from '../lib/people';
+
+interface Props {
+  person: Person;
+  subtitle?: string;
+  papers?: number;
+  large?: boolean;
+}
+const { person: p, subtitle, papers = 0, large = false } = Astro.props;
+const photos = import.meta.glob<{ default: ImageMetadata }>('/content/people/photos/*.{jpg,jpeg,png,webp}', {
+  eager: true,
+});
+const photo = Object.entries(photos).find(
+  ([k]) =>
+    k
+      .split('/')
+      .pop()!
+      .replace(/\.\w+$/, '') === p.id,
+)?.[1].default;
+// Stable avatar colour from the id.
+const hue = [...p.id].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 360, 7);
+const LINKS = [
+  ['website', 'globe', 'Website'],
+  ['github', 'github', 'GitHub'],
+  ['scholar', 'scholar', 'Google Scholar'],
+  ['linkedin', 'linkedin', 'LinkedIn'],
+  ['x', 'x-social', 'X'],
+] as const;
+const links: { href: string; icon: (typeof LINKS)[number][1] | 'mail'; label: string }[] = LINKS.flatMap(
+  ([k, icon, label]) => (p.links?.[k] ? [{ href: p.links[k]!, icon, label }] : []),
+);
+if (p.links?.email) links.push({ href: `mailto:${p.links.email}`, icon: 'mail', label: 'Email' });
+const primary = p.links?.website ?? p.links?.linkedin;
+---
+
+<article
+  class:list={[
+    'card reveal group flex h-full gap-5 p-5 transition hover:border-brand/40 hover:shadow-lg',
+    large ? 'flex-col sm:flex-row sm:items-center sm:p-8' : 'flex-col items-center text-center',
+  ]}
+>
+  {photo ? (
+    <Image
+      src={photo}
+      alt={`Portrait of ${p.name}`}
+      width={large ? 320 : 192}
+      height={large ? 320 : 192}
+      class:list={['shrink-0 rounded-2xl object-cover', large ? 'size-40 sm:size-48' : 'size-24']}
+    />
+  ) : (
+    <span
+      class:list={[
+        'grid shrink-0 place-items-center rounded-2xl font-semibold text-white',
+        large ? 'size-40 text-4xl' : 'size-24 text-2xl',
+      ]}
+      style={`background: linear-gradient(135deg, hsl(${hue} 55% 42%), hsl(${(hue + 50) % 360} 60% 32%))`}
+      aria-hidden="true"
+    >
+      {initials(p.name)}
+    </span>
+  )}
+  <div class="min-w-0 flex-1">
+    <h3 class:list={['font-semibold tracking-tight', large ? 'text-2xl' : 'text-base']}>
+      {primary ? (
+        <a href={primary} class="hover:text-brand">
+          {p.name}
+        </a>
+      ) : (
+        p.name
+      )}
+    </h3>
+    {subtitle && <p class="mt-1 text-sm text-muted">{subtitle}</p>}
+    {p.from && <p class="mt-1 text-xs text-muted">{large ? p.from : `Previously ${p.from}`}</p>}
+    <slot />
+    <div class:list={['mt-4 flex flex-wrap items-center gap-1.5', !large && 'justify-center']}>
+      {links.map((l) => (
+        <a
+          href={l.href}
+          class="grid size-8 place-items-center rounded-full border border-line text-muted transition hover:border-brand hover:text-brand"
+          aria-label={`${p.name}: ${l.label}`}
+        >
+          <Icon name={l.icon} class="size-3.5" />
+        </a>
+      ))}
+      {papers > 0 && (
+        <a
+          href={`/publications/?author=${p.id}`}
+          class="ml-1 rounded-full bg-brand-soft px-2.5 py-1 text-xs font-semibold text-brand hover:bg-brand hover:text-white"
+        >
+          {papers} paper{papers > 1 ? 's' : ''}
+        </a>
+      )}
+    </div>
+  </div>
+</article>

@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from 'astro:content';
+import Prose from '../../layouts/Prose.astro';
+import PubList from '../../components/pubs/PubList.astro';
+import { site } from '../../lib/data';
+import { getPapers, papersByKeys } from '../../lib/papers';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((p) => ({ params: { slug: p.id }, props: { project: p } }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const pillar = site().pillars.find((p) => p.id === project.data.pillar)!;
+// Explicit papers first, then anything else in the pillar's research bucket.
+const listed = papersByKeys(project.data.papers);
+const extra = getPapers().filter((p) => p.bucket === pillar.bucket && !listed.includes(p));
+const related = [...listed, ...extra].sort((a, b) => b.year - a.year);
+---
+
+<Prose title={project.data.title} description={project.data.description} eyebrow={pillar.title}>
+  <Content />
+  <section slot="after" class="mt-16">
+    {related.length > 0 && (
+      <>
+        <h2 class="mb-2 text-2xl font-bold tracking-tight">Related publications</h2>
+        <PubList papers={related} previews={false} />
+      </>
+    )}
+  </section>
+</Prose>

@@ -1,0 +1,25 @@
+---
+// Inner page with a dark title band and a Markdown body.
+import Base from './Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow?: string;
+  lead?: string;
+}
+const { title, description, eyebrow, lead } = Astro.props;
+---
+
+<Base title={title} description={description} overlayHeader>
+  <PageHeader eyebrow={eyebrow} title={title} lead={lead ?? description} />
+  <div class="container-x py-14">
+    <div class="mx-auto max-w-3xl">
+      <div class="prose-lab">
+        <slot />
+      </div>
+      <slot name="after" />
+    </div>
+  </div>
+</Base>

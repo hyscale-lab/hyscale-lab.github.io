@@ -1,0 +1,21 @@
+---
+// Logo mark drawn with a CSS mask so it takes the current text colour.
+interface Props {
+  class?: string;
+  wordmark?: boolean;
+}
+const { class: cls = '', wordmark = true } = Astro.props;
+---
+
+<span class:list={['inline-flex items-center gap-2.5', cls]}>
+  <span
+    class="size-8 shrink-0 bg-current"
+    style="mask: url(/brand/mark-white.png) center / contain no-repeat; -webkit-mask: url(/brand/mark-white.png) center / contain no-repeat;"
+    aria-hidden="true"
+  ></span>
+  {wordmark && (
+    <span class="text-lg leading-none font-semibold tracking-tight">
+      HyScale<span class="font-normal opacity-70"> Lab</span>
+    </span>
+  )}
+</span>

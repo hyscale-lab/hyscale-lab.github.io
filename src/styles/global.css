@@ -1,0 +1,173 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+@import '@fontsource-variable/rubik';
+@import '@fontsource-variable/jetbrains-mono';
+
+/* Dark mode follows the `dark` class on <html>, set by ThemeToggle. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---- Design tokens -------------------------------------------------------
+ * Colours come from the HyScale logo: navy cloud (#171d63), slate wordmark
+ * (#3b3a5a) and crimson brackets (#a82e48). Light is the default palette;
+ * `.dark` swaps the same tokens. Components use the Tailwind names below
+ * (bg-surface, text-muted, border-line, …), never raw hex values. */
+:root {
+  --c-bg: #ffffff;
+  --c-surface: #f5f6fb;
+  --c-raised: #ffffff;
+  --c-ink: #0f1330;
+  --c-muted: #555b78;
+  --c-line: #e3e5ef;
+  --c-brand: #252c8c;
+  --c-brand-strong: #171d63;
+  --c-brand-soft: #e9eafb;
+  --c-accent: #b32d4b;
+  --c-accent-soft: #fbe9ed;
+  --c-highlight: #fff3c4;
+}
+
+.dark {
+  --c-bg: #0a0d1f;
+  --c-surface: #10142b;
+  --c-raised: #151a36;
+  --c-ink: #e9ebf7;
+  --c-muted: #a1a6c4;
+  --c-line: #252b4d;
+  --c-brand: #9ea4ff;
+  --c-brand-strong: #c3c7ff;
+  --c-brand-soft: #1c2150;
+  --c-accent: #ff6b8a;
+  --c-accent-soft: #3a1622;
+  --c-highlight: #4a3d0c;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-raised: var(--c-raised);
+  --color-ink: var(--c-ink);
+  --color-muted: var(--c-muted);
+  --color-line: var(--c-line);
+  --color-brand: var(--c-brand);
+  --color-brand-strong: var(--c-brand-strong);
+  --color-brand-soft: var(--c-brand-soft);
+  --color-accent: var(--c-accent);
+  --color-accent-soft: var(--c-accent-soft);
+  --color-highlight: var(--c-highlight);
+}
+
+@theme {
+  --font-sans: 'Rubik Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* Night palette for the bands that stay dark in both themes (hero, CTA, footer). */
+  --color-night: #0a0d24;
+  --color-night-2: #141a4a;
+  --color-night-ink: #eef0ff;
+  --color-night-muted: #aab0d6;
+  --animate-marquee: marquee 40s linear infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    font-feature-settings: 'ss01';
+  }
+  ::selection {
+    @apply bg-brand text-white;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Reusable classes. Tailwind 4 only lets @apply reference @utility blocks. */
+@utility container-x {
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+}
+@utility eyebrow {
+  @apply text-xs font-semibold tracking-[0.18em] uppercase;
+}
+@utility btn {
+  @apply inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition;
+}
+@utility btn-primary {
+  @apply btn bg-accent text-white shadow-lg shadow-accent/25 hover:-translate-y-0.5 hover:shadow-xl dark:text-night;
+}
+@utility btn-ghost {
+  @apply btn border border-current/25 hover:border-current/60 hover:bg-white/5;
+}
+@utility card {
+  @apply rounded-2xl border border-line bg-raised shadow-sm;
+}
+@utility chip {
+  @apply inline-flex items-center rounded-full border border-line bg-raised px-3 py-1 text-xs font-medium text-muted
+    transition hover:border-brand/50 hover:text-ink;
+  &[aria-pressed='true'] {
+    @apply border-brand bg-brand text-white dark:text-night;
+  }
+}
+@utility gradient-text {
+  @apply bg-gradient-to-r from-[#8f96ff] via-[#c7b8ff] to-[#ff7d98] bg-clip-text text-transparent;
+}
+/* Grid-and-glow backdrop used by the dark bands (hero, page headers, CTA, footer). */
+@utility night-band {
+  @apply relative isolate overflow-hidden bg-night text-night-ink;
+  background-image:
+    radial-gradient(60rem 30rem at 85% -10%, rgb(179 45 75 / 0.35), transparent 60%),
+    radial-gradient(50rem 30rem at 0% 110%, rgb(37 44 140 / 0.6), transparent 60%);
+  &::before {
+    content: '';
+    @apply pointer-events-none absolute inset-0 -z-10 opacity-[0.12];
+    background-image:
+      linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+}
+/* Scroll-in animation; Base.astro adds `.is-visible`. Visible without JS or with reduced motion. */
+@utility reveal {
+  @apply translate-y-6 opacity-0 transition duration-700 ease-out;
+  &.is-visible,
+  :where(.no-js) & {
+    @apply translate-y-0 opacity-100;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    @apply translate-y-0 opacity-100;
+  }
+}
+
+/* Long-form Markdown (blog posts, project pages, hiring, teaching). */
+.prose-lab {
+  @apply prose max-w-none prose-slate dark:prose-invert prose-headings:font-semibold prose-headings:tracking-tight
+    prose-a:text-brand prose-a:decoration-brand/30 prose-a:underline-offset-4 hover:prose-a:decoration-brand
+    prose-code:before:content-none prose-code:after:content-none prose-pre:border prose-pre:border-line;
+}
+.dark .astro-code,
+.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}

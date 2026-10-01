@@ -1,0 +1,27 @@
+---
+import Icon from '../Icon.astro';
+interface Props {
+  title: string;
+  text: string;
+  primary: { label: string; href: string };
+  secondary?: { label: string; href: string };
+}
+const { title, text, primary, secondary } = Astro.props;
+---
+
+<section class="px-5 py-24 sm:px-8">
+  <div class="night-band reveal mx-auto max-w-6xl rounded-[2rem] px-8 py-16 text-center shadow-2xl shadow-brand/20 sm:px-16 sm:py-20">
+    <h2 class="mx-auto max-w-2xl text-3xl font-bold tracking-tight sm:text-5xl">{title}</h2>
+    <p class="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-night-muted">{text}</p>
+    <div class="mt-10 flex flex-wrap justify-center gap-3">
+      <a href={primary.href} class="btn-primary">
+        {primary.label} <Icon name="arrow-right" class="size-4" />
+      </a>
+      {secondary && (
+        <a href={secondary.href} class="btn-ghost text-white">
+          {secondary.label}
+        </a>
+      )}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,57 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import PostCard from '../../components/PostCard.astro';
+import TagChips from '../../components/TagChips.astro';
+import Icon from '../../components/Icon.astro';
+import { getPosts } from '../../lib/blog';
+
+const posts = await getPosts();
+---
+
+<Base title="Blog" description="Notes, tutorials and news from HyScale Lab." overlayHeader>
+  <PageHeader eyebrow="Blog" title="Notes from the lab" lead="Research stories, tutorials and lab news.">
+    <a href="/rss.xml" class="btn-ghost mt-8 text-white">
+      <Icon name="rss" class="size-4" /> RSS feed
+    </a>
+  </PageHeader>
+
+  <div data-filter-root class="container-x py-12">
+    {posts.length > 0 ? (
+      <>
+        <div class="mb-8 flex flex-wrap items-center gap-4">
+          <TagChips used={posts.flatMap((p) => p.data.tags)} />
+          <p class="flex items-center gap-3 text-xs text-muted" aria-live="polite">
+            <span>
+              <strong data-filter-count class="text-ink">
+                {posts.length}
+              </strong>{' '}
+              posts
+            </span>
+            <button type="button" data-filter-clear hidden class="font-semibold text-brand hover:underline">
+              Clear filters
+            </button>
+          </p>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map((p) => (
+            <PostCard post={p} />
+          ))}
+        </div>
+        <p data-filter-empty hidden class="py-16 text-center text-muted">
+          No posts with these tags.
+        </p>
+      </>
+    ) : (
+      <p class="py-16 text-center text-muted">No posts yet.</p>
+    )}
+  </div>
+</Base>
+
+<script>
+  import { setupFilter } from '../../scripts/filter';
+  document.addEventListener('astro:page-load', () => {
+    const root = document.querySelector<HTMLElement>('[data-filter-root]');
+    if (root) setupFilter(root);
+  });
+</script>

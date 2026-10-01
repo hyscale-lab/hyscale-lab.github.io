@@ -1,0 +1,36 @@
+---
+import { marked } from 'marked';
+import { load } from '../../lib/data';
+import SectionHeading from './SectionHeading.astro';
+
+interface Props {
+  limit?: number;
+}
+const { limit = 5 } = Astro.props;
+const news = load('news.yaml')
+  .sort((a, b) => +b.date - +a.date)
+  .slice(0, limit);
+const fmt = new Intl.DateTimeFormat('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+---
+
+{news.length > 0 && (
+  <section class="py-24 sm:py-28">
+    <div class="container-x">
+      <SectionHeading eyebrow="News" title="What's new" />
+      <ol class="reveal relative grid gap-6 border-l border-line pl-8">
+        {news.map((n) => (
+          <li class="relative">
+            <span class="absolute top-1.5 -left-[2.3rem] size-3 rounded-full border-2 border-bg bg-accent" />
+            <time
+              datetime={n.date.toISOString().slice(0, 10)}
+              class="text-xs font-semibold tracking-wide text-muted uppercase"
+            >
+              {fmt.format(n.date)}
+            </time>
+            <div class="prose-lab mt-1 text-[0.95rem]" set:html={marked.parseInline(n.text)} />
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+)}

@@ -1,0 +1,158 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import PersonCard from '../components/PersonCard.astro';
+import { alumni, currentGroups, period, pi, roleLabel, supervisees } from '../lib/people';
+import { getPapers } from '../lib/papers';
+
+const papers = getPapers();
+const paperCount = (id: string) => papers.filter((p) => p.authors.some((a) => a.member?.id === id)).length;
+const lead = pi();
+const groups = currentGroups();
+const former = alumni();
+const students = supervisees();
+const tabs = [
+  { id: 'current', label: 'Current members', count: groups.reduce((n, g) => n + g.members.length, 1) },
+  { id: 'alumni', label: 'Alumni', count: former.length },
+  { id: 'supervisees', label: 'Supervisees', count: students.reduce((n, y) => n + y.rows.length, 0) },
+];
+const tabBtn =
+  'rounded-full px-4 py-2 text-sm font-semibold text-muted transition hover:text-ink aria-selected:bg-brand aria-selected:text-white dark:aria-selected:text-night';
+---
+
+<Base
+  title="People"
+  description="The HyScale Lab principal investigator, current members, alumni, and supervisees."
+  overlayHeader
+>
+  <PageHeader
+    eyebrow="The team"
+    title="People"
+    lead="HyScale Lab brings together researchers working across cloud systems, computer architecture and AI infrastructure."
+  />
+
+  <div class="container-x py-12">
+    <div role="tablist" aria-label="People" class="card mb-10 inline-flex flex-wrap gap-1 p-1.5" data-tabs>
+      {tabs.map((t, i) => (
+        <button
+          type="button"
+          role="tab"
+          id={`tab-${t.id}`}
+          aria-controls={t.id}
+          aria-selected={i === 0 ? 'true' : 'false'}
+          tabindex={i === 0 ? 0 : -1}
+          class={tabBtn}
+        >
+          {t.label} <span class="ml-1 opacity-60">{t.count}</span>
+        </button>
+      ))}
+    </div>
+
+    <section id="current" role="tabpanel" aria-labelledby="tab-current" class="grid gap-14">
+      <div>
+        <h2 class="eyebrow mb-5 text-accent">Principal investigator</h2>
+        <PersonCard person={lead} subtitle={lead.title} papers={paperCount(lead.id)} large>
+          {lead.bio && <p class="mt-4 max-w-2xl text-sm leading-relaxed text-muted">{lead.bio}</p>}
+        </PersonCard>
+      </div>
+      {groups.map((g) => (
+        <div>
+          <h2 class="eyebrow mb-5 text-accent">{g.label}</h2>
+          <ul class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {g.members.map(({ person, stint }) => (
+              <li>
+                <PersonCard person={person} subtitle={`Since ${stint.start}`} papers={paperCount(person.id)} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </section>
+
+    <section id="alumni" role="tabpanel" aria-labelledby="tab-alumni" hidden>
+      <div class="card overflow-x-auto">
+        <table class="w-full min-w-[40rem] text-left text-sm">
+          <thead class="border-b border-line text-xs tracking-wide text-muted uppercase">
+            <tr>
+              <th class="px-5 py-3 font-semibold">Name</th>
+              <th class="px-5 py-3 font-semibold">Role</th>
+              <th class="px-5 py-3 font-semibold">Years</th>
+              <th class="px-5 py-3 font-semibold">Now</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-line">
+            {former.map(({ person: p, last }) => {
+              const href = p.links?.website ?? p.links?.linkedin;
+              return (
+                <tr class="hover:bg-surface">
+                  <td class="px-5 py-3.5 font-medium">
+                    {href ? (
+                      <a href={href} class="hover:text-brand">
+                        {p.name}
+                      </a>
+                    ) : (
+                      p.name
+                    )}
+                  </td>
+                  <td class="px-5 py-3.5 text-muted">{roleLabel(last.role)}</td>
+                  <td class="px-5 py-3.5 text-muted tabular-nums">{period(last)}</td>
+                  <td class="px-5 py-3.5">{p.now ?? <span class="text-muted">—</span>}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="supervisees" role="tabpanel" aria-labelledby="tab-supervisees" hidden class="grid gap-10">
+      <p class="max-w-2xl text-muted">
+        Final-year project (FYP) and URECA undergraduate researchers supervised in the lab, by academic year.
+      </p>
+      {students.map((y) => (
+        <div>
+          <h2 class="mb-4 text-lg font-semibold tracking-tight">{y.label}</h2>
+          <ul class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {y.rows.map(({ person, stint }) => (
+              <li class="flex items-baseline justify-between gap-3 rounded-xl border border-line bg-raised px-4 py-3">
+                <span class="font-medium">{person.name}</span>
+                <span class="text-xs text-muted">{stint.role === 'ureca' ? 'URECA' : 'FYP'}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </section>
+  </div>
+</Base>
+
+<script>
+  // Accessible tabs; the URL hash (#current, #alumni, #supervisees) selects a tab,
+  // which is how the old /people/former-members/ style URLs land on the right one.
+  const setup = () => {
+    const list = document.querySelector<HTMLElement>('[data-tabs]');
+    if (!list) return;
+    const tabs = [...list.querySelectorAll<HTMLButtonElement>('[role=tab]')];
+    const select = (tab: HTMLButtonElement, focus = false) => {
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')!)!.hidden = !on;
+      });
+      if (focus) tab.focus();
+      history.replaceState(history.state, '', `#${tab.getAttribute('aria-controls')}`);
+    };
+    tabs.forEach((t, i) => {
+      t.onclick = () => select(t);
+      t.onkeydown = (e) => {
+        const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (d) select(tabs[(i + d + tabs.length) % tabs.length], true);
+      };
+    });
+    const fromHash = tabs.find((t) => `#${t.getAttribute('aria-controls')}` === location.hash);
+    if (fromHash) select(fromHash);
+  };
+  document.addEventListener('astro:page-load', setup);
+  window.addEventListener('hashchange', setup);
+</script>

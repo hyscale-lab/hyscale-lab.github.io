@@ -1,0 +1,118 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { site } from '../lib/data';
+
+interface Props {
+  /** Transparent over a dark hero until the page scrolls. */
+  overlay?: boolean;
+}
+const { overlay = false } = Astro.props;
+const { nav } = site();
+const path = Astro.url.pathname;
+const active = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+---
+
+<header
+  data-header
+  data-overlay={overlay ? 'true' : undefined}
+  class:list={[
+    'group/header top-0 z-40 w-full transition-colors duration-300',
+    overlay ? 'fixed text-night-ink' : 'sticky border-b border-line bg-bg/85 text-ink backdrop-blur-lg',
+  ]}
+>
+  <div class="container-x flex h-16 items-center justify-between gap-6">
+    <a href="/" class="shrink-0" aria-label="HyScale Lab home">
+      <Logo />
+    </a>
+
+    <nav aria-label="Main" class="hidden lg:block">
+      <ul class="flex items-center gap-1 text-sm font-medium">
+        {nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              aria-current={active(item.href) ? 'page' : undefined}
+              class="relative rounded-full px-3.5 py-2 opacity-80 transition hover:opacity-100 aria-[current=page]:opacity-100 aria-[current=page]:after:absolute aria-[current=page]:after:bottom-0.5 aria-[current=page]:after:left-1/2 aria-[current=page]:after:h-0.5 aria-[current=page]:after:w-4 aria-[current=page]:after:-translate-x-1/2 aria-[current=page]:after:rounded-full aria-[current=page]:after:bg-accent"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <ThemeToggle />
+      <a href="/hiring/" class="btn-primary hidden !px-4 !py-2 sm:inline-flex">
+        Join us
+      </a>
+      <button
+        type="button"
+        data-menu-button
+        class="grid size-9 place-items-center rounded-full border border-current/20 lg:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open menu"
+      >
+        <Icon name="menu" class="size-4" />
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" hidden class="border-t border-line bg-bg text-ink lg:hidden">
+    <nav aria-label="Mobile" class="container-x py-4">
+      <ul class="grid gap-1 text-base font-medium">
+        {nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              aria-current={active(item.href) ? 'page' : undefined}
+              class="block rounded-lg px-3 py-2.5 hover:bg-surface aria-[current=page]:text-brand"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+        <li>
+          <a href="/hiring/" class="btn-primary mt-2 w-full justify-center">
+            Join us
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  /* Overlay header turns solid once the page scrolls or the menu opens. */
+  [data-overlay][data-solid] {
+    background: color-mix(in srgb, var(--c-bg) 88%, transparent);
+    backdrop-filter: blur(16px);
+    color: var(--c-ink);
+    border-bottom: 1px solid var(--c-line);
+  }
+</style>
+
+<script>
+  const setup = () => {
+    const header = document.querySelector<HTMLElement>('[data-header]');
+    if (!header) return;
+    const btn = header.querySelector<HTMLButtonElement>('[data-menu-button]')!;
+    const menu = header.querySelector<HTMLElement>('#mobile-menu')!;
+    const sync = () => header.toggleAttribute('data-solid', window.scrollY > 24 || !menu.hidden);
+    btn.onclick = () => {
+      menu.hidden = !menu.hidden;
+      btn.setAttribute('aria-expanded', String(!menu.hidden));
+      btn.setAttribute('aria-label', menu.hidden ? 'Open menu' : 'Close menu');
+      sync();
+    };
+    if (header.dataset.overlay) {
+      sync();
+      window.addEventListener('scroll', sync, { passive: true });
+      document.addEventListener('astro:before-swap', () => window.removeEventListener('scroll', sync), { once: true });
+    }
+  };
+  document.addEventListener('astro:page-load', setup);
+</script>
