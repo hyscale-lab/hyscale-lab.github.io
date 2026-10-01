@@ -1,0 +1,22 @@
+# Shared tag registry for publications (papers.bib `tags = {a, b}`) and blog
+# posts (front matter `tags: [a, b]`). Using a tag that is not listed here
+# fails the build. Keep ids kebab-case; `label` is what visitors see.
+
+- { id: serverless, label: Serverless }
+- { id: llm-serving, label: LLM serving }
+- { id: agentic-ai, label: Agentic AI }
+- { id: multimodal, label: Multi-modal AI }
+- { id: ai-infrastructure, label: AI infrastructure }
+- { id: autoscaling, label: Autoscaling }
+- { id: cluster-management, label: Cluster management }
+- { id: storage, label: Storage }
+- { id: virtualization, label: Virtualization }
+- { id: characterization, label: Characterization }
+- { id: security, label: Security }
+- { id: virtual-memory, label: Virtual memory }
+- { id: memory-systems, label: Memory systems }
+- { id: microarchitecture, label: Microarchitecture }
+- { id: rack-scale, label: Rack-scale systems }
+- { id: ml-for-systems, label: ML for systems }
+- { id: open-source, label: Open source }
+- { id: lab-news, label: Lab news }
