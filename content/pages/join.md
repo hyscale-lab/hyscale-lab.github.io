@@ -19,7 +19,6 @@ Contact Professor Dmitrii Ustiugov before applying to a funding program:
 - [Alibaba–NTU](https://www.ntu.edu.sg/alibaba-ntu-jri)
 - [A\*STAR Graduate Scholarship (AGS)](https://www.a-star.edu.sg/scholarships/home/scholarships/ags--scholarship)
 - [AI Singapore PhD Fellowship](https://aisingapore.org/research/phd-fellowship-programme/)
-- [A\*STAR Computing and Information Science Scholarship (ACIS)](https://www.a-star.edu.sg/Scholarships/for-graduate-studies/a-star-cis-scholarship)
 - [Other NTU graduate scholarships](https://www.ntu.edu.sg/graduate-college/admissions)
 
 ## Postdoctoral researchers
