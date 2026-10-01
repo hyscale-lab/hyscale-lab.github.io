@@ -125,6 +125,18 @@ Markdown description…
 | Tags                            | `content/tags.yaml`                                             |
 | Lab name, hero text, navigation | `content/site.yaml`                                             |
 
+## Change the look
+
+| What                                               | Where                                                                                                 |
+| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Hero photo, hero text                              | `content/site.yaml` → `hero` (`image` is a path under `content/`, e.g. `gallery/lab_2026-06-19.jpeg`) |
+| Team photo on the landing page                     | `content/site.yaml` → `team_image`                                                                    |
+| Theme colours (light, dark, dark bands, gradients) | `src/styles/global.css`, the token block at the top                                                   |
+| Logo, favicons, link-preview image                 | `src/assets/hyscale-circle.png`, then `node scripts/make-brand-assets.mjs`                            |
+
+To add a new hero photo, put it in `content/gallery/` (and list it in `content/gallery.yaml` if it should also
+appear on Lab Life), then point `hero.image` at it.
+
 ## Automation
 
 | Workflow                | When           | What                                                               |

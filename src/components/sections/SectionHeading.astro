@@ -10,7 +10,7 @@ const { eyebrow, title, lead, align = 'left', dark = false } = Astro.props;
 ---
 
 <div class:list={['reveal mb-12 max-w-3xl', align === 'center' && 'mx-auto text-center']}>
-  {eyebrow && <p class:list={['eyebrow mb-3', dark ? 'text-[#ff8aa3]' : 'text-accent']}>{eyebrow}</p>}
+  {eyebrow && <p class:list={['eyebrow mb-3', dark ? 'text-night-accent' : 'text-accent']}>{eyebrow}</p>}
   <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
   {lead && <p class:list={['mt-4 text-lg leading-relaxed', dark ? 'text-night-muted' : 'text-muted']}>{lead}</p>}
   <slot />
