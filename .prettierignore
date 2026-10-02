@@ -6,3 +6,5 @@ package-lock.json
 content/citations.yml
 # BibTeX is not formatted by Prettier
 content/papers.bib
+# Google Search Console verification file; must stay byte-for-byte as Google issued it
+public/google*.html
