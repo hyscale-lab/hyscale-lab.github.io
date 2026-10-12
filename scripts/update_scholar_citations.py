@@ -35,6 +35,11 @@ def load_scholar_user_id() -> str:
 SCHOLAR_USER_ID: str = load_scholar_user_id()
 OUTPUT_FILE: str = "content/citations.yml"
 
+# Exit code for "Google Scholar refused or timed out": a temporary condition
+# (Scholar often blocks cloud IPs such as GitHub's runners), not a bug.
+# update-citations.yml turns it into a warning instead of a failed run.
+EXIT_SCHOLAR_UNAVAILABLE = 75
+
 
 def get_scholar_citations() -> None:
     """Fetch and update Google Scholar citation data."""
@@ -69,9 +74,10 @@ def get_scholar_citations() -> None:
         author_data = scholarly.fill(author)
     except Exception as e:
         print(
-            f"Error fetching author data from Google Scholar for user ID '{SCHOLAR_USER_ID}': {e}. Please check your internet connection and Scholar user ID."
+            f"Could not fetch author data from Google Scholar for user ID '{SCHOLAR_USER_ID}': "
+            f"{type(e).__name__}: {e}. Scholar may be blocking or rate-limiting this machine; try again later."
         )
-        sys.exit(1)
+        sys.exit(EXIT_SCHOLAR_UNAVAILABLE)
 
     if not author_data:
         print(
