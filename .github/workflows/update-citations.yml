@@ -49,25 +49,41 @@ jobs:
             echo "📝 No existing citations.yml file found."
           fi
 
+      # Google Scholar often blocks or throttles GitHub's runners, so a blocked or
+      # timed-out fetch is a warning (the next scheduled run retries). The run only
+      # fails for real errors (e.g. a broken install), or when blocking has kept
+      # citations.yml from updating for more than MAX_AGE_DAYS.
       - name: Run citation update script
         id: run_citation_update
         shell: bash
+        env:
+          PYTHONUNBUFFERED: '1' # show the script's progress in the log, even if it is killed
+          MAX_AGE_DAYS: '14'
         run: |
           set +e
-          echo "🚀 Running citation update script (single attempt)..."
-          start_time=$(date)
-          timeout 90 python scripts/update_scholar_citations.py
+          echo "🚀 Running citation update script..."
+          timeout 180 python scripts/update_scholar_citations.py
           status=$?
-          end_time=$(date)
+          set -e
           if [ $status -eq 0 ]; then
-            echo "✅ Citation update succeeded (started at $start_time, ended at $end_time)."
-            echo "✅ Citation update succeeded." >> $GITHUB_STEP_SUMMARY
-          else
-            echo "❌ Citation update script failed with exit code $status (started at $start_time, ended at $end_time)."
-            echo "❌ Citation update script failed with exit code $status." >> $GITHUB_STEP_SUMMARY
-            # Fail the run so a broken update shows as a red X instead of a silent green run.
+            echo "✅ Citation update succeeded." | tee -a $GITHUB_STEP_SUMMARY
+            exit 0
+          fi
+          if [ $status -ne 75 ] && [ $status -ne 124 ]; then
+            echo "❌ Citation update script failed with exit code $status." | tee -a $GITHUB_STEP_SUMMARY
             exit $status
           fi
+          # 75 = Scholar refused the request, 124 = timed out after 180 s.
+          last=$(python -c "import yaml; print(yaml.safe_load(open('content/citations.yml'))['metadata']['last_updated'])")
+          age=$(( ( $(date -u +%s) - $(date -u -d "$last" +%s) ) / 86400 ))
+          msg="Google Scholar did not respond (exit $status). citations.yml was last updated $last ($age days ago)."
+          if [ $age -gt $MAX_AGE_DAYS ]; then
+            echo "::error::$msg That is more than $MAX_AGE_DAYS days; Scholar may be blocking GitHub's runners for good. Run the script locally and commit content/citations.yml."
+            echo "❌ $msg Over $MAX_AGE_DAYS days old." >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+          echo "::warning::$msg Will retry on the next scheduled run."
+          echo "⚠️ $msg Will retry on the next scheduled run." >> $GITHUB_STEP_SUMMARY
 
       - name: Save new citations.yml hash
         id: after
