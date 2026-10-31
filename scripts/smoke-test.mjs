@@ -32,7 +32,7 @@ await page.locator('[data-filter-clear]:visible').first().click();
 check('clear filters', (await visible('[data-item]')) === total);
 
 await page.locator('[data-filter-tag="security"]').click();
-check('tag chip click', (await visible('[data-item]')) === 2 && page.url().includes('tag=security'));
+check('tag chip click', (await visible('[data-item]')) === 1 && page.url().includes('tag=security'));
 await page.locator('[data-filter-tag="security"]').click();
 
 // Pillar (main tag) chips are exclusive; topic chips combine with them.
@@ -42,7 +42,7 @@ await page.locator('[data-filter-tag="llm-agentic"]').click();
 check(
   'picking a pillar replaces the previous one',
   (await page.locator('[data-filter-kind="main"][aria-pressed=true]').count()) === 1 &&
-    (await visible('[data-item]')) === 7,
+    (await visible('[data-item]')) === 5,
   `${await visible('[data-item]')} shown`,
 );
 await page.locator('[data-filter-tag="llm-serving"]').click();

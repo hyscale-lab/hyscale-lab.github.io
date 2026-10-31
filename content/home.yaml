@@ -33,7 +33,7 @@ stats:
 # `highlight` and `summary` in content/projects/<id>.md; list ids in display order.
 open_source:
   eyebrow: Open-source systems
-  projects: [vhive, invitro, aries]
+  projects: [vhive, aries, invitro]
   # Seconds per slide; 0 turns autoplay off.
   autoplay: 7
 

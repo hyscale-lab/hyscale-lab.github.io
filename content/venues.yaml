@@ -4,6 +4,10 @@
   color: '#8c8c8c'
   url: https://arxiv.org/
 
+'SoCC':
+  color: '#0054a6'
+  url: https://acmsocc.org/
+
 'EMNLP':
   color: '#007c48'
   url: https://aclanthology.org/venues/emnlp/

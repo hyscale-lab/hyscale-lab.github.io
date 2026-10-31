@@ -85,7 +85,7 @@ const schemas = {
     .strict(),
   'page-headers.yaml': z
     .object({
-      publications: pageHeader,
+      publications: pageHeader.extend({ preprints_heading: z.string() }),
       people: pageHeader,
       research: pageHeader,
       blog: pageHeader,

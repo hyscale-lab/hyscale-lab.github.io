@@ -7,23 +7,39 @@ import type { Paper } from '../../lib/papers';
 interface Props {
   papers: Paper[];
   groupByYear?: boolean;
+  /** Heading for the group of arXiv-only preprints shown above the years (groupByYear only). */
+  preprintsHeading?: string;
   previews?: boolean;
   showTags?: boolean;
 }
-const { papers, groupByYear = false, previews = true, showTags = true } = Astro.props;
-const years = [...new Set(papers.map((p) => p.year))];
+const { papers, groupByYear = false, preprintsHeading, previews = true, showTags = true } = Astro.props;
+// Preprints go in their own group above the years when a heading is given; otherwise they sit in their year.
+const preprints = preprintsHeading ? papers.filter((p) => p.preprint) : [];
+const published = preprintsHeading ? papers.filter((p) => !p.preprint) : papers;
+const groups: { label: string; papers: Paper[]; small?: boolean }[] = [
+  ...(preprints.length ? [{ label: preprintsHeading!, papers: preprints, small: true }] : []),
+  ...[...new Set(published.map((p) => p.year))].map((y) => ({
+    label: String(y),
+    papers: published.filter((p) => p.year === y),
+  })),
+];
 ---
 
 {groupByYear ? (
-  years.map((y) => (
+  groups.map((g) => (
     <section data-group class="grid gap-x-8 border-t border-line pt-6 md:grid-cols-[6rem_1fr]">
-      <h2 class="text-3xl font-bold tracking-tight text-muted md:sticky md:top-24 md:self-start">{y}</h2>
+      <h2
+        class:list={[
+          'font-bold tracking-tight text-muted md:sticky md:top-24 md:self-start',
+          g.small ? 'text-lg leading-tight' : 'text-3xl',
+        ]}
+      >
+        {g.label}
+      </h2>
       <ol class="divide-y divide-line">
-        {papers
-          .filter((p) => p.year === y)
-          .map((p) => (
-            <PubEntry paper={p} previews={previews} showTags={showTags} />
-          ))}
+        {g.papers.map((p) => (
+          <PubEntry paper={p} previews={previews} showTags={showTags} />
+        ))}
       </ol>
     </section>
   ))

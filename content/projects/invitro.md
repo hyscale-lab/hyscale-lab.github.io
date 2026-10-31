@@ -10,7 +10,7 @@ order: 2
 repo: vhive-serverless/invitro
 docs: https://github.com/vhive-serverless/invitro/tree/main/docs
 license: MIT
-papers: [ustiugov2023invitro, kondrashov2025highcostkeepingwarm]
+papers: [ustiugov2023invitro]
 ---
 
 InVitro is a set of tools for analyzing the performance of serverless cluster deployments. It has two parts:

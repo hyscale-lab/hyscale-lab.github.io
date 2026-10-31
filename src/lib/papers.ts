@@ -24,6 +24,7 @@ export interface Paper {
   title: string;
   authors: PaperAuthor[];
   venue: string;
+  preprint: boolean; // arXiv-only, not yet published at a venue
   abbr: string | null;
   venueColor: string;
   venueUrl: string | null;
@@ -180,6 +181,7 @@ export function getPapers(): Paper[] {
         };
       }),
       venue: cleanTex(f.booktitle ?? f.journal ?? (f.archiveprefix === 'arXiv' || f.arxiv ? 'arXiv preprint' : '')),
+      preprint: !f.booktitle && !f.journal && !!(f.archiveprefix === 'arXiv' || f.arxiv),
       abbr,
       venueColor: badgeColor(venue?.color ?? DEFAULT_VENUE_COLOR),
       venueUrl: venue?.url ?? null,

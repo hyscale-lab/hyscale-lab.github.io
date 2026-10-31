@@ -32,7 +32,8 @@ const projects = await getProjects();
 const heroImage = contentImage(home.hero.image, 'content/home.yaml → hero.image');
 
 // Stats bar.
-const fmt = (n: number) => (n >= 1000 ? `${(n / 1000).toFixed(1).replace(/\.0$/, '')}k` : String(n));
+// Round down so "1.4K+" is a true lower bound (1,483 is 1.4K+, not 1.5K+).
+const fmt = (n: number) => (n >= 1000 ? `${(Math.floor(n / 100) / 10).toString()}K` : String(n));
 const members = currentGroups().reduce((n, g) => n + g.members.length, 0) + 1; // + PI
 const stars = await totalStars(projects.map((p) => p.data.repo));
 const statValue = {

@@ -111,7 +111,7 @@ const header = load('page-headers.yaml').publications;
     </div>
 
     <div class="grid gap-8">
-      <PubList papers={papers} groupByYear />
+      <PubList papers={papers} groupByYear preprintsHeading={header.preprints_heading} />
     </div>
     <p data-filter-empty hidden class="py-16 text-center text-muted">
       No papers match these filters.
