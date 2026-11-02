@@ -1,5 +1,5 @@
 metadata:
-  last_updated: '2026-10-28'
+  last_updated: '2026-11-02'
 papers:
   cZ9jA9oAAAAJ:2osOgNQ5qMEC:
     citations: 188
@@ -86,7 +86,7 @@ papers:
     title: 'FASER: Fine-Grained Phase Management for Speculative Decoding in Dynamic LLM Serving'
     year: '2026'
   cZ9jA9oAAAAJ:Zph67rFs4hoC:
-    citations: 424
+    citations: 426
     title: 'ServerlessLLM: Low-latency serverless inference for large language models'
     year: '2024'
   cZ9jA9oAAAAJ:_FxGoFyzp5QC:
