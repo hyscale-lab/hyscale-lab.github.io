@@ -22,8 +22,8 @@ export const ROLE_GROUPS: { role: Role; label: string; singular: string }[] = [
 const SUPERVISEE_ROLES: Role[] = ['fyp', 'ureca'];
 export const roleLabel = (r: Role) => ROLE_GROUPS.find((g) => g.role === r)!.singular;
 
-/** A stint is ongoing if it has no end, or ends this year or later. */
-export const isOngoing = (s: Stint, now = new Date().getFullYear()) => s.end === undefined || s.end >= now;
+/** A stint is ongoing if it has no end, or ends after this year (`end` is the year the person left). */
+export const isOngoing = (s: Stint, now = new Date().getFullYear()) => s.end === undefined || s.end > now;
 
 export const period = (s: { start: number; end?: number }) =>
   s.end === undefined ? `${s.start}–present` : s.start === s.end ? `${s.start}` : `${s.start}–${s.end}`;

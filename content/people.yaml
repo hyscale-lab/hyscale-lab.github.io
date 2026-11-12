@@ -36,7 +36,7 @@
   links:
     website: https://nivekiba.github.io/
   stints:
-    - { role: postdoc, start: 2025 }
+    - { role: postdoc, start: 2025, end: 2026 }
 
 - id: chengzhi-lu
   name: Chengzhi Lu
