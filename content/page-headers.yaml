@@ -2,6 +2,7 @@
 #   page_title   browser tab and link-preview title
 #   description  used for search results and link previews
 #   lead         the sentence under the title
+#   epigraph     optional quote under the lead: { text, by }
 
 publications:
   page_title: Publications
@@ -10,6 +11,9 @@ publications:
   description: HyScale Lab publications across serverless, LLM and agentic, and multi-modal and embodied AI cloud systems.
   lead: Peer-reviewed papers and preprints from HyScale Lab and the PI's earlier work.
   preprints_heading: Work-in-Progress Publications
+  epigraph:
+    text: There is a time for many words, and there is also a time for sleep.
+    by: Homer, The Odyssey
 
 people:
   page_title: People
@@ -28,6 +32,12 @@ research:
   lead: >-
     HyScale develops cloud systems through three research pillars, and releases the systems we build as
     open-source research infrastructure.
+  epigraph:
+    text: >-
+      There are three principal means of acquiring knowledge available to us: observation of nature,
+      reflection, and experimentation. Observation collects facts; reflection combines them;
+      experimentation verifies the result of that combination.
+    by: Denis Diderot, On the Interpretation of Nature
 
 blog:
   page_title: Blog

@@ -74,6 +74,8 @@ Edit `content/people.yaml`. Each person has one or more **stints**:
   Current Members to Alumni automatically.
 - **Photo:** add `content/people/photos/<id>.jpg` (square works best). Without one, the card shows initials.
 - If someone's name is spelled differently in papers, add `bib_names: [J. Doe]`.
+- Members can also drop a photo and a links file in `content/people/inbox/` (see the README there) for a
+  maintainer to move in.
 
 ### Write a blog post
 

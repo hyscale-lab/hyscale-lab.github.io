@@ -14,7 +14,7 @@ const header = load('page-headers.yaml').research;
 ---
 
 <Base title={header.page_title} description={header.description} overlayHeader>
-  <PageHeader eyebrow={header.eyebrow} title={header.title} lead={header.lead} />
+  <PageHeader eyebrow={header.eyebrow} title={header.title} lead={header.lead} epigraph={header.epigraph} />
   <div class="container-x grid gap-20 py-16">
     {pillars.map((pillar, i) => {
       const items = projects.filter((p) => p.data.pillar === pillar.id);

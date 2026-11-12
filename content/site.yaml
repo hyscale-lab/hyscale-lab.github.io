@@ -33,3 +33,4 @@ nav:
   - { label: Blog, href: /blog/ }
   - { label: Lab Life, href: /lab-life/ }
   - { label: Teaching, href: /teaching/ }
+  - { label: PI, href: /pi/ }

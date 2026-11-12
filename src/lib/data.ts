@@ -25,6 +25,7 @@ const pageHeader = z
     title: z.string(),
     description: z.string(),
     lead: z.string(),
+    epigraph: z.object({ text: z.string(), by: z.string() }).strict().optional(),
   })
   .strict();
 

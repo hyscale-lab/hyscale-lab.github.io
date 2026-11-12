@@ -4,8 +4,9 @@ interface Props {
   eyebrow?: string;
   title: string;
   lead?: string;
+  epigraph?: { text: string; by: string };
 }
-const { eyebrow, title, lead } = Astro.props;
+const { eyebrow, title, lead, epigraph } = Astro.props;
 ---
 
 <section class="night-band">
@@ -13,6 +14,12 @@ const { eyebrow, title, lead } = Astro.props;
     {eyebrow && <p class="eyebrow mb-4 text-night-accent">{eyebrow}</p>}
     <h1 class="max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl">{title}</h1>
     {lead && <p class="mt-5 max-w-2xl text-lg leading-relaxed text-night-muted">{lead}</p>}
+    {epigraph && (
+      <figure class="mt-6 max-w-2xl border-l-2 border-night-accent/60 pl-4 text-sm text-night-muted">
+        <blockquote class="italic">“{epigraph.text}”</blockquote>
+        <figcaption class="mt-1">— {epigraph.by}</figcaption>
+      </figure>
+    )}
     <slot />
   </div>
 </section>

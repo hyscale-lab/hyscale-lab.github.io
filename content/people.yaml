@@ -150,6 +150,14 @@
   stints:
     - { role: exchange-phd, start: 2024, end: 2025 }
 
+- id: junyi-chen
+  name: Junyi Chen
+  from: Hong Kong Polytechnic University
+  links:
+    website: https://jinyucn.github.io/
+  stints:
+    - { role: exchange-phd, start: 2024, end: 2025 }
+
 - id: yixin-zhang
   name: Yixin Zhang
   from: NTU
