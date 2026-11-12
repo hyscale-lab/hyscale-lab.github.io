@@ -21,12 +21,11 @@ const resolved = partners.map((p) => {
   if (!img) throw new Error(`[content] content/partners.yaml: logo "${p.logo}" not found in content/partners/`);
   return { ...p, img };
 });
+// One strip: sponsors first, then collaborators, each in content order.
+const order = ['sponsor', 'collaborator'];
 const groups = [
-  { type: 'sponsor', label: 'Sponsors' },
-  { type: 'collaborator', label: 'Collaborators' },
-]
-  .map((g) => ({ ...g, items: resolved.filter((p) => p.type === g.type) }))
-  .filter((g) => g.items.length);
+  { label: 'Partners', items: [...resolved].sort((a, b) => order.indexOf(a.type) - order.indexOf(b.type)) },
+];
 ---
 
 {resolved.length > 0 && (
