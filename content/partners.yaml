@@ -10,9 +10,10 @@
 - { name: EPFL, logo: epfl.png, url: https://www.epfl.ch/, type: collaborator }
 - { name: University of Edinburgh, logo: edinburgh.png, url: https://www.ed.ac.uk/, type: collaborator }
 - { name: FORTH-ICS, logo: forth-ics.jpg, url: https://www.ics.forth.gr/, type: collaborator }
-- { name: Google, logo: google.png, url: https://research.google/, type: collaborator }
-- { name: Microsoft, logo: microsoft.jpeg, url: https://www.microsoft.com/research/, type: collaborator }
+- { name: Ant Group, logo: ant-group.png, url: https://www.antgroup.com/en, type: sponsor }
+- { name: Google, logo: google.png, url: https://research.google/, type: sponsor }
+- { name: Microsoft, logo: microsoft.jpeg, url: https://www.microsoft.com/research/, type: sponsor }
 - { name: Amazon Web Services, logo: aws.jpeg, url: https://aws.amazon.com/, type: collaborator }
 - { name: Oracle Labs, logo: oracle-labs.png, url: https://labs.oracle.com/, type: collaborator }
 - { name: Arm, logo: arm.png, url: https://www.arm.com/, type: collaborator }
-- { name: AMD, logo: amd.png, url: https://www.amd.com/, type: collaborator }
+- { name: AMD, logo: amd.png, url: https://www.amd.com/, type: sponsor }
