@@ -1,8 +1,8 @@
 metadata:
-  last_updated: '2026-11-11'
+  last_updated: '2026-11-18'
 papers:
   cZ9jA9oAAAAJ:-f6ydRqryjwC:
-    citations: 0
+    citations: 2
     title: 'When Cache Pressure Becomes a Trap: Metastability in Agent Serving'
     year: '2026'
   cZ9jA9oAAAAJ:2osOgNQ5qMEC:
@@ -14,7 +14,7 @@ papers:
     title: 'MemTrust: A Zero-Trust Architecture for Unified AI Memory System'
     year: '2026'
   cZ9jA9oAAAAJ:4TOpqqG69KYC:
-    citations: 5
+    citations: 6
     title: 'The High Cost of Keeping Warm: Characterizing Overhead in Serverless Autoscaling Policies'
     year: '2025'
   cZ9jA9oAAAAJ:7PzlFSSx8tAC:
@@ -42,7 +42,7 @@ papers:
     title: Analyzing tail latency in serverless clouds with STeLLAR
     year: '2021'
   cZ9jA9oAAAAJ:M3ejUd6NZC8C:
-    citations: 17
+    citations: 18
     title: 'Slim-SC: Thought pruning for efficient scaling with self-consistency'
     year: '2025'
   cZ9jA9oAAAAJ:MXK_kJrjxJIC:
@@ -54,11 +54,11 @@ papers:
     title: 'PromptTuner: SLO-Aware Elastic System for LLM Prompt Tuning'
     year: '2026'
   cZ9jA9oAAAAJ:Se3iqnhoufwC:
-    citations: 74
+    citations: 75
     title: 'Lukewarm serverless functions: Characterization and optimization'
     year: '2022'
   cZ9jA9oAAAAJ:Tyk-4Ss8FVUC:
-    citations: 23
+    citations: 24
     title: Virtual address translation via learned page table indexes
     year: '2018'
   cZ9jA9oAAAAJ:ULOm3_A8WrAC:
@@ -82,7 +82,7 @@ papers:
     title: 'Manage the Workloads not the Cluster: Designing a Control Plane for Large-Scale AI Clusters'
     year: '2025'
   cZ9jA9oAAAAJ:YsMSGLbcyi4C:
-    citations: 117
+    citations: 118
     title: Prefetched address translation
     year: '2019'
   cZ9jA9oAAAAJ:ZeXyd9-uunAC:
@@ -90,15 +90,15 @@ papers:
     title: 'FASER: Fine-Grained Phase Management for Speculative Decoding in Dynamic LLM Serving'
     year: '2026'
   cZ9jA9oAAAAJ:Zph67rFs4hoC:
-    citations: 437
+    citations: 453
     title: 'ServerlessLLM: Low-latency serverless inference for large language models'
     year: '2024'
   cZ9jA9oAAAAJ:_FxGoFyzp5QC:
-    citations: 374
+    citations: 376
     title: Benchmarking, analysis, and optimization of serverless function snapshots
     year: '2021'
   cZ9jA9oAAAAJ:aqlVkmm33-oC:
-    citations: 17
+    citations: 18
     title: 'TokenScale: Timely and accurate autoscaling for disaggregated LLM serving with token velocity'
     year: '2025'
   cZ9jA9oAAAAJ:hC7cP41nSMkC:
@@ -106,7 +106,7 @@ papers:
     title: 'SnapShare: Isolation-Preserving Deduplication for Serverless Snapshots'
     year: '2026'
   cZ9jA9oAAAAJ:qUcmZB5y_30C:
-    citations: 3
+    citations: 4
     title: Rethinking ai cloud infrastructure for agentic serving systems with the aries experimentation framework
     year: '2026'
   cZ9jA9oAAAAJ:u5HHmVD_uO8C:
