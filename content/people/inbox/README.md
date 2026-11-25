@@ -14,5 +14,6 @@ Nothing in this folder is published until then.
    git push
    ```
 
-Maintainers: copy the photo to `content/people/photos/<id>.jpg`, add the links to that person's
+Maintainers: run `swift scripts/portrait.swift <inbox photo> content/people/photos/<id>.jpg`
+(face-centred 800×800 crop with light auto tone, so all photos match), add the links to that person's
 entry in `content/people.yaml`, then delete both files from this folder.
