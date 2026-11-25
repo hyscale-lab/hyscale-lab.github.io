@@ -59,7 +59,9 @@ const schemas = {
       }),
       pillars: heading.optional(),
       stats: z
-        .array(z.object({ stat: z.enum(['publications', 'citations', 'members', 'stars']), label: z.string() }))
+        .array(
+          z.object({ stat: z.enum(['publications', 'citations', 'hindex', 'members', 'stars']), label: z.string() }),
+        )
         .optional(),
       open_source: z
         .object({ eyebrow: z.string(), projects: z.array(z.string()).min(1), autoplay: z.number().min(0).default(0) })
@@ -142,7 +144,11 @@ const schemas = {
     z.object({ image: z.string(), alt: z.string(), caption: z.string().optional(), date: z.string().optional() }),
   ),
   'citations.yml': z.object({
-    metadata: z.object({ last_updated: z.string(), total_citations: z.number().optional() }),
+    metadata: z.object({
+      last_updated: z.string(),
+      total_citations: z.number().optional(),
+      h_index: z.number().optional(),
+    }),
     papers: z.record(z.string(), z.object({ citations: z.number(), title: z.string(), year: z.coerce.string() })),
   }),
 } as const;

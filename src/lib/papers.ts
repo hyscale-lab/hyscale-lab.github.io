@@ -215,6 +215,9 @@ export function papersByKeys(keys: string[]) {
   });
 }
 
+/** h-index from the Google Scholar profile (null until the scraper has recorded it). */
+export const hIndex = () => load('citations.yml').metadata.h_index ?? null;
+
 /** Total from the Google Scholar profile ("Citations, All"); per-paper sum only as a fallback. */
 export const totalCitations = () => {
   const c = load('citations.yml');

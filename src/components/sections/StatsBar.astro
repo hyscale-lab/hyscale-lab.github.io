@@ -3,10 +3,21 @@ interface Props {
   stats: { value: string; label: string }[];
 }
 const { stats } = Astro.props;
+// Literal class names so Tailwind keeps them; one column per stat on wide screens.
+const LG_COLS = [
+  '',
+  'lg:grid-cols-1',
+  'lg:grid-cols-2',
+  'lg:grid-cols-3',
+  'lg:grid-cols-4',
+  'lg:grid-cols-5',
+  'lg:grid-cols-6',
+];
+const lgCols = LG_COLS[Math.min(stats.length, 6)];
 ---
 
 <section class="border-y border-line bg-raised">
-  <dl class="container-x grid grid-cols-2 divide-line py-10 sm:py-12 lg:grid-cols-4 lg:divide-x">
+  <dl class:list={['container-x grid grid-cols-2 divide-line py-10 sm:py-12 lg:divide-x', lgCols]}>
     {stats.map((s) => (
       <div class="reveal px-4 py-4 text-center">
         <dt class="text-sm font-medium text-muted">{s.label}</dt>

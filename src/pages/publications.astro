@@ -4,7 +4,7 @@ import PageHeader from '../components/PageHeader.astro';
 import PubList from '../components/pubs/PubList.astro';
 import TagChips from '../components/TagChips.astro';
 import Icon from '../components/Icon.astro';
-import { getPapers, totalCitations } from '../lib/papers';
+import { getPapers, totalCitations, hIndex } from '../lib/papers';
 import { getPeople } from '../lib/people';
 import { load } from '../lib/data';
 
@@ -47,6 +47,12 @@ const header = load('page-headers.yaml').publications;
         <dt class="text-night-muted">Google Scholar citations</dt>
         <dd class="text-2xl font-semibold">{totalCitations().toLocaleString('en-US')}</dd>
       </div>
+      {hIndex() !== null && (
+        <div>
+          <dt class="text-night-muted">h-index</dt>
+          <dd class="text-2xl font-semibold">{hIndex()}</dd>
+        </div>
+      )}
       <div>
         <dt class="text-night-muted">Years</dt>
         <dd class="text-2xl font-semibold">

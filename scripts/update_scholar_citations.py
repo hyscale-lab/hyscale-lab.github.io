@@ -93,6 +93,10 @@ def get_scholar_citations() -> None:
     if isinstance(total, int):
         citation_data["metadata"]["total_citations"] = total
         print(f"Profile total citations: {total}")
+    hindex = author_data.get("hindex")
+    if isinstance(hindex, int):
+        citation_data["metadata"]["h_index"] = hindex
+        print(f"Profile h-index: {hindex}")
 
     for pub in author_data["publications"]:
         try:
@@ -125,6 +129,7 @@ def get_scholar_citations() -> None:
         and existing_data.get("papers") == citation_data["papers"]
         and existing_data.get("metadata", {}).get("total_citations")
         == citation_data["metadata"].get("total_citations")
+        and existing_data.get("metadata", {}).get("h_index") == citation_data["metadata"].get("h_index")
     ):
         print("No changes in citation data. Skipping file update.")
         return

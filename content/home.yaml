@@ -22,10 +22,11 @@ pillars:
     The HyScale Systems and Cloud Architecture Lab at NTU Singapore builds scalable,
     efficient cloud systems and open-source research infrastructure.
 
-# Numbers bar. `stat` is one of: publications, citations, members, stars.
+# Numbers bar. `stat` is one of: publications, citations, hindex, members, stars.
 stats:
   - { stat: publications, label: Publications }
   - { stat: citations, label: Google Scholar citations }
+  - { stat: hindex, label: h-index }
   - { stat: members, label: Lab members }
   - { stat: stars, label: GitHub stars on our open source }
 

@@ -16,7 +16,7 @@ import PubList from '../components/pubs/PubList.astro';
 import PostCard from '../components/PostCard.astro';
 import Icon from '../components/Icon.astro';
 import { load, site } from '../lib/data';
-import { getPapers, totalCitations } from '../lib/papers';
+import { getPapers, totalCitations, hIndex } from '../lib/papers';
 import { currentGroups } from '../lib/people';
 import { totalStars } from '../lib/github';
 import { getPillars, getProjects } from '../lib/research';
@@ -39,6 +39,7 @@ const stars = await totalStars(projects.map((p) => p.data.repo));
 const statValue = {
   publications: String(papers.length),
   citations: `${fmt(totalCitations())}+`,
+  hindex: hIndex() === null ? null : String(hIndex()),
   members: String(members),
   stars: stars === null ? null : `${fmt(stars)}+`,
 };
