@@ -49,7 +49,11 @@
   name: Wenyan Chen
   from: University of Macau
   links:
-    website: https://chenwenyan.github.io/
+    website: https://chenwenyan.github.io
+    github: https://github.com/chenwenyan
+    scholar: https://scholar.google.com/citations?user=WKFOF1cAAAAJ
+    linkedin: https://www.linkedin.com/in/wenyan-chen-899318296
+    email: wenyan.chen@ntu.edu.sg
   stints:
     - { role: postdoc, start: 2025 }
 
@@ -57,7 +61,11 @@
   name: Leonid Kondrashov
   from: MIPT
   links:
-    website: http://leokondrashov.github.io/
+    website: https://leokondrashov.github.io
+    github: https://github.com/leokondrashov
+    scholar: https://scholar.google.com/citations?user=i8quYMYAAAAJ
+    linkedin: https://www.linkedin.com/in/leonid-kondrashov
+    email: leonid001@e.ntu.edu.sg
   stints:
     - { role: phd, start: 2023 }
 
@@ -81,7 +89,12 @@
   name: Yulin Zou
   from: NTU
   links:
-    website: http://yulinzou.github.io/
+    website: https://yulinzou.github.io/
+    github: https://github.com/yulinzou
+    scholar: https://scholar.google.com/citations?user=aj-wcbgAAAAJ
+    linkedin: https://www.linkedin.com/in/yulin-zou-651636189
+    x: https://x.com/yzou1201
+    email: yulin001@e.ntu.edu.sg
   stints:
     - { role: phd, start: 2024 }
 
@@ -109,6 +122,10 @@
 - id: pang-wei-siong
   name: Pang Wei Siong
   from: NTU
+  links:
+    github: https://github.com/Pwspang
+    linkedin: https://sg.linkedin.com/in/pang-wei-siong-40b245106
+    email: wpang013@e.ntu.edu.sg
   stints:
     - { role: phd, start: 2026 }
 
