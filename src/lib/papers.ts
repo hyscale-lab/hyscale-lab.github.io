@@ -215,5 +215,8 @@ export function papersByKeys(keys: string[]) {
   });
 }
 
-/** Sum over the whole Google Scholar profile (content/citations.yml), not just papers.bib. */
-export const totalCitations = () => Object.values(load('citations.yml').papers).reduce((n, p) => n + p.citations, 0);
+/** Total from the Google Scholar profile ("Citations, All"); per-paper sum only as a fallback. */
+export const totalCitations = () => {
+  const c = load('citations.yml');
+  return c.metadata.total_citations ?? Object.values(c.papers).reduce((n, p) => n + p.citations, 0);
+};

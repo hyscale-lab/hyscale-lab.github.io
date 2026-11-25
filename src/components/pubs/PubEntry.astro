@@ -120,15 +120,6 @@ const btn =
           {l.label}
         </a>
       ))}
-      {p.citations !== null && p.citations > 0 && (
-        <span
-          class="inline-flex items-center gap-1 rounded-md bg-surface px-2.5 py-1 text-xs font-medium text-muted"
-          title="Citations on Google Scholar"
-        >
-          <Icon name="quote" class="size-3.5" />
-          {p.citations} citations
-        </span>
-      )}
     </div>
 
     {showTags && p.tags.length > 0 && (

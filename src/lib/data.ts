@@ -142,7 +142,7 @@ const schemas = {
     z.object({ image: z.string(), alt: z.string(), caption: z.string().optional(), date: z.string().optional() }),
   ),
   'citations.yml': z.object({
-    metadata: z.object({ last_updated: z.string() }),
+    metadata: z.object({ last_updated: z.string(), total_citations: z.number().optional() }),
     papers: z.record(z.string(), z.object({ citations: z.number(), title: z.string(), year: z.coerce.string() })),
   }),
 } as const;
