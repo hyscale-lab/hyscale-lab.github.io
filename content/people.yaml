@@ -108,7 +108,11 @@
   name: Colin Hong
   from: NTU
   links:
+    website: https://googlercolin.github.io/
+    github: https://github.com/googlercolin
+    scholar: https://scholar.google.com/citations?user=E_yxdd0AAAAJ
     linkedin: https://www.linkedin.com/in/colinhong/
+    email: HONG0259@e.ntu.edu.sg
   stints:
     - { role: fyp, start: 2023, end: 2024 }
     - { role: phd, start: 2025 }
